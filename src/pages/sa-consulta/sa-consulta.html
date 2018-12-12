@@ -14,14 +14,14 @@
     <form class="container" [formGroup]="profileForm" (ngSubmit)="getDataSymptom()">
 
       <h3 class="title">Incarbone Eduardo Oscar</h3>
-      <h5 class="sub-title">Motivo de Consulta</h5>
+      <h5 class="sub-title">Motivo por el cual solicita Médico a domicilio</h5>
 
       <hr class="soft-line soft-line-black">
 
       <div class="form-control">
         <div class="container-select">
           <ion-label>Sintoma</ion-label>
-          <ion-select [selectOptions]="selectOptions" okText="Aceptar" cancelText="Cancelar" formControlName="symptom" placeholder="Seleccionar">
+          <ion-select [selectOptions]="selectOptions" [ngClass]="{ 'is-invalid': f.symptom.errors && f.symptom.touched,'is-valid': f.symptom.touched && f.symptom.valid }" okText="Aceptar" cancelText="Cancelar" formControlName="symptom" placeholder="Seleccionar">
             <ion-option *ngFor="let dataSymptom of symptom" value="{{dataSymptom}}">{{dataSymptom}}</ion-option>
           </ion-select>
         </div>

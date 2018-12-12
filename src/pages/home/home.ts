@@ -12,6 +12,7 @@ import { Events } from 'ionic-angular';
 import { VideoConsultaPage } from '../videoconsulta/videoconsulta'
 import { SolicitudVcPage } from './../solicitud-vc/solicitud-vc';
 import { SociosPage } from './../socios/socios';
+import { SolicitudAtencionPage } from './../solicitud-atencion/solicitud-atencion';
 
 @Component({
   selector: 'page-home',
@@ -258,6 +259,10 @@ export class HomePage {
 			this.isCIDBlocked  = this.dataService.getVCStatus();
 		}
 	}
+
+  gotoSA(){
+    this.navCtrl.push( SolicitudAtencionPage );
+  }
 
 	goToSociosPage(){
 		this.utils.showLoader();

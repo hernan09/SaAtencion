@@ -22,6 +22,8 @@ export class SaConsultaPage {
   selectOptions:any;
   symptom:any;
 
+  validationSymptom:string="";
+
   profileForm = new FormGroup({
     symptom: new FormControl('', Validators.required),
   })
@@ -38,6 +40,8 @@ export class SaConsultaPage {
   ionViewDidLoad() {
     this.menu.setArrowBack(true);
   }
+
+  get f() { return this.profileForm.controls; }
 
   getDataSymptom() {
     console.log("data", this.profileForm.value);

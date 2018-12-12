@@ -11,7 +11,7 @@
 
     <div class="image img-url"></div>
     <h3 class="title">Incarbone Eduardo Oscar</h3>
-    <h5 class="sub-title">Datos de Contacto</h5>
+    <h5 class="sub-title">Datos de Socio</h5>
 
     <hr class="soft-line soft-line-black">
 
@@ -26,8 +26,8 @@
 
           <ion-col col-3>
             <div class="form-control padding">
-                <input value="" type="number"  [(ngModel)]="prefijo" formControlName="cod" (keyup)="validatePrefijoNumber(prefijo, 4)" onkeyup="this.setAttribute('value', this.value);" id="cod" class="input-text input-user">
-                <label class="label-text" >Cod</label>
+                <input value="" type="number" [ngClass]="{ 'is-invalid': f.cod.errors && f.cod.touched,'is-valid': f.cod.touched && f.cod.valid }" [(ngModel)]="prefijo" formControlName="cod" (keyup)="validatePrefijoNumber(prefijo, 4)" onkeyup="this.setAttribute('value', this.value);" id="cod" class="input-text input-user">
+                <label class="label-text" >Código</label>
             </div>
           </ion-col>
 
@@ -37,34 +37,95 @@
 
           <ion-col col-5>
             <div class="form-control padding">
-                <input value="" type="number" [(ngModel)]="tel" formControlName="tel" (keyup)="validateTelNumber(tel, 8)" onkeyup="this.setAttribute('value', this.value);"  id="tel" class="input-text input-user">
-                <label class="label-text" >Tel</label>
+                <input value="" type="number" [(ngModel)]="tel"
+                  [ngClass]="{ 'is-invalid': f.tel.errors && f.tel.touched,'is-valid': f.tel.touched && f.tel.valid }"
+                  formControlName="tel"
+                  (keyup)="validateTelNumber(tel, 8)"
+                  onkeyup="this.setAttribute('value', this.value);"
+                  id="tel" class="input-text input-user">
+                <label class="label-text" >Teléfono</label>
             </div>
           </ion-col>
 
         </ion-row>
       </ion-grid>
 
-      <div class="form-control">
-          <input value="" type="text"  formControlName="email" onkeyup="this.setAttribute('value', this.value);"  id="email" class="input-text input-user">
+      <div class="form-control email-valid" *ngIf="emailShow == 'Otro'">
+          <input
+           value="" type="text"
+           formControlName="email"
+           onkeyup="this.setAttribute('value', this.value);"
+           id="email" class="input-text input-user"
+           [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched,'is-valid': f.email.touched && f.email.valid }"
+           >
           <label class="label-text" >Email</label>
       </div>
 
-      <div class="form-control">
+      <div class="form-control" *ngIf="emailShow != 'Otro'">
         <div class="container-select">
-          <ion-label>Localidad</ion-label>
-          <ion-select [selectOptions]="selectOptions"   formControlName="location" okText="Aceptar" cancelText="Cancelar"  placeholder="Seleccionar">
-            <ion-option *ngFor="let dataLocation of location" value="{{dataLocation}}" >{{dataLocation}}</ion-option>
+          <ion-label>Email</ion-label>
+          <ion-select [selectOptions]="emailTitle"
+          [(ngModel)]="emailShow"
+          formControlName="emailList"
+          okText="Aceptar"
+          cancelText="Cancelar"
+          placeholder="Seleccionar el Email del socio a atender"
+          [ngClass]="{ 'is-invalid': f.emailList.errors && f.emailList.touched,'is-valid': f.emailList.touched && f.emailList.valid }"
+          >
+            <ion-option *ngFor="let dataEmail of emailList" value="{{dataEmail}}" >{{dataEmail}}</ion-option>
           </ion-select>
         </div>
       </div>
 
       <div class="form-control">
-          <input value="" type="text" id="direction"  formControlName="direction"  onkeyup="this.setAttribute('value', this.value);"  class="input-text input-user">
+        <div class="container-select">
+          <ion-label>Localidad</ion-label>
+          <ion-select [selectOptions]="selectOptions"
+           [(ngModel)]="validationLocation"
+           formControlName="location"
+           okText="Aceptar"
+           cancelText="Cancelar"
+           placeholder="Seleccionar Localidad de Atención"
+           [ngClass]="{ 'is-invalid': f.location.errors && f.location.touched,'is-valid': f.location.touched && f.location.valid }"
+           >
+            <ion-option *ngFor="let dataLocation of location" value="{{dataLocation}}" >{{dataLocation}}</ion-option>
+          </ion-select>
+        </div>
+      </div>
+
+      <div class="form-control" *ngIf="addressShow == 'Otro'">
+          <input
+          value=""
+          type="text"
+          id="direction"
+          [(ngModel)]="validationAddress"
+          onkeyup="this.setAttribute('value', this.value);"
+          class="input-text input-user"
+          formControlName="direction"
+          [ngClass]="{'is-valid': validationAddress.length > 1}">
           <label class="label-text" >Dirección</label>
       </div>
 
-      <button type="submit" class="btn btn-light" [disabled]="!profileForm.valid">
+      <div class="form-control" [hidden]="addressShow == 'Otro'">
+        <div class="container-select">
+          <ion-label>Dirección</ion-label>
+          <ion-select [selectOptions]="adressTitle"
+           [(ngModel)]="addressShow"
+           formControlName="addressList"
+           okText="Aceptar"
+           cancelText="Cancelar"
+           placeholder="Seleccionar Dirección de Atención"
+           [ngClass]="{ 'is-invalid': f.addressList.errors && f.addressList.touched,'is-valid': f.addressList.touched && f.addressList.valid }"
+            >
+            <ion-option *ngFor="let dataAddress of addressList" value="{{dataAddress}}" >{{dataAddress}}</ion-option>
+          </ion-select>
+        </div>
+      </div>
+
+      <button type="submit" *ngIf="addressShow != 'Otro'" class="btn btn-light" [disabled]="!profileForm.valid ">
+        Continuar
+      </button>
+      <button type="submit"  *ngIf="addressShow == 'Otro'" class="btn btn-light" [disabled]="profileForm.valid && validationAddress.length == 0">
         Continuar
       </button>
 

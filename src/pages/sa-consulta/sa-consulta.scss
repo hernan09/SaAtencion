@@ -3,16 +3,26 @@ page-sa-consulta {
     margin-bottom: 10px !important;
   }
 
+  .is-invalid {
+    border-color: red !important;
+    border-bottom: 2px solid red !important;
+  }
+  .is-valid {
+    border-color: green !important;
+    border-bottom: 2px solid green !important;
+  }
+
   .title {
     text-align: center;
     font-size: $title_size;
+    color: #1f4f9a;
   }
 
   .sub-title {
     text-align: center;
     font-size: $text_extra_big_size;
     margin: 5px;
-    font-weight: 200;
+    font-weight: 400;
   }
 
   .padding {

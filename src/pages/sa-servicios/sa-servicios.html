@@ -14,7 +14,7 @@
       <ion-list radio-group >
 
         <h3 class="title">Incarbone Eduardo Oscar</h3>
-        <h5 class="sub-title">Elegí la opción que mejor se adapte a vos</h5>
+        <h5 class="sub-title">Podemos ofrecerte los siguientes servicios</h5>
 
         <hr class="soft-line soft-line-black">
 
@@ -22,7 +22,7 @@
           <div class="box-option">
 
             <ion-grid>
-              <ion-row class="box-service" *ngFor="let data of dataService">
+              <ion-row class="box-service" *ngFor="let data of dataService" (click) = "showAlertAdress(data.section)">
 
                 <ion-col col-4>
                   <div class="image-service image-url " [ngStyle]="{'background-image':'url(' + data.img + ')'}"></div>
@@ -36,9 +36,16 @@
                       <label *ngIf="data.description"or="">{{data.description}}</label>
                     </div>
 
-                    <div class="time">
+                    <div class="time" *ngIf="data.dataTime == undefined">
                       <p>Tiempo de espera:</p>
                       <label for="">{{data.time}}</label>
+
+                      <p>Doctor:</p>
+                      <label for="">{{data.name}}</label>
+                    </div>
+
+                    <div class="time" *ngIf="data.dataTime != undefined">
+                      <p>{{data.dataTime}}</p>
                     </div>
 
                 </ion-col>
