@@ -1,14 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild  } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SaTiempoPage } from './../sa-tiempo/sa-tiempo';
-import { SaResumenPage } from '../sa-resumen/sa-resumen';
+import { Utils } from './../../providers/utils';
+import { SaServiciosPage } from '../sa-servicios/sa-servicios';
 import { NavigatorPage } from './../navigator/navigator';
 import { Config } from './../../app/config';
 import { AlertService } from './../../providers/alert.service';
-import { AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 /**
- * Generated class for the SaServiciosPage page.
+ * Generated class for the SaResumenPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -16,52 +15,56 @@ import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
-  selector: 'page-sa-servicios',
-  templateUrl: 'sa-servicios.html',
+  selector: 'page-sa-resumen',
+  templateUrl: 'sa-resumen.html',
 })
-export class SaServiciosPage {
+export class SaResumenPage {
+
   @ViewChild(NavigatorPage) menu : NavigatorPage;
-  dataService: any;
   title = 'Solicitud de Atención';
+  userData:any;
+  datos:any;
+  dataSymptom:any;
+  dataTime:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private alertService : AlertService,public alertCtrl :AlertController) {
+  //datos users
+  addressList:string;
+  cod:number;
+  direction:string;
+  email:string;
+  emailList:string;
+  location:string;
+  tel:number;
+  symptom:string;
+  time:string;
 
-    this.getDataOption();
+  constructor(public navCtrl: NavController, public navParams: NavParams,public utils: Utils,private alertService : AlertService) {
+
+    this.userData = this.utils.getFormSolicitudAtencion();
+
+    this.datos = this.userData[1].step2;
+    this.dataSymptom = this.userData[2].step3;
+    this.dataTime = this.userData[3].step4;
+
+    console.log("datos",this.datos.addressList);
+    this.addressList = this.datos.addressList;
+    this.cod = this.datos.cod;
+    this.direction = this.datos.direction;
+    this.email = this.datos.email;
+    this.emailList = this.datos.emailList;
+    this.location = this.datos.location;
+    this.tel = this.datos.tel;
+
+    this.symptom = this.dataSymptom.symptom;
+    this.time = this.dataTime.time;
   }
 
   ionViewDidLoad() {
     this.menu.setArrowBack(true);
   }
 
-  getDataOption() {
-    this.dataService = [
-      {
-        final:"una",
-        type:"video Consulta Médica",
-        description:"sin salir de tu casa",
-        time:"10 minutos",
-        dataTime:undefined,
-        img: 'assets/img/doc2.jpg',
-        name: 'Dr. Provera, Hernán',
-        section: "videoConsulta",
-        title:"Solicitar una Video Consulta Médica"
-      },{
-        final:"un",
-        type:"Medico a Domicilio",
-        description:"",
-        time:null,
-        dataTime:"Dentro de las siguientes 2 hs un Médico Generalista estará en su domicilio",
-        img: 'assets/img/medicator_demora.png',
-        name: '',
-        section: "MédicoD",
-        title:"Solicitar un Médico a Domicilio"
-      }
-    ]
-  }
-
   previusPage() {
-    this.navCtrl.setRoot( SaTiempoPage );
+    this.navCtrl.setRoot( SaServiciosPage );
   }
 
   showAlertAdress(data){
@@ -97,15 +100,5 @@ export class SaServiciosPage {
         alert.present();
     }
   }
-
-  getAlert(){
-    console.log("alert!!!")
-    this.alertService.showAlert("Médico a Domicilio", "Pedido de Médico a Domicilio registrado exitosamente",Config.ALERT_CLASS.OK_CSS);
-  }
-
-  gotoPage(){
-    this.navCtrl.push( SaResumenPage );
-  }
-
 
 }

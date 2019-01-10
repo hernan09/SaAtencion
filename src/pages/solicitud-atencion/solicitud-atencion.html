@@ -16,9 +16,9 @@
         <h3 class="title">Seleccione el Socio para el cual se solicita el Médico</h3>
         <hr class="soft-line soft-line-black">
 
-        <form  [formGroup]="profileForm" (ngSubmit)="getDataPartner()">
+        <form  [formGroup]="profileForm" (ngSubmit)="getDataPartner()" >
 
-          <div radio-group formControlName="partner">
+          <div radio-group formControlName="partner" [(ngModel)]="radio">
 
             <ion-item *ngFor="let user of data" >
               <ion-label>{{user}}</ion-label>

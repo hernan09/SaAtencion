@@ -9,21 +9,47 @@ import { Alert } from 'ionic-angular/components/alert/alert';
 @Injectable()
 export class Utils {
 
-  alert :any  
+  alert :any
   loading :any
 
 	firstTimeNotificationsSent :boolean = true
 
 	notificationsCounter :any
 	notificationsCounterChange :Subject<number> = new Subject<number>()
+  dataFormSA: any = [];
 
   constructor(
-    public alertCtrl :AlertController,    
+    public alertCtrl :AlertController,
     public loadingCtrl :LoadingController
   ){
   	this.notificationsCounter = 0
   }
-  
+
+  /*Solicitud de Atencion*/
+  setFormSolicitudAtencion(data, position) {
+
+    if(position != -1){
+      if(this.dataFormSA.length < position){
+        this.dataFormSA.push(data);
+        console.log("agregado: ",this.dataFormSA);
+      } else{
+        this.dataFormSA[position] = data;
+        console.log("editado: ",this.dataFormSA);
+      }
+    }else{
+      this.dataFormSA = [];
+    }
+
+
+  }
+
+  getFormSolicitudAtencion(){
+    console.log("get arrayFinal: ",this.dataFormSA);
+    return this.dataFormSA;
+  }
+
+  /*------------------------*/
+
   public showLoader(dismissOnPageChange?) {
     this.loading = this.loadingCtrl.create({
       spinner : 'ios-small',
@@ -114,7 +140,7 @@ export class Utils {
     }
     else{
       return false;
-    }   
+    }
   }
 
 }

@@ -4,6 +4,8 @@ import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
 import { SaContactoPage } from '../sa-contacto/sa-contacto';
 import { NavigatorPage } from './../navigator/navigator';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Utils } from './../../providers/utils';
+import { DataService } from './../../providers/data.service';
 /**
  * Generated class for the SaConsultaPage page.
  *
@@ -21,20 +23,26 @@ export class SaConsultaPage {
   @ViewChild(NavigatorPage) menu : NavigatorPage;
   selectOptions:any;
   symptom:any;
+  symptomValue:string="";
+  symptomAnimation:boolean = false;
 
   validationSymptom:string="";
 
   profileForm = new FormGroup({
     symptom: new FormControl('', Validators.required),
   })
-
-  constructor( public navCtrl: NavController, public navParams: NavParams ) {
+  title = 'Solicitud de Atención';
+  dataForm:any;
+  symptomSelected:string;
+  public telefono;
+  constructor( public navCtrl: NavController, public navParams: NavParams,public utils: Utils, private data :DataService ) {
 
     this.selectOptions = {
       title: 'Síntoma',
     };
 
     this.getSymptom();
+    this.pageBack();
   }
 
   ionViewDidLoad() {
@@ -54,10 +62,39 @@ export class SaConsultaPage {
 
 
   gotoPage(){
+    this.saveData();
     this.navCtrl.push( SaTiempoPage );
   }
 
-  getSymptom() {
-    this.symptom = [ 'Constipación', 'Diarrea', 'Fiebre', 'Síntomas de la piel', 'Alteraciones oculares', 'Dolor de garganta', 'Resfrio' ];
+  saveData(){
+
+    this.dataForm = {
+      "step3": this.profileForm.value
+    }
+
+    let arrayDataForm = this.utils.getFormSolicitudAtencion();
+
+    this.utils.setFormSolicitudAtencion(this.dataForm,2);
   }
+
+  pageBack() {
+
+     let arrayDataForm = this.utils.getFormSolicitudAtencion();
+
+     if(arrayDataForm.length > 2) {
+
+        this.symptomAnimation = true;
+        this.symptomSelected  = arrayDataForm[2].step3.symptom;
+
+     }
+  }
+
+  getSymptom() {
+    this.symptom = [ 'Constipación', 'Diarrea', 'Fiebre', 'Síntomas de la piel', 'Alteraciones oculares', 'Dolor de garganta', 'Resfrio', 'Otro' ];
+  }
+
+  nextPhoneNumber(){
+    this.telefono = this.data.nextPhoneNumber();
+  }
+
 }

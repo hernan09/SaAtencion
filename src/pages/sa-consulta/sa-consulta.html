@@ -1,6 +1,6 @@
 <ion-header>
 
-  <page-navigator></page-navigator>
+  <page-navigator [title]="title"></page-navigator>
 
 </ion-header>
 
@@ -11,27 +11,72 @@
 
     <div class="image img-url"></div>
 
-    <form class="container" [formGroup]="profileForm" (ngSubmit)="getDataSymptom()">
+    <form class="container"  (ngSubmit)="getDataSymptom()">
 
       <h3 class="title">Incarbone Eduardo Oscar</h3>
       <h5 class="sub-title">Motivo por el cual solicita Médico a domicilio</h5>
 
       <hr class="soft-line soft-line-black">
 
-      <div class="form-control">
+      <div class="form-control" *ngIf="symptomSelected == 'Otro'">
+          <input
+          value=""
+          type="text"
+          name="symptomOther"
+          id="symtomID"
+          [(ngModel)]="symptomValue"
+          onkeyup="this.setAttribute('value', this.value);"
+          class="input-text input-user"
+          [ngClass]="{'is-valid': symptomValue.length > 1}">
+          <label class="label-text"
+                 [ngClass]="{ 'back-value-option' : symptomAnimation ||  symptomSelected != 'Otro'}" for="symtomID">Dirección {{symptomValue}}</label>
+
+          <div>
+          <ion-grid class="box-warning">
+
+            <ion-row>
+              <ion-col col-4>
+                <div class="img-warning"></div>
+              </ion-col>
+              <ion-col col-8>
+                <p>Para síntomas que no figuran en la lista, por favor comuníquese con nosotros</p>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+          </div>
+      </div>
+
+      <div class="form-control" [formGroup]="profileForm" *ngIf="symptomSelected != 'Otro'">
         <div class="container-select">
           <ion-label>Sintoma</ion-label>
-          <ion-select [selectOptions]="selectOptions" [ngClass]="{ 'is-invalid': f.symptom.errors && f.symptom.touched,'is-valid': f.symptom.touched && f.symptom.valid }" okText="Aceptar" cancelText="Cancelar" formControlName="symptom" placeholder="Seleccionar">
+          <ion-select [selectOptions]="selectOptions"
+             [ngClass]="{ 'is-invalid': f.symptom.errors && f.symptom.touched,'is-valid': f.symptom.touched && f.symptom.valid || f.symptom.valid}"
+             okText="Aceptar"
+             name="symptom"
+             cancelText="Cancelar"
+             formControlName="symptom"
+             placeholder="Seleccionar"
+             [(ngModel)]="symptomSelected"
+             >
             <ion-option *ngFor="let dataSymptom of symptom" value="{{dataSymptom}}">{{dataSymptom}}</ion-option>
           </ion-select>
         </div>
 
       </div>
 
-      <button type="submit" class="btn btn-light" [disabled]="!profileForm.valid">
+      <button type="submit" class="btn btn-light" [disabled]="!profileForm.valid" *ngIf="symptomSelected != 'Otro'">
         Continuar
       </button>
 
     </form>
+
+    <a href="tel:{{telefono}}" (click)="nextPhoneNumber()" *ngIf="symptomSelected == 'Otro'">
+      <button ion-button full icon-start class="btn btn-green position-call">
+        <ion-icon name="call"></ion-icon>
+         Llámanos
+      </button>
+    </a>
+
   </div>
 </ion-content>

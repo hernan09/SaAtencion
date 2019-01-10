@@ -31,7 +31,7 @@ export class SaContactoPage {
   addressShow:string = "";
   telFinal:number;
   prefijoFinal:number;
-  private prefijo : number;
+  private prefijo : number = undefined;
   private tel: number;
   emailTitle: any;
   adressTitle:any;
@@ -53,8 +53,20 @@ export class SaContactoPage {
     direction: new FormControl('' )
   })
   title = 'Solicitud de Atención';
+  dataForm:any;
+  otherEmail:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public utils: Utils,private alertService : AlertService,) {
+  //label animation
+  backDataCod:boolean = false;
+  telAnimation:boolean = false;
+  emailAnimation:boolean = false;
+  addresAnimation:boolean = false;
+
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public utils: Utils,
+              private alertService : AlertService,) {
 
     this.selectOptions = {
       title: 'Localidad',
@@ -69,6 +81,8 @@ export class SaContactoPage {
     this.getEmail();
     this.getAddress();
     this.getLocation();
+
+    this.pageBack();
   }
 
   get f() { return this.profileForm.controls; }
@@ -92,21 +106,60 @@ export class SaContactoPage {
         this.alertService.showAlert(Config.TITLE.WRONG_NUMBER, Config.MSG.WRONG_NUMBER_ERROR,Config.ALERT_CLASS.ERROR_CSS);
         console.log("Cantidad de numeros del telefono debe sumar 10");
     }else {
+      this.saveData();
       this.navCtrl.push( SaConsultaPage );
     }
   }
 
+  saveData(){
+
+    this.dataForm = {
+      "step2": this.profileForm.value
+    }
+
+    let arrayDataForm = this.utils.getFormSolicitudAtencion();
+
+    this.utils.setFormSolicitudAtencion(this.dataForm,1);
+  }
+
+  pageBack() {
+     let arrayDataForm = this.utils.getFormSolicitudAtencion();
+
+     if(arrayDataForm.length > 1) {
+         this.backDataCod = true;
+         this.telAnimation = true;
+         this.emailAnimation = true;
+         this.addresAnimation = true;
+
+         if(arrayDataForm[1].step2.emailList == ""){
+           arrayDataForm[1].step2.emailList = "Otro";
+         }
+         if(arrayDataForm[1].step2.addressList == ""){
+           arrayDataForm[1].step2.direction = "Otro";
+         }
+
+        this.prefijo            = arrayDataForm[1].step2.cod;
+        // document.getElementById("cod").setAttribute("value",arrayDataForm[1].step2.cod);
+        this.tel                = arrayDataForm[1].step2.tel;
+        this.otherEmail         = arrayDataForm[1].step2.email;//otro
+        this.emailShow          = arrayDataForm[1].step2.emailList;
+        this.validationLocation = arrayDataForm[1].step2.location;
+        this.addressShow        = arrayDataForm[1].step2.addressList;
+        this.validationAddress  = arrayDataForm[1].step2.direction;//otro
+     }
+  }
+
   checkTelLength(){
-      if((this.prefijo.toString() + this.tel.toString()).length == 10){
-          return true;
-      }
-      else{
-          return false;
-      }
+    if((this.prefijo.toString() + this.tel.toString()).length == 10){
+        return true;
+    }
+    else{
+        return false;
+    }
   }
 
   getLocation(){
-    this.location = [ 'Córdoba','Santa Fe', 'Rosario', 'Funes',  'Roldan', 'Otra'  ];
+    this.location = [ 'Córdoba', 'Rosario', 'Funes' ];
   }
 
   getEmail(){
@@ -137,7 +190,7 @@ export class SaContactoPage {
     else{
         this.prefijo = this.prefijoFinal;
     }
-}
+  }
 
 
 }

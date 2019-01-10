@@ -41,6 +41,8 @@ import { SaContactoPage } from './../pages/sa-contacto/sa-contacto';
 import { SaConsultaPage } from './../pages/sa-consulta/sa-consulta';
 import { SaTiempoPage } from './../pages/sa-tiempo/sa-tiempo';
 import { SaServiciosPage } from './../pages/sa-servicios/sa-servicios';
+import { SaEdadPage } from './../pages/sa-edad/sa-edad';
+import { SaResumenPage } from './../pages/sa-resumen/sa-resumen';
 
 // services
 import { AuthService } from '../providers/auth.service'
@@ -82,7 +84,9 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     SaContactoPage,
     SaConsultaPage,
     SaTiempoPage,
-    SaServiciosPage
+    SaServiciosPage,
+    SaEdadPage,
+    SaResumenPage
   ],
 
   entryComponents: [
@@ -107,7 +111,9 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     SaContactoPage,
     SaConsultaPage,
     SaTiempoPage,
-    SaServiciosPage
+    SaServiciosPage,
+    SaEdadPage,
+    SaResumenPage
   ],
 
   imports: [

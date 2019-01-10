@@ -29,6 +29,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 export class SolicitudAtencionPage {
     data:any;
+    dataForm: any;
+    radio: string;
+
     public title ="Solicitud de Atención";
     @ViewChild(NavigatorPage) menu : NavigatorPage;
 
@@ -36,24 +39,42 @@ export class SolicitudAtencionPage {
       partner: new FormControl('', Validators.required)
     })
 
-    constructor(public navCtrl: NavController){
+    constructor(public navCtrl: NavController, public utils: Utils){
       this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol" ]
+
+      this.pageBack();
     }
 
     ionViewCanEnter(){
-      this.menu.setArrowBack(true);      
+      console.log("BACK",this.utils.getFormSolicitudAtencion());
+      this.menu.setArrowBack(true);
     }
 
     getDataPartner() {
-      this.gotoPage();
+      this.dataForm = {
+        "step1": this.profileForm.value
+      }
 
+      this.utils.setFormSolicitudAtencion(this.dataForm,0);
+      console.log("getFormSolicitudAtencion",this.utils.getFormSolicitudAtencion());
+      this.gotoPage();
     }
+
     gotoPage(){
       this.navCtrl.push( SaContactoPage );
     }
 
     previusPage() {
       this.navCtrl.setRoot(HomePage);
-  }
+    }
+
+    pageBack() {
+      let arrayDataForm = this.utils.getFormSolicitudAtencion();
+       if(arrayDataForm.length > 0 ) {
+         console.log("BACK FINAL",arrayDataForm[0].step1.partner);
+
+        this.radio = arrayDataForm[0].step1.partner
+       }
+    }
 
 }

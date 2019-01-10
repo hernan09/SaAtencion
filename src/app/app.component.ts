@@ -65,7 +65,6 @@ export class MyApp {
     }
   ]
 
-
   activeUser = {
     dni: '',
     nombre: ''

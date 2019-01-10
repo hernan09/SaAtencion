@@ -1,6 +1,6 @@
 <ion-header>
 
-  <page-navigator></page-navigator>
+  <page-navigator [title]="title"></page-navigator>
 
 </ion-header>
 
@@ -20,31 +20,31 @@
 
         <div class="container">
           <div class="box-option">
-
+<!-- showAlertAdress(data.section) -->
             <ion-grid>
-              <ion-row class="box-service" *ngFor="let data of dataService" (click) = "showAlertAdress(data.section)">
-
+              <ion-row class="box-service" *ngFor="let data of dataService" (click) = "gotoPage()">
+                <h5 class="sub-title">{{data.title}}</h5>
                 <ion-col col-4>
                   <div class="image-service image-url " [ngStyle]="{'background-image':'url(' + data.img + ')'}"></div>
                 </ion-col>
 
                 <ion-col col-8 >
 
-                    <div class="video">
+                    <!-- <div class="video">
                       <label>Solicitá {{data.final}}</label>
                       <p>{{data.type}}</p>
                       <label *ngIf="data.description"or="">{{data.description}}</label>
-                    </div>
+                    </div> -->
 
-                    <div class="time" *ngIf="data.dataTime == undefined">
+                    <div  *ngIf="data.dataTime == undefined">
                       <p>Tiempo de espera:</p>
                       <label for="">{{data.time}}</label>
 
-                      <p>Doctor:</p>
+                      <p class="space">Doctor:</p>
                       <label for="">{{data.name}}</label>
                     </div>
 
-                    <div class="time" *ngIf="data.dataTime != undefined">
+                    <div  *ngIf="data.dataTime != undefined">
                       <p>{{data.dataTime}}</p>
                     </div>
 

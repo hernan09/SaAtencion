@@ -63,39 +63,39 @@ $lightgray : #ddd;
 /*Tamaño de fuentes*/
 @media screen and (max-width: 319px){
 	html,body,scroll-content,fixed-content,ion-app.md{
-		font-size:9px !important;
+		font-size:10px !important;
 	}
 }
 @media screen and (min-width: 320px) {
   html,body,scroll-content,fixed-content,ion-app.md{
-    font-size:9px!important;
+    font-size:10px!important;
   }
 }
 
 @media screen and (min-width: 360px) {
   html,body,scroll-content,fixed-content,ion-app.md{
-    font-size:9.5px!important;
+    font-size:10.5px!important;
   }
 }
 
 @media screen and (min-width: 480px) {
   html,body,scroll-content,fixed-content,ion-app.md{
-    font-size:10px!important;
+    font-size:11px!important;
   }
 }
 @media screen and (min-width: 600px){
 	html,body,scroll-content,fixed-content,ion-app.md{
-		font-size:11px!important;
+		font-size:12px!important;
 	}
 }
 @media screen and (min-width: 800px){
 	html,body,scroll-content,fixed-content,ion-app.md{
-		font-size:11.5px!important;
+		font-size:12.5px!important;
 	}
 }
 @media screen and (min-width: 1024px){
 	html,body,scroll-content,fixed-content,ion-app.md{
-		font-size:12px!important;
+		font-size:13px!important;
 	}
 }
 
@@ -420,4 +420,3 @@ $toolbar-wp-background: #002664;
 .alert-wrapper .alert-head h2{
   font-weight: 500 !important;
 }
-

@@ -54,6 +54,7 @@ export class HomePage {
 		private events : Events,
 	){
 		//Actualizo los datos de todos los usuarios, refresca el menu de multiusuario.
+    this.utils.setFormSolicitudAtencion([],-1);
 		this.dataService.updateUsers();
 		this.checkVCStatus();
 

@@ -1,0 +1,37 @@
+page-sa-resumen {
+
+  .scroll-content > *:last-of-type {
+    margin-bottom: 0 !important;
+  }
+
+  .scroll-content {
+    padding:  0 !important;
+  }
+
+  .title {
+    text-align: center;
+    font-size: $title_size;
+    color: #1f4f9a;
+  }
+
+  .position-btn {
+    position: relative;
+    top: 45px;
+  }
+
+  .sub-title {
+    text-align: center;
+    font-size: $text_extra_big_size;
+    margin: 5px;
+    font-weight: 400;
+  }
+
+  .col-izq{
+    text-align: right;
+  }
+
+  .col-der{
+    text-align: left;
+    font-size: $text_extra_big_size;
+  }
+}
