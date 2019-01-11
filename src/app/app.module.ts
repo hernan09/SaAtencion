@@ -43,6 +43,7 @@ import { SaTiempoPage } from './../pages/sa-tiempo/sa-tiempo';
 import { SaServiciosPage } from './../pages/sa-servicios/sa-servicios';
 import { SaEdadPage } from './../pages/sa-edad/sa-edad';
 import { SaResumenPage } from './../pages/sa-resumen/sa-resumen';
+import { SaQuestionSymptomPage } from './../pages/sa-question-symptom/sa-question-symptom';
 
 // services
 import { AuthService } from '../providers/auth.service'
@@ -86,7 +87,8 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     SaTiempoPage,
     SaServiciosPage,
     SaEdadPage,
-    SaResumenPage
+    SaResumenPage,
+    SaQuestionSymptomPage
   ],
 
   entryComponents: [
@@ -113,7 +115,8 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     SaTiempoPage,
     SaServiciosPage,
     SaEdadPage,
-    SaResumenPage
+    SaResumenPage,
+    SaQuestionSymptomPage
   ],
 
   imports: [

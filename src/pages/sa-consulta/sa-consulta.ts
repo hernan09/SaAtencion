@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
 import { SaContactoPage } from '../sa-contacto/sa-contacto';
+import { SaEdadPage } from '../sa-edad/sa-edad';
 import { NavigatorPage } from './../navigator/navigator';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utils } from './../../providers/utils';
@@ -53,17 +54,42 @@ export class SaConsultaPage {
 
   getDataSymptom() {
     console.log("data", this.profileForm.value);
-    this.gotoPage();
+    let symptomFinal = this.profileForm.value.symptom
+    if (symptomFinal == 'Fiebre' || symptomFinal == 'Dolor de oido' || symptomFinal == 'Dolor o molestia de garganta'){
+      this.gotoPage(symptomFinal);
+    } else {
+      this.gotoPage(symptomFinal);
+      console.log("otra página");
+    }
   }
 
   previusPage() {
     this.navCtrl.setRoot( SaContactoPage );
   }
 
-
-  gotoPage(){
+  gotoPage(valueSymptom){
     this.saveData();
-    this.navCtrl.push( SaTiempoPage );
+
+    if(valueSymptom == 'Odontalgia') {
+      var quetionSymtom = {
+        question:'¿El dolor es debido a un golpe o traumatismo?',
+        showQuestion:false
+      }
+    }
+
+    if(valueSymptom == 'Constipación') {
+      var quetionSymtom = {
+        question:'¿Además este vomitando?',
+        showQuestion:true
+
+      }
+    }
+
+    if(valueSymptom == 'Odontalgia' || valueSymptom == 'Constipación'){
+      this.navCtrl.push( SaEdadPage, {'quetionSymtom': quetionSymtom} );
+    }else {
+      this.navCtrl.push( SaTiempoPage, {'valueSymptom': valueSymptom} );
+    }
   }
 
   saveData(){
@@ -85,12 +111,11 @@ export class SaConsultaPage {
 
         this.symptomAnimation = true;
         this.symptomSelected  = arrayDataForm[2].step3.symptom;
-
      }
   }
 
   getSymptom() {
-    this.symptom = [ 'Constipación', 'Diarrea', 'Fiebre', 'Síntomas de la piel', 'Alteraciones oculares', 'Dolor de garganta', 'Resfrio', 'Otro' ];
+    this.symptom = [ 'Fiebre', 'Dolor de oido', 'Dolor o molestia de garganta', 'Odontalgia', 'Constipación', 'Otro' ];
   }
 
   nextPhoneNumber(){

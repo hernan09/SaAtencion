@@ -29,14 +29,21 @@ export class SaTiempoPage {
   title = 'Solicitud de Atención';
   dataForm:any;
   radioTime:string;
+  symptom:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public utils: Utils) {
+    this.getSymptomData();
     this.getTime();
     this.pageBack();
   }
 
   ionViewDidLoad() {
     this.menu.setArrowBack(true);
+  }
+
+  getSymptomData() {
+    this.symptom = this.navParams.get("valueSymptom");
+    console.log("this.symptom",this.symptom);
   }
 
   getDataTime() {
@@ -47,19 +54,33 @@ export class SaTiempoPage {
   }
 
   getTime() {
-    this.time =
-    [
-      {
-        period: "Menos de 1 mes de vida",
-        page: "1"
-      },{
-        period: "Menos de 10 años",
-        page: 'SaEdadPage'
-      },{
-        period: "Más de 10 años",
-        page: "3"
-      }
-    ]
+    if(this.symptom == 'Fiebre'){
+      this.time =
+      [
+        {
+          period: "Menos de 1 mes de vida",
+          page: "1"
+        },{
+          period: "Menos de 10 años",
+          page: 'SaEdadPage'
+        },{
+          period: "Más de 10 años",
+          page: "3"
+        }
+      ]
+    }else {
+      this.time =
+      [
+        {
+          period: "Menos de 10 años",
+          page: 'SaEdadPage'
+        },{
+          period: "Más de 10 años",
+          page: "3"
+        }
+      ]
+    }
+
   }
 
   previusPage() {
@@ -70,9 +91,28 @@ export class SaTiempoPage {
 
     this.saveData();
 
-    if(page == 'Menos de 10 años'){
-      this.navCtrl.push( SaEdadPage );
+    if(this.symptom == 'Dolor de oido') {
+      var quetionSymtom = {
+        question : "¿El dolor de oído le provoca llanto al niño?",
+        showQuestion: false,
+      }
     }else {
+      var quetionSymtom = {
+        question : "¿El paciente también tiene fiebre?",
+        showQuestion: true,
+      }
+    }
+
+    if(page == 'Menos de 10 años' && this.symptom == 'Dolor de oido'){
+      this.navCtrl.push( SaEdadPage, {'quetionSymtom': quetionSymtom} );
+    }
+    else if(page == 'Menos de 10 años' && this.symptom == 'Dolor o molestia de garganta') {
+      this.navCtrl.push( SaEdadPage, {'quetionSymtom': quetionSymtom} );
+    }
+    else if(page == 'Menos de 10 años') {
+      this.navCtrl.push( SaEdadPage );
+    }
+    else {
       this.navCtrl.push( SaServiciosPage );
     }
   }
