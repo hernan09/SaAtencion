@@ -39,7 +39,12 @@ export class SolicitudAtencionPage {
       partner: new FormControl('', Validators.required)
     })
 
-    constructor(public navCtrl: NavController, public utils: Utils){
+    constructor(
+      public navCtrl: NavController,
+      public utils: Utils,
+      private alertService : AlertService,
+      public navParams: NavParams
+     ){
       this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol" ]
 
       this.pageBack();
@@ -57,11 +62,29 @@ export class SolicitudAtencionPage {
 
       this.utils.setFormSolicitudAtencion(this.dataForm,0);
       console.log("getFormSolicitudAtencion",this.utils.getFormSolicitudAtencion());
-      this.gotoPage();
+
+      let alert = this.alertService.showOptionAlert(Config.TITLE.WARNING_TITLE, 'La ultima dirección de atención fue: "Emilio mitre 457". ¿Se encuentra en este domicilio?', Config.ALERT_OPTIONS.SI, Config.ALERT_OPTIONS.NO,Config.ALERT_CLASS.ERROR_CSS);
+      alert.onDidDismiss(res => {
+        var location = 'Córdoba';
+        var address = 'Emilio mitre 457';
+        if (res != false) {
+          //Si contesta que si al Reemplazar titular
+          this.gotoPage(true,location,address);
+        } else {
+          this.gotoPage(false,undefined,undefined);
+        }
+      });
+      alert.present();
     }
 
-    gotoPage(){
-      this.navCtrl.push( SaContactoPage );
+    gotoPage(data,location,address){
+      let showAdress = {
+        show: data,
+        location : location,
+        address: address
+      }
+      console.log(showAdress);
+      this.navCtrl.push( SaContactoPage, {'showAdress' : showAdress} );
     }
 
     previusPage() {

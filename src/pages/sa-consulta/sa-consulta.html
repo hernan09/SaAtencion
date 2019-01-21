@@ -18,8 +18,8 @@
 
       <hr class="soft-line soft-line-black">
 
-      <div class="form-control" *ngIf="symptomSelected == 'Otro'">
-          <input
+      <div  *ngIf="symptomSelected == 'Otro'">
+          <!-- <input
           value=""
           type="text"
           name="symptomOther"
@@ -29,9 +29,8 @@
           class="input-text input-user"
           [ngClass]="{'is-valid': symptomValue.length > 1}">
           <label class="label-text"
-                 [ngClass]="{ 'back-value-option' : symptomAnimation ||  symptomSelected != 'Otro'}" for="symtomID">Dirección {{symptomValue}}</label>
+                 [ngClass]="{ 'back-value-option' : symptomAnimation ||  symptomSelected != 'Otro'}" for="symtomID">Dirección </label> -->
 
-          <div>
           <ion-grid class="box-warning">
 
             <ion-row>
@@ -44,7 +43,7 @@
             </ion-row>
 
           </ion-grid>
-          </div>
+
       </div>
 
       <div class="form-control" [formGroup]="profileForm" *ngIf="symptomSelected != 'Otro'">

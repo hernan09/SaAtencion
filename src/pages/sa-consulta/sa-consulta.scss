@@ -75,7 +75,7 @@ page-sa-consulta {
     border-color: green !important;
     border-bottom: 2px solid green !important;
   }
-  
+
   .box-warning{
     height: 7em;
     border: 1px solid #ecebeb;
@@ -86,7 +86,7 @@ page-sa-consulta {
     .img-warning {
       height: 100%;
       width: 100%;
-      height: 60px;
+      height: 75px;
       background-image: url(../assets/img/medicator_demora.png);
       background-position: center;
       background-repeat: no-repeat;
@@ -94,6 +94,7 @@ page-sa-consulta {
     }
     p {
       font-size: $text_regular_size;
+      margin: 10% 0%;
     }
   }
 

@@ -81,6 +81,7 @@ export class SaContactoPage {
     this.getEmail();
     this.getAddress();
     this.getLocation();
+    this.getInformationMaps();
 
     this.pageBack();
   }
@@ -94,6 +95,11 @@ export class SaContactoPage {
   getDataContact() {
     console.log("data", this.profileForm.value);
     this.gotoPage();
+  }
+
+  getInformationMaps(){
+    this.getInformationMaps = this.navParams.get("showAdress");
+    console.log("showAdress",this.getInformationMaps);
   }
 
   previusPage() {
