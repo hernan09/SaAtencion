@@ -55,7 +55,7 @@ export class SaContactoPage {
   title = 'Solicitud de Atención';
   dataForm:any;
   otherEmail:string;
-
+  informationMaps: any;
   //label animation
   backDataCod:boolean = false;
   telAnimation:boolean = false;
@@ -98,8 +98,13 @@ export class SaContactoPage {
   }
 
   getInformationMaps(){
-    this.getInformationMaps = this.navParams.get("showAdress");
-    console.log("showAdress",this.getInformationMaps);
+    this.informationMaps = this.navParams.get("showAdress");
+    if(this.informationMaps.show){
+      console.log("showAdress",this.informationMaps);
+
+      this.validationLocation = this.informationMaps.location;
+      this.addressShow = this.informationMaps.address;
+    }
   }
 
   previusPage() {
