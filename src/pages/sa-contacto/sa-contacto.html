@@ -16,7 +16,57 @@
     <hr class="soft-line soft-line-black">
 
     <form class="container" [formGroup]="profileForm" (ngSubmit)="getDataContact()">
+      
+      <div class="box-address" *ngIf="informationMaps.show">
+        <div class="form-control">
+          <div class="container-select">
+            <ion-label>Localidad</ion-label>
+            <ion-select
+             [selectOptions]="selectOptions"
+             [(ngModel)]="validationLocation"
+             formControlName="location"
+             okText="Aceptar"
+             cancelText="Cancelar"
+             placeholder="Seleccionar Localidad de Atención"
+             [ngClass]="{ 'is-invalid': f.location.errors && f.location.touched,'is-valid': f.location.touched && f.location.valid ||  f.location.valid }"
+             >
+              <ion-option *ngFor="let dataLocation of location" value="{{dataLocation}}" >{{dataLocation}}</ion-option>
+            </ion-select>
+          </div>
+        </div>
 
+        <div class="form-control" *ngIf="addressShow == 'Otro'">
+            <input
+            value=""
+            type="text"
+            id="direction"
+            [(ngModel)]="validationAddress"
+            onkeyup="this.setAttribute('value', this.value);"
+            class="input-text input-user"
+            formControlName="direction"
+            [ngClass]="{'is-valid': validationAddress.length > 1}">
+
+            <label class="label-text"
+                   [ngClass]="{ 'back-value-option' : addresAnimation ||  addressShow != 'Otro'}" for="direction">Dirección</label>
+        </div>
+
+        <div class="form-control" [hidden]="addressShow == 'Otro' ">
+          <div class="container-select">
+            <ion-label>Dirección</ion-label>
+            <ion-select
+             [selectOptions]="adressTitle"
+             [(ngModel)]="addressShow"
+             formControlName="addressList"
+             okText="Aceptar"
+             cancelText="Cancelar"
+             placeholder="Seleccionar Dirección de Atención"
+             [ngClass]="{ 'is-invalid': f.addressList.errors && f.addressList.touched,'is-valid': f.addressList.touched && f.addressList.valid ||  f.addressList.valid }"
+              >
+              <ion-option *ngFor="let dataAddress of addressList" value="{{dataAddress}}" >{{dataAddress}}</ion-option>
+            </ion-select>
+          </div>
+        </div>
+      </div>
       <ion-grid>
         <ion-row>
 
@@ -101,52 +151,54 @@
         </div>
       </div>
 
-      <div class="form-control">
-        <div class="container-select">
-          <ion-label>Localidad</ion-label>
-          <ion-select
-           [selectOptions]="selectOptions"
-           [(ngModel)]="validationLocation"
-           formControlName="location"
-           okText="Aceptar"
-           cancelText="Cancelar"
-           placeholder="Seleccionar Localidad de Atención"
-           [ngClass]="{ 'is-invalid': f.location.errors && f.location.touched,'is-valid': f.location.touched && f.location.valid ||  f.location.valid }"
-           >
-            <ion-option *ngFor="let dataLocation of location" value="{{dataLocation}}" >{{dataLocation}}</ion-option>
-          </ion-select>
+      <div class="box-address" *ngIf="informationMaps.show">
+        <div class="form-control">
+          <div class="container-select">
+            <ion-label>Localidad</ion-label>
+            <ion-select
+             [selectOptions]="selectOptions"
+             [(ngModel)]="validationLocation"
+             formControlName="location"
+             okText="Aceptar"
+             cancelText="Cancelar"
+             placeholder="Seleccionar Localidad de Atención"
+             [ngClass]="{ 'is-invalid': f.location.errors && f.location.touched,'is-valid': f.location.touched && f.location.valid ||  f.location.valid }"
+             >
+              <ion-option *ngFor="let dataLocation of location" value="{{dataLocation}}" >{{dataLocation}}</ion-option>
+            </ion-select>
+          </div>
         </div>
-      </div>
 
-      <div class="form-control" *ngIf="addressShow == 'Otro'">
-          <input
-          value=""
-          type="text"
-          id="direction"
-          [(ngModel)]="validationAddress"
-          onkeyup="this.setAttribute('value', this.value);"
-          class="input-text input-user"
-          formControlName="direction"
-          [ngClass]="{'is-valid': validationAddress.length > 1}">
+        <div class="form-control" *ngIf="addressShow == 'Otro'">
+            <input
+            value=""
+            type="text"
+            id="direction"
+            [(ngModel)]="validationAddress"
+            onkeyup="this.setAttribute('value', this.value);"
+            class="input-text input-user"
+            formControlName="direction"
+            [ngClass]="{'is-valid': validationAddress.length > 1}">
 
-          <label class="label-text"
-                 [ngClass]="{ 'back-value-option' : addresAnimation ||  addressShow != 'Otro'}" for="direction">Dirección</label>
-      </div>
+            <label class="label-text"
+                   [ngClass]="{ 'back-value-option' : addresAnimation ||  addressShow != 'Otro'}" for="direction">Dirección</label>
+        </div>
 
-      <div class="form-control" [hidden]="addressShow == 'Otro' ">
-        <div class="container-select">
-          <ion-label>Dirección</ion-label>
-          <ion-select
-           [selectOptions]="adressTitle"
-           [(ngModel)]="addressShow"
-           formControlName="addressList"
-           okText="Aceptar"
-           cancelText="Cancelar"
-           placeholder="Seleccionar Dirección de Atención"
-           [ngClass]="{ 'is-invalid': f.addressList.errors && f.addressList.touched,'is-valid': f.addressList.touched && f.addressList.valid ||  f.addressList.valid }"
-            >
-            <ion-option *ngFor="let dataAddress of addressList" value="{{dataAddress}}" >{{dataAddress}}</ion-option>
-          </ion-select>
+        <div class="form-control" [hidden]="addressShow == 'Otro' ">
+          <div class="container-select">
+            <ion-label>Dirección</ion-label>
+            <ion-select
+             [selectOptions]="adressTitle"
+             [(ngModel)]="addressShow"
+             formControlName="addressList"
+             okText="Aceptar"
+             cancelText="Cancelar"
+             placeholder="Seleccionar Dirección de Atención"
+             [ngClass]="{ 'is-invalid': f.addressList.errors && f.addressList.touched,'is-valid': f.addressList.touched && f.addressList.valid ||  f.addressList.valid }"
+              >
+              <ion-option *ngFor="let dataAddress of addressList" value="{{dataAddress}}" >{{dataAddress}}</ion-option>
+            </ion-select>
+          </div>
         </div>
       </div>
 
