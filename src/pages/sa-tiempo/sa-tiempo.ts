@@ -30,11 +30,13 @@ export class SaTiempoPage {
   dataForm:any;
   radioTime:string;
   symptom:string;
+  socio:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public utils: Utils) {
     this.getSymptomData();
     this.getTime();
     this.pageBack();
+    this.getName();
   }
 
   ionViewDidLoad() {
@@ -44,6 +46,10 @@ export class SaTiempoPage {
   getSymptomData() {
     this.symptom = this.navParams.get("valueSymptom");
     console.log("this.symptom",this.symptom);
+  }
+
+  getName(){
+    this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;
   }
 
   getDataTime() {

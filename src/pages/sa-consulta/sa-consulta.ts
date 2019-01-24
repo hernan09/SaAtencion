@@ -26,15 +26,20 @@ export class SaConsultaPage {
   symptom:any;
   symptomValue:string="";
   symptomAnimation:boolean = false;
-
+  descriptionData:string;
+  description:string;
+  countDescription:number=0;
   validationSymptom:string="";
-
+  textareaLength:number=20;
   profileForm = new FormGroup({
     symptom: new FormControl('', Validators.required),
+    description : new FormControl('')
   })
   title = 'Solicitud de Atención';
   dataForm:any;
   symptomSelected:string;
+  prefijoFinal:string;
+  socio:any;
   public telefono;
   constructor( public navCtrl: NavController, public navParams: NavParams,public utils: Utils, private data :DataService ) {
 
@@ -44,6 +49,7 @@ export class SaConsultaPage {
 
     this.getSymptom();
     this.pageBack();
+    this.getName();
   }
 
   ionViewDidLoad() {
@@ -61,6 +67,25 @@ export class SaConsultaPage {
       this.gotoPage(symptomFinal);
       console.log("otra página");
     }
+  }
+
+  getName(){
+    this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;
+  }
+
+  onkeyup(number,length) {
+    console.log(event);
+    console.log(this.descriptionData.length);
+    this.prefijoFinal;
+    if(number === null || number === undefined) this.descriptionData = undefined;
+    else if(this.utils.validationInputTypeNumber(number,length)){
+        this.prefijoFinal = number;
+    }
+    else{
+        this.descriptionData = this.prefijoFinal;
+    }
+
+    this.countDescription = this.descriptionData.length;
   }
 
   previusPage() {

@@ -31,10 +31,12 @@ export class SaQuestionSymptomPage {
   symptom:any;
   question:string;
   showQuestion:boolean;
+  socio:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public utils: Utils) {
     this.getSymptomData();
     this.getAge();
     this.pageBack();
+    this.getName();
   }
 
   ionViewDidLoad() {
@@ -54,6 +56,10 @@ export class SaQuestionSymptomPage {
   getDataTime() {
     console.log("data", this.profileForm.value);
     this.gotoPage();
+  }
+
+  getName(){
+    this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;
   }
 
   getAge() {

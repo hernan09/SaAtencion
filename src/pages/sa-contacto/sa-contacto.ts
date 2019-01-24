@@ -30,11 +30,13 @@ export class SaContactoPage {
   addressList:any;
   addressShow:string = "";
   telFinal:number;
+  telDataSelect:string;
   prefijoFinal:number;
   private prefijo : number = undefined;
   private tel: number;
   emailTitle: any;
   adressTitle:any;
+  telSelect:any;
 
   //validation input color
   validationCod:number;
@@ -44,18 +46,23 @@ export class SaContactoPage {
   validationEmail:string;
 
   profileForm = new FormGroup({
-    cod: new FormControl('', Validators.required),
-    tel: new FormControl('', Validators.required),
+    cod: new FormControl('', Validators.minLength(1)),
+    tel: new FormControl('', Validators.minLength(6)),
     email: new FormControl('', Validators.email),
     emailList: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
     addressList: new FormControl('', Validators.required),
-    direction: new FormControl('' )
+    direction: new FormControl('' ),
+    telSelect: new FormControl('',Validators.required )
   })
   title = 'Solicitud de Atención';
   dataForm:any;
   otherEmail:string;
   informationMaps: any;
+  showAddress :boolean;
+  socio: any;
+  telValidateFinal:number;
+  codValidateFinal:number;
   //label animation
   backDataCod:boolean = false;
   telAnimation:boolean = false;
@@ -77,7 +84,8 @@ export class SaContactoPage {
     this.adressTitle = {
       title: 'Dirección',
     };
-
+    this.getName();
+    this.getTel();
     this.getEmail();
     this.getAddress();
     this.getLocation();
@@ -92,18 +100,28 @@ export class SaContactoPage {
     this.menu.setArrowBack(true);
   }
 
+  getName(){
+    this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;
+  }
+
   getDataContact() {
     console.log("data", this.profileForm.value);
     this.gotoPage();
   }
 
   getInformationMaps(){
-    this.informationMaps = this.navParams.get("showAdress");
-    if(this.informationMaps.show){
-      console.log("showAdress",this.informationMaps);
+    // console.log("showAdress",this.informationMaps);
 
-      this.validationLocation = this.informationMaps.location;
-      this.addressShow = this.informationMaps.address;
+    if(this.navParams.get("showAdress")){
+      this.informationMaps = this.navParams.get("showAdress");
+      console.log(this.informationMaps != undefined)
+      if(this.informationMaps.show) {
+        this.showAddress = this.informationMaps.show;
+        this.validationLocation = this.informationMaps.location;
+        this.addressShow = this.informationMaps.address;
+      }
+    }else {
+      this.showAddress = true;
     }
   }
 
@@ -135,13 +153,20 @@ export class SaContactoPage {
 
   pageBack() {
      let arrayDataForm = this.utils.getFormSolicitudAtencion();
-
+    console.log("back",arrayDataForm);
      if(arrayDataForm.length > 1) {
          this.backDataCod = true;
          this.telAnimation = true;
          this.emailAnimation = true;
          this.addresAnimation = true;
 
+         this.telValidateFinal=6;
+         this.codValidateFinal=2;
+
+
+         if(arrayDataForm[1].step2.telSelect == ""){
+           arrayDataForm[1].step2.telSelect = "Otro";
+         }
          if(arrayDataForm[1].step2.emailList == ""){
            arrayDataForm[1].step2.emailList = "Otro";
          }
@@ -156,16 +181,23 @@ export class SaContactoPage {
         this.emailShow          = arrayDataForm[1].step2.emailList;
         this.validationLocation = arrayDataForm[1].step2.location;
         this.addressShow        = arrayDataForm[1].step2.addressList;
+        this.telDataSelect      = arrayDataForm[1].step2.telSelect;
         this.validationAddress  = arrayDataForm[1].step2.direction;//otro
      }
   }
 
   checkTelLength(){
-    if((this.prefijo.toString() + this.tel.toString()).length == 10){
-        return true;
-    }
-    else{
-        return false;
+    if(this.telDataSelect == 'Otro' ){
+      console.log("prefijo",this.prefijo);
+      console.log("tel",this.tel);
+      if(this.prefijo && this.tel && (this.prefijo.toString() + this.tel.toString()).length == 10 ){
+          return true;
+      }
+      else{
+          return false;
+      }
+    }else {
+      return true;
     }
   }
 
@@ -178,7 +210,10 @@ export class SaContactoPage {
   }
 
   getAddress(){
-    this.addressList = [ 'La valle 400','La valle 600', 'Otro'  ];
+    this.addressList = [ 'Emilio mitre 457','La valle 600', 'Otro'  ];
+  }
+  getTel(){
+    this.telSelect = [ '011 - 15 42670066','011 - 15 42670055', 'Otro'  ];
   }
 
   validateTelNumber(number, length){
@@ -190,6 +225,9 @@ export class SaContactoPage {
      else{
          this.tel = this.telFinal;
      }
+
+     this.telValidateFinal = this.telFinal.toString().length;
+     console.log("this.telValidateFinal",this.telValidateFinal);
  }
 
  validatePrefijoNumber(number, length){
@@ -201,6 +239,8 @@ export class SaContactoPage {
     else{
         this.prefijo = this.prefijoFinal;
     }
+    this.codValidateFinal = this.prefijoFinal.toString().length;
+
   }
 
 

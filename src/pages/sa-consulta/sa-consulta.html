@@ -13,12 +13,13 @@
 
     <form class="container"  (ngSubmit)="getDataSymptom()">
 
-      <h3 class="title">Incarbone Eduardo Oscar</h3>
+      <h3 class="title" *ngFor="let item of socio" >{{item}}</h3>
+
       <h5 class="sub-title">Motivo por el cual solicita Médico a domicilio</h5>
 
       <hr class="soft-line soft-line-black">
 
-      <div  *ngIf="symptomSelected == 'Otro'">
+      <div  class="border" *ngIf="symptomSelected == 'Otro'">
           <!-- <input
           value=""
           type="text"
@@ -46,7 +47,7 @@
 
       </div>
 
-      <div class="form-control" [formGroup]="profileForm" *ngIf="symptomSelected != 'Otro'">
+      <div class="" [formGroup]="profileForm" *ngIf="symptomSelected != 'Otro'">
         <div class="container-select">
           <ion-label>Sintoma</ion-label>
           <ion-select [selectOptions]="selectOptions"
@@ -61,6 +62,8 @@
             <ion-option *ngFor="let dataSymptom of symptom" value="{{dataSymptom}}">{{dataSymptom}}</ion-option>
           </ion-select>
         </div>
+        <textarea name="name" (keyup)="onkeyup(descriptionData,200)" [attr.maxLength]="textareaLength" formControlName="description" [(ngModel)]="descriptionData" placeholder="Ingrese una descripción del sintoma" class="description-symptom"></textarea>
+        <div class="count">{{countDescription}} / 200</div>
 
       </div>
 

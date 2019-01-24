@@ -31,12 +31,15 @@ export class SaResumenPage {
   addressList:string;
   cod:number;
   direction:string;
+  telDataSelect:string;
   email:string;
   emailList:string;
   location:string;
   tel:number;
   symptom:string;
+  description:string;
   time:string;
+  socio:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public utils: Utils,private alertService : AlertService) {
 
@@ -49,6 +52,7 @@ export class SaResumenPage {
     console.log("datos",this.datos.addressList);
     this.addressList = this.datos.addressList;
     this.cod = this.datos.cod;
+    this.telDataSelect = this.datos.telSelect;
     this.direction = this.datos.direction;
     this.email = this.datos.email;
     this.emailList = this.datos.emailList;
@@ -56,7 +60,14 @@ export class SaResumenPage {
     this.tel = this.datos.tel;
 
     this.symptom = this.dataSymptom.symptom;
-    this.time = this.dataTime.time;
+    this.description = this.dataSymptom.description;
+
+    if(this.dataTime)
+      this.time = this.dataTime.time;
+    else this.time = '';
+
+
+    this.getName();
   }
 
   ionViewDidLoad() {
@@ -65,6 +76,10 @@ export class SaResumenPage {
 
   previusPage() {
     this.navCtrl.setRoot( SaServiciosPage );
+  }
+
+  getName(){
+    this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;
   }
 
   showAlertAdress(data){

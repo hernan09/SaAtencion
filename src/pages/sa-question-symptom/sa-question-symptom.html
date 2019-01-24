@@ -13,7 +13,8 @@
       <ion-list >
         <div class="image img-url"></div>
 
-        <h3 class="title">Incarbone Eduardo Oscar</h3>
+        <h3 class="title" *ngFor="let item of socio" >{{item}}</h3>
+
         <h5 class="sub-title" >{{question}}</h5>
 
         <hr class="soft-line soft-line-black">

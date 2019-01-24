@@ -31,7 +31,11 @@ export class SolicitudAtencionPage {
     data:any;
     dataForm: any;
     radio: string;
-
+    name1: string = '';
+    name2: string = '';
+    tycs1:boolean;
+    tycs2:boolean;
+    enable:boolean;
     public title ="Solicitud de Atención";
     @ViewChild(NavigatorPage) menu : NavigatorPage;
 
@@ -55,13 +59,37 @@ export class SolicitudAtencionPage {
       this.menu.setArrowBack(true);
     }
 
+    btnValidate() {
+      if(this.tycs1 || this.tycs2 || (this.tycs1 && this.tycs2)){
+        this.enable = true;
+      } else {
+        this.enable = false;
+      }
+    }
+
     getDataPartner() {
+      // this.dataForm = {
+      //   "step1": this.profileForm.value
+      // }
+
+      if(this.tycs1) {
+        this.name1 = 'Incarbone Eduardo Oscar';
+      }
+      if(this.tycs2) {
+        this.name2 = 'Incarbone Maria Sol';
+      }
+
+      let check = {
+        users: [this.name1,this.name2],
+        users1:this.tycs1,
+        users2:this.tycs2
+      }
+
       this.dataForm = {
-        "step1": this.profileForm.value
+        "step1": check
       }
 
       this.utils.setFormSolicitudAtencion(this.dataForm,0);
-      console.log("getFormSolicitudAtencion",this.utils.getFormSolicitudAtencion());
 
       let alert = this.alertService.showOptionAlert(Config.TITLE.WARNING_TITLE, 'La ultima dirección de atención fue: "Emilio mitre 457". ¿Se encuentra en este domicilio?', Config.ALERT_OPTIONS.SI, Config.ALERT_OPTIONS.NO,Config.ALERT_CLASS.ERROR_CSS);
       alert.onDidDismiss(res => {
@@ -83,7 +111,6 @@ export class SolicitudAtencionPage {
         location : location,
         address: address
       }
-      console.log(showAdress);
       this.navCtrl.push( SaContactoPage, {'showAdress' : showAdress} );
     }
 
@@ -94,9 +121,12 @@ export class SolicitudAtencionPage {
     pageBack() {
       let arrayDataForm = this.utils.getFormSolicitudAtencion();
        if(arrayDataForm.length > 0 ) {
+         this.enable = true;
          console.log("BACK FINAL",arrayDataForm[0].step1.partner);
 
         this.radio = arrayDataForm[0].step1.partner
+        this.tycs1 = arrayDataForm[0].step1.users1
+        this.tycs2 = arrayDataForm[0].step1.users2
        }
     }
 

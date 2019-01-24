@@ -10,14 +10,14 @@
   <div class="box-container">
 
     <div class="image img-url"></div>
-    <h3 class="title">Incarbone Eduardo Oscar</h3>
+    <h3 class="title" *ngFor="let item of socio" >{{item}}</h3>
     <h5 class="sub-title">Datos de Socio</h5>
 
     <hr class="soft-line soft-line-black">
 
     <form class="container" [formGroup]="profileForm" (ngSubmit)="getDataContact()">
-      
-      <div class="box-address" *ngIf="informationMaps.show">
+
+      <div class="box-address" *ngIf="!showAddress">
         <div class="form-control">
           <div class="container-select">
             <ion-label>Localidad</ion-label>
@@ -67,7 +67,28 @@
           </div>
         </div>
       </div>
-      <ion-grid>
+
+      <div class="box-tel" [hidden]="telDataSelect == 'Otro'">
+
+          <div class="form-control" >
+
+              <div class="container-select">
+                <ion-label>Tel</ion-label>
+                <ion-select
+                formControlName="telSelect"
+                 [(ngModel)]="telDataSelect"
+                 okText="Aceptar"
+                 cancelText="Cancelar"
+                 placeholder="Seleccionar Telefono"
+                [ngClass]="{ 'is-invalid': f.telSelect.errors && f.telSelect.touched,'is-valid': f.telSelect.touched && f.telSelect.valid ||  f.telSelect.valid }"
+                 >
+                  <ion-option *ngFor="let dataTel of telSelect" value="{{dataTel}}" >{{dataTel}}</ion-option>
+                </ion-select>
+              </div>
+          </div>
+      </div>
+
+      <ion-grid *ngIf="telDataSelect == 'Otro'">
         <ion-row>
 
           <ion-col col-2>
@@ -81,8 +102,8 @@
                   id="cod"
                   value = ""
                   type="number"
-                  [ngClass]="{ 'is-invalid': f.cod.errors && f.cod.touched ,
-                               'is-valid': f.cod.touched  && f.cod.valid  ||  f.cod.valid }"
+                  [ngClass]="{ 'is-invalid': codValidateFinal < 2 ,
+                               'is-valid': codValidateFinal >= 2  }"
                   [(ngModel)]="prefijo"
                   formControlName="cod"
                   (keyup)="validatePrefijoNumber(prefijo, 4)"
@@ -106,7 +127,7 @@
                   value=""
                   type="number"
                   [(ngModel)]="tel"
-                  [ngClass]="{ 'is-invalid': f.tel.errors && f.tel.touched,'is-valid': (f.tel.touched && f.tel.valid) ||  f.tel.valid}"
+                  [ngClass]="{ 'is-invalid': telValidateFinal < 6,'is-valid': telValidateFinal >= 6 }"
                   formControlName="tel"
                   (keyup)="validateTelNumber(tel, 8)"
                   onkeyup="this.setAttribute('value', this.value);"
@@ -151,7 +172,7 @@
         </div>
       </div>
 
-      <div class="box-address" *ngIf="informationMaps.show">
+      <div class="box-address" *ngIf="showAddress">
         <div class="form-control">
           <div class="container-select">
             <ion-label>Localidad</ion-label>

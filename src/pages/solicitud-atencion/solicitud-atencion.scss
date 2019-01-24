@@ -48,4 +48,31 @@ page-solicitud-atencion {
       flex-direction: row-reverse;
       border-bottom: 0 !important;
     }
+
+    .tycs {
+      margin-top: 20px;
+      display: flex;
+      padding: 10px;
+
+      .label {
+        color: $osde_cyan;
+        font-size: 1.1em;
+        margin-left: 10px;
+
+      }
+      .checkbox-icon {
+        width: 22px !important;
+        height: 22px !important;
+      }
+      .checkbox-inner {
+        left: 6px !important;
+        height: 15px !important;
+        width: 7px !important;
+      }
+      .user-name {
+        margin-left: 10px;
+        margin-top: 4px;
+        font-size: $text_extra_big_size;
+      }
+    }
 }

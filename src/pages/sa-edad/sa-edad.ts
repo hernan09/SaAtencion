@@ -31,15 +31,21 @@ export class SaEdadPage {
   symptom:any;
   question:string;
   showQuestion:boolean;
+  socio:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public utils: Utils,) {
     this.getSymptomData();
     this.getAge();
     this.pageBack();
+    this.getName();
   }
 
   ionViewDidLoad() {
     this.menu.setArrowBack(true);
+  }
+
+  getName(){
+    this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;
   }
 
   getSymptomData() {

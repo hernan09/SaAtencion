@@ -7,6 +7,7 @@ import { Config } from './../../app/config';
 import { AlertService } from './../../providers/alert.service';
 import { AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { Utils } from './../../providers/utils';
 /**
  * Generated class for the SaServiciosPage page.
  *
@@ -23,11 +24,13 @@ export class SaServiciosPage {
   @ViewChild(NavigatorPage) menu : NavigatorPage;
   dataService: any;
   title = 'Solicitud de Atención';
+  socio:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private alertService : AlertService,public alertCtrl :AlertController) {
+    private alertService : AlertService,public alertCtrl :AlertController,public utils: Utils) {
 
     this.getDataOption();
+    this.getName();
   }
 
   ionViewDidLoad() {
@@ -58,6 +61,10 @@ export class SaServiciosPage {
         title:"Solicitar un Médico a Domicilio"
       }
     ]
+  }
+
+  getName(){
+    this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;
   }
 
   previusPage() {
