@@ -35,6 +35,7 @@ export class SaContactoPage {
   private prefijo : number = undefined;
   private tel: number;
   emailTitle: any;
+  telTitle: any;
   adressTitle:any;
   telSelect:any;
 
@@ -80,6 +81,9 @@ export class SaContactoPage {
     };
     this.emailTitle = {
       title: 'Email',
+    };
+    this.telTitle = {
+      title: 'Teléfono',
     };
     this.adressTitle = {
       title: 'Dirección',

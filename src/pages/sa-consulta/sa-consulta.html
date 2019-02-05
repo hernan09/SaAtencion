@@ -15,7 +15,7 @@
 
       <h3 class="title" *ngFor="let item of socio" >{{item}}</h3>
 
-      <h5 class="sub-title">Motivo por el cual solicita Médico a domicilio</h5>
+      <h5 class="sub-title">Seleccione el síntoma que más le aqueja en estos momentos</h5>
 
       <hr class="soft-line soft-line-black">
 
@@ -31,7 +31,16 @@
           [ngClass]="{'is-valid': symptomValue.length > 1}">
           <label class="label-text"
                  [ngClass]="{ 'back-value-option' : symptomAnimation ||  symptomSelected != 'Otro'}" for="symtomID">Dirección </label> -->
-
+          <div class="form-control padding">
+              <div class="box-data-container">
+                 <input type="text" class="input-text input-user" [(ngModel)]="symptomValueSelect"(keyup)="search($event)" onkeyup="this.setAttribute('value', this.value);" [ngModelOptions]="{standalone: true}">
+                 <div class="" [ngClass]= "{'data-select':showPrediction}" *ngIf="showPrediction">
+                     <div *ngFor="let symptom of arrayFinalSymptom" (click)="setValueSymptom(symptom)">{{symptom}}</div>
+                     <div class="close-prediction" (click)="close()">Cancelar</div>
+                 </div>
+                 <label class="label-text" for="tel">Síntoma  </label>
+             </div>
+          </div>
           <ion-grid class="box-warning">
 
             <ion-row>
@@ -62,9 +71,18 @@
             <ion-option *ngFor="let dataSymptom of symptom" value="{{dataSymptom}}">{{dataSymptom}}</ion-option>
           </ion-select>
         </div>
-        <textarea name="name" (keyup)="onkeyup(descriptionData,200)" [attr.maxLength]="textareaLength" formControlName="description" [(ngModel)]="descriptionData" placeholder="Ingrese una descripción del sintoma" class="description-symptom"></textarea>
-        <div class="count">{{countDescription}} / 200</div>
-
+        <!-- <textarea name="name" (keyup)="onkeyup(descriptionData,200)" [attr.maxLength]="textareaLength" formControlName="description" [(ngModel)]="descriptionData" placeholder="Ingrese una descripción del sintoma" class="description-symptom"></textarea> -->
+        <!-- <div class="count">{{countDescription}} / 200</div> -->
+        <div class="form-control padding">
+            <div class="box-data-container">
+               <input type="text" class="input-text input-user" [(ngModel)]="symptomValueSelect"(keyup)="search($event)" onkeyup="this.setAttribute('value', this.value);" [ngModelOptions]="{standalone: true}">
+               <div class="" [ngClass]= "{'data-select':showPrediction}" *ngIf="showPrediction">
+                   <div *ngFor="let symptom of arrayFinalSymptom" (click)="setValueSymptom(symptom)">{{symptom}}</div>
+                   <div class="close-prediction"(click)="close()">Cancelar</div>
+               </div>
+               <label class="label-text" for="tel">Síntoma  </label>
+           </div>
+        </div>
       </div>
 
       <button type="submit" class="btn btn-light" [disabled]="!profileForm.valid" *ngIf="symptomSelected != 'Otro'">

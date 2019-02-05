@@ -76,6 +76,7 @@
                 <ion-label>Tel</ion-label>
                 <ion-select
                 formControlName="telSelect"
+                [selectOptions]="telTitle"
                  [(ngModel)]="telDataSelect"
                  okText="Aceptar"
                  cancelText="Cancelar"

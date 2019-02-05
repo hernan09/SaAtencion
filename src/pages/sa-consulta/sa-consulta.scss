@@ -122,4 +122,30 @@ page-sa-consulta {
     padding-top: 4px;
   }
 
+  .box-data-container {
+    position: relative;
+    margin-bottom: 5px;
+  }
+  .data-select{
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 5px;
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    background: white;
+    color: black;
+    z-index: 99999999;
+
+    div {
+      padding: 10px 0;
+      border-bottom: 1px solid grey;
+    }
+    .close-prediction {
+      text-align: right;
+      padding-right: 5%;
+      color: $osde_blue;
+    }
+  }
+
 }

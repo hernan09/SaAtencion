@@ -40,16 +40,6 @@ export class SaServiciosPage {
   getDataOption() {
     this.dataService = [
       {
-        final:"una",
-        type:"video Consulta Médica",
-        description:"sin salir de tu casa",
-        time:"10 minutos",
-        dataTime:undefined,
-        img: 'assets/img/doc2.jpg',
-        name: 'Dr. Provera, Hernán',
-        section: "videoConsulta",
-        title:"Solicitar una Video Consulta Médica"
-      },{
         final:"un",
         type:"Medico a Domicilio",
         description:"",
@@ -58,7 +48,20 @@ export class SaServiciosPage {
         img: 'assets/img/medicator_demora.png',
         name: '',
         section: "MédicoD",
-        title:"Solicitar un Médico a Domicilio"
+        title:"Solicitar un Médico a Domicilio",
+        subTitle:''
+      },
+      {
+        final:"una",
+        type:"video Consulta Médica",
+        description:"sin salir de tu casa",
+        time:"10 minutos",
+        dataTime:undefined,
+        img: 'assets/img/doc2.jpg',
+        name: 'Dr. Provera, Hernán',
+        section: "videoConsulta",
+        title:"Solicitar una Video Consulta Médica",
+        subTitle:'Podes anticipar la llegada del médico...'
       }
     ]
   }

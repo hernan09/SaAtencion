@@ -23,35 +23,39 @@
           <div class="box-option">
 <!-- showAlertAdress(data.section) -->
             <ion-grid>
-              <ion-row class="box-service" *ngFor="let data of dataService" (click) = "gotoPage()">
-                <h5 class="sub-title">{{data.title}}</h5>
-                <ion-col col-4>
-                  <div class="image-service image-url " [ngStyle]="{'background-image':'url(' + data.img + ')'}"></div>
-                </ion-col>
+              <div *ngFor="let data of dataService">
+                <div class="sub-title" *ngIf="data.subTitle != ''">{{data.subTitle}}</div>
+                <ion-row class="box-service"  (click) = "gotoPage()">
+                  <h5 class="sub-title">{{data.title}}</h5>
+                  <ion-col col-4>
+                    <div class="image-service image-url " [ngStyle]="{'background-image':'url(' + data.img + ')'}"></div>
+                  </ion-col>
 
-                <ion-col col-8 >
+                  <ion-col col-8 >
 
-                    <!-- <div class="video">
-                      <label>Solicitá {{data.final}}</label>
-                      <p>{{data.type}}</p>
-                      <label *ngIf="data.description"or="">{{data.description}}</label>
-                    </div> -->
+                      <!-- <div class="video">
+                        <label>Solicitá {{data.final}}</label>
+                        <p>{{data.type}}</p>
+                        <label *ngIf="data.description"or="">{{data.description}}</label>
+                      </div> -->
 
-                    <div  *ngIf="data.dataTime == undefined">
-                      <p>Tiempo de espera:</p>
-                      <label for="">{{data.time}}</label>
+                      <div  *ngIf="data.dataTime == undefined">
+                        <p>Tiempo de espera:</p>
+                        <label for="">{{data.time}}</label>
 
-                      <p class="space">Doctor:</p>
-                      <label for="">{{data.name}}</label>
-                    </div>
+                        <p class="space">Doctor:</p>
+                        <label for="">{{data.name}}</label>
+                      </div>
 
-                    <div  *ngIf="data.dataTime != undefined">
-                      <p>{{data.dataTime}}</p>
-                    </div>
+                      <div  *ngIf="data.dataTime != undefined">
+                        <p>{{data.dataTime}}</p>
+                      </div>
 
-                </ion-col>
+                  </ion-col>
 
-              </ion-row>
+                </ion-row>
+              </div>
+
             </ion-grid>
 
           </div>

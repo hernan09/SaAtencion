@@ -40,6 +40,12 @@ export class SaConsultaPage {
   symptomSelected:string;
   prefijoFinal:string;
   socio:any;
+  //filter
+  symptomValueSelect:string;
+  result:string = '';
+  arrayFinalSymptom :string[] = new Array() ;
+  showPrediction:boolean;
+
   public telefono;
   constructor( public navCtrl: NavController, public navParams: NavParams,public utils: Utils, private data :DataService ) {
 
@@ -106,7 +112,6 @@ export class SaConsultaPage {
       var quetionSymtom = {
         question:'¿Además este vomitando?',
         showQuestion:true
-
       }
     }
 
@@ -147,4 +152,63 @@ export class SaConsultaPage {
     this.telefono = this.data.nextPhoneNumber();
   }
 
+  /*filter did you mean*/
+  filterData(array,data) {
+    let prediction1 = array;
+    var i,j,x,result,predictionData ='';
+    for (i = 0; i < prediction1.length; i++) {
+      result = this.symptomValueSelect;
+      console.log("RESULT",result);
+      for (x = 0; x < prediction1[i].length; x++) {
+        predictionData =predictionData +prediction1[i][x]
+        console.log("1-",predictionData)
+        if(result.toLowerCase() == predictionData.toLowerCase()){
+          if(this.symptomValueSelect.length > 2 ) {
+              this.showPrediction = true;
+              console.log("ENTROOOOOOO FILTRANDOOOOO**********************",this.arrayFinalSymptom.indexOf(data));
+              if(this.arrayFinalSymptom.indexOf(data) == -1) this.arrayFinalSymptom.push(data);
+          }
+        }
+      }
+      predictionData = ''
+    }
+  }
+
+  search(data) {
+    console.log("input data",this.symptomValueSelect);
+    console.log("data",data.target.value);
+    this.symptomValueSelect = data.target.value;
+    if(!this.symptomValueSelect) return;
+    if(this.symptomValueSelect.length >  3 ){
+
+      let prediction1 = ['costipacion' ,'afiebrado' , 'febricula' , 'temperatura alta' , 'piel caliente' , 'hipertermia' , 'piel calenturada', 'cuerpo calenturado' , 'escalofríos' , 'fiebre'];
+      this.filterData(prediction1,'Fiebre');
+
+      let prediction2 = ['dolor de oido' , 'dolor de oreja' , 'otalgia' , 'agua en el oido' , 'supuracion de oido' ,'cera en el oido' , 'tapon de cera' , 'otitis' , 'otitis media' , 'otitis externa' , 'oido tapado' , 'se me tapa el oido' , 'insecto en el oido' , 'bicho en el oido' , 'juguete en el oido' , 'cuerpo extraño en el oido' , 'bolita en el oido' , 'semilla en el oido' , 'hisopo en el oido' , 'cotonete en el oído']
+      this.filterData(prediction2,'Dolor de oido');
+
+      let prediction3 = ['dolor de garganta' , 'odinofagia' , 'dolor al tragar' , 'molestia al tragar' , 'ardor al tragar' , 'picazón de garganta' , 'garganta roja' , 'garganta colorada' , 'placas en la garganta' , 'puntos blancos en la garganta' , 'faringitis' , 'amigdalitis' , 'ganglios inflamados en el cuello']
+      this.filterData(prediction3,'Dolor de Garganta');
+
+      let prediction4 = ['odontalgia' , 'dolor de diente' , 'dolor de muela' , 'dolor dental' , 'muela inflamada' , 'carie' , 'gingivitis' , 'dolor de encias' , 'encia inflamada' , 'diente partido' , 'diente roto' , 'muela partida' , 'muela rota']
+      this.filterData(prediction4,'Odontalgia');
+
+      let prediction5 = ['costipacion' , 'constipacion' , 'estreñimiento' , 'estreñido' , 'no puede evacuar' , 'no hace caca' , 'no puede hacer caca' , 'no puede ir de cuerpo' , 'seco de vientre' , 'vientre seco']
+      this.filterData(prediction5,'Constipacion');
+
+    }else {
+      this.showPrediction = false;
+      this.arrayFinalSymptom = []
+    }
+
+  }
+
+  setValueSymptom(value) {
+    this.showPrediction = false;
+    this.symptomValueSelect = value;
+  }
+
+  close() {
+    this.showPrediction = false;
+  }
 }

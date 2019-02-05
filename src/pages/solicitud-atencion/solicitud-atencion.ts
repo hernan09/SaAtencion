@@ -91,7 +91,7 @@ export class SolicitudAtencionPage {
 
       this.utils.setFormSolicitudAtencion(this.dataForm,0);
 
-      let alert = this.alertService.showOptionAlert(Config.TITLE.WARNING_TITLE, 'La ultima dirección de atención fue: "Emilio mitre 457". ¿Se encuentra en este domicilio?', Config.ALERT_OPTIONS.SI, Config.ALERT_OPTIONS.NO,Config.ALERT_CLASS.ERROR_CSS);
+      let alert = this.alertService.showOptionAlert(Config.TITLE.WARNING_TITLE, 'Tenemos este domicilio asociado a vos: "Emilio mitre 457". ¿Te encontras en el mismo?', Config.ALERT_OPTIONS.SI, Config.ALERT_OPTIONS.NO,Config.ALERT_CLASS.ERROR_CSS);
       alert.onDidDismiss(res => {
         var location = 'Córdoba';
         var address = 'Emilio mitre 457';
