@@ -93,7 +93,6 @@ export class DataService {
         let response = res.json();
         if (response.telefonos.length > 0) {
             this.telefonos = response.telefonos;
-            console.log('handleTelefonos',this.telefonos);
             this.saveTelefonos(response.telefonos, dni);
         }
         return response;
@@ -378,8 +377,9 @@ export class DataService {
 
     public restoreTelefonos(dni?) {
         var telefonos = this.getLocalStorage(Config.KEY.TELEFONOS, dni)
+        console.log("=> restoreTelefonos telefonos",telefonos);
         if (telefonos){
-          this.telefonos = telefonos;
+          this.telefonos = telefonos.telefonos;
         } else{
         }
     }
@@ -540,22 +540,23 @@ export class DataService {
 
 
     public getPhoneNumber() {
-        var tel = this.telefonos[this.indexTelefonos]
+        var tel = this.telefonos[this.indexTelefonos];
         if(tel == undefined) {
           tel =  {
               telefono: 'default',
               detalle: '0810-333-3511'
           };
         }
+        console.log("tel final",tel);
         return tel && tel.detalle
     }
 
 
     public nextPhoneNumber() {
-        console.log('Switching phone number data service',this.indexTelefonos)
-        console.log('this.telefonos.length dataservice',this.telefonos.length)
+        // console.log('Switching phone number data service',this.indexTelefonos)
+        // console.log('this.telefonos.length dataservice',this.telefonos.length)
         this.indexTelefonos++
-        console.log('Switching phone number2 data service',this.indexTelefonos)
+        // console.log('Switching phone number2 data service',this.indexTelefonos)
         if (this.indexTelefonos === this.telefonos.length) {
             this.indexTelefonos = 0
         }

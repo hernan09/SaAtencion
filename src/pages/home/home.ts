@@ -104,11 +104,14 @@ export class HomePage {
 			let phonesLS = this.dataService.getLocalStorage(Config.KEY.TELEFONOS);
 			let userDataLS = this.dataService.getLocalStorage(Config.KEY.MIS_DATOS);
 			let historyLS = this.dataService.getLocalStorage(Config.KEY.HISTORIAL);
-			// if(!phonesLS){
+      console.log("phonesLS",phonesLS);
+      console.log("userDataLS",userDataLS);
+      console.log("historyLS",historyLS);
+			if(!phonesLS){
 				console.log("No hay telefonos en LS => los telefonos",phonesLS);
 				this.dataService.updateTelefono();
 				this.telefono = this.dataService.getPhoneNumber();
-			// }
+			}
 			if(!userDataLS){
 				console.log("No hay usuarios en LS => traigo los Usuarios");
 

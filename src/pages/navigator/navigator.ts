@@ -24,6 +24,7 @@ export class NavigatorPage {
 
     //Busca en localstorage phone numbers
     this.telefono = data.getPhoneNumber();
+    console.log("NAVIGATOR TEL",this.telefono);
 
     events.subscribe('survey', (data) => {
       this.isSurveyActive = data;
@@ -50,7 +51,5 @@ export class NavigatorPage {
     if (this.navCtrl.getActive().instance.previusPage)
       this.navCtrl.getActive().instance.previusPage();
   }
-
-
 
 }

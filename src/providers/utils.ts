@@ -9,7 +9,7 @@ import { Alert } from 'ionic-angular/components/alert/alert';
 @Injectable()
 export class Utils {
 
-  alert :any  
+  alert :any
   loading :any
 
 	firstTimeNotificationsSent :boolean = true
@@ -18,12 +18,12 @@ export class Utils {
 	notificationsCounterChange :Subject<number> = new Subject<number>()
 
   constructor(
-    public alertCtrl :AlertController,    
+    public alertCtrl :AlertController,
     public loadingCtrl :LoadingController
   ){
   	this.notificationsCounter = 0
   }
-  
+
   public showLoader(dismissOnPageChange?) {
     this.loading = this.loadingCtrl.create({
       spinner : 'ios-small',
@@ -36,7 +36,6 @@ export class Utils {
   public hideLoader() {
     if (this.loading) this.loading.dismiss().catch(e=>{})
   }
-
 
   public getItem(name) {
     return JSON.parse(window.localStorage.getItem(name))
@@ -114,7 +113,7 @@ export class Utils {
     }
     else{
       return false;
-    }   
+    }
   }
 
 }
