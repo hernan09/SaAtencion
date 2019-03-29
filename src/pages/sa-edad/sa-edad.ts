@@ -2,10 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SaServiciosPage } from '../sa-servicios/sa-servicios';
+import { SaAddressPage } from '../sa-address/sa-address';
 import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
+import { SaConsultaPage } from '../sa-consulta/sa-consulta';
 import { SaQuestionSymptomPage } from '../sa-question-symptom/sa-question-symptom';
 import { NavigatorPage } from './../navigator/navigator';
 import { Utils } from './../../providers/utils';
+import { ChangeDetectorRef } from '@angular/core';
 /**
  * Generated class for the SaEdadPage page.
  *
@@ -33,15 +36,48 @@ export class SaEdadPage {
   showQuestion:boolean;
   socio:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public utils: Utils,) {
-    this.getSymptomData();
+  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams,public utils: Utils,) {
+
+    let dataPage =  this.utils.getFormSolicitudAtencion();
+    console.log("datos de esta sección 5 EDADDD!!: ", dataPage);
+
     this.getAge();
-    this.pageBack();
     this.getName();
   }
 
   ionViewDidLoad() {
+    this.getBackData();
     this.menu.setArrowBack(true);
+    console.log(this.navParams.get("quetionSymtom"));
+  }
+
+  getBackData(){
+
+    console.log(" => DELETE",this.utils.getBackPage());
+    if(this.utils.getBackPage()){
+
+      let dataPage =  this.utils.getFormSolicitudAtencion();
+      var count = 0 ;
+      for (let i = 0; i < dataPage.length; i++) {
+          count = count + 1;
+      }
+
+      console.log("datos de la edad",dataPage[count-1]);
+      this.radioSelected = dataPage[count-1].step5.time;//paso: cambiar variable => 2
+
+      if(dataPage[count-1].section){
+        this.question = dataPage[count-1].section.question;
+        this.showQuestion = dataPage[count-1].section.showQuestion;
+      }
+      else{
+        this.question = dataPage[count-1].question;
+      }
+
+      this.utils.deleteDataFormSolicitudAtencion();
+      this.cdRef.detectChanges();
+    }else {
+      this.getSymptomData();
+    }
   }
 
   getName(){
@@ -55,14 +91,13 @@ export class SaEdadPage {
 
       this.question = this.symptom.question;
       this.showQuestion = this.symptom.showQuestion;
-    } else{
+    } else {
       this.question = '¿El paciente tiene antecedentes de convulciones febriles o ha  convulsionado alguna vez por fiebre?'
       console.log("otro sintoma");
     }
   }
 
   getDataTime() {
-    console.log("data", this.profileForm.value);
     this.gotoPage(this.profileForm.value.time);
   }
 
@@ -78,10 +113,17 @@ export class SaEdadPage {
   }
 
   previusPage() {
-    this.navCtrl.setRoot( SaTiempoPage );
+    if('¿Además este vomitando?' == this.question || '¿El dolor es debido a un golpe o traumatismo?' == this.question){
+      this.navCtrl.setRoot( SaConsultaPage );
+    }else {
+      this.navCtrl.setRoot( SaTiempoPage );
+    }
   }
 
   gotoPage(data){
+
+    this.utils.backPage(false);
+
     this.saveData();
     if(this.showQuestion){
       if('¿Además este vomitando?' == this.question) {
@@ -91,7 +133,7 @@ export class SaEdadPage {
         if(data == 'No'){
           this.navCtrl.push( SaQuestionSymptomPage, {'quetionValue' : quetionValue} );
         }else {
-          this.navCtrl.push( SaServiciosPage );
+          this.navCtrl.push( SaAddressPage  );
         }
       } else{
         let quetionValue = {
@@ -100,19 +142,21 @@ export class SaEdadPage {
         if(data == 'Si'){
           this.navCtrl.push( SaQuestionSymptomPage, {'quetionValue' : quetionValue} );
         }else {
-          this.navCtrl.push( SaServiciosPage );
+          this.navCtrl.push( SaAddressPage );
         }
       }
 
     } else {
-      this.navCtrl.push( SaServiciosPage );
+      this.navCtrl.push( SaAddressPage );
     }
   }
 
   saveData(){
 
     this.dataForm = {
-      "step5": this.profileForm.value
+      "step5": this.profileForm.value,
+      "section":this.symptom,
+      "question":this.question
     }
 
     let arrayDataForm = this.utils.getFormSolicitudAtencion();
@@ -120,16 +164,7 @@ export class SaEdadPage {
     this.utils.setFormSolicitudAtencion(this.dataForm,4);
   }
 
-  pageBack() {
-
-     let arrayDataForm = this.utils.getFormSolicitudAtencion();
-
-     if(arrayDataForm.length > 4) {
-
-        this.radioSelected  = arrayDataForm[4].step5.time;
-
-     }
+  ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
+    this.utils.backPage(true);
   }
-
-
 }

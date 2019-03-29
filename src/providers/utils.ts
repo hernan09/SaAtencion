@@ -14,9 +14,12 @@ export class Utils {
 
 	firstTimeNotificationsSent :boolean = true
 
-	notificationsCounter :any
+	notificationsCounter : any
 	notificationsCounterChange :Subject<number> = new Subject<number>()
   dataFormSA: any = [];
+  oldDataFormSA: any = [];
+  backPageSA:boolean = false;
+
 
   constructor(
     public alertCtrl :AlertController,
@@ -26,26 +29,49 @@ export class Utils {
   }
 
   /*Solicitud de Atencion*/
+
   setFormSolicitudAtencion(data, position) {
-
-    if(position != -1){
-      if(this.dataFormSA.length < position){
-        this.dataFormSA.push(data);
-        console.log("agregado: ",this.dataFormSA);
-      } else{
-        this.dataFormSA[position] = data;
-        console.log("editado: ",this.dataFormSA);
-      }
-    }else{
+    console.log("*******************AGREGADO data: ",data);
+    if(position != -1)
+      this.dataFormSA.push(data);
+    else
       this.dataFormSA = [];
-    }
+    // console.log("=> Agregado: ",this.dataFormSA);
+    // if(position != -1){
+    //
+    //
+    //   if(this.dataFormSA.length < position){
+    //     this.dataFormSA.push(data);
+    //     console.log("agregado: ",this.dataFormSA);
+    //   } else{
+    //     this.dataFormSA[position] = data;
+    //     console.log("editado: ",this.dataFormSA);
+    //   }
+    // }
+    // else{
+    //   this.dataFormSA = [];
+    // }
+  }
 
+  getOldFormSolicitudAtencion(){
+    return this.oldDataFormSA;
+  }
 
+  deleteDataFormSolicitudAtencion(){
+    console.log("*******************ELIMINADO data");
+    this.dataFormSA.pop();
   }
 
   getFormSolicitudAtencion(){
-    console.log("get arrayFinal: ",this.dataFormSA);
     return this.dataFormSA;
+  }
+
+  backPage(data){
+    this.backPageSA = data;
+  }
+
+  getBackPage(){
+    return this.backPageSA;
   }
 
   /*------------------------*/

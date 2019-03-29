@@ -1,13 +1,17 @@
+import { NavigatorPage } from './../navigator/navigator';
 import { Utils } from './../../providers/utils';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SaConsultaPage } from '../sa-consulta/sa-consulta';
+import { SaServiciosPage } from '../sa-servicios/sa-servicios';
 import { SolicitudAtencionPage } from '../solicitud-atencion/solicitud-atencion';
-import { NavigatorPage } from './../navigator/navigator';
+import { SaAddressPage } from '../sa-address/sa-address';
 import { ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Config } from './../../app/config';
 import { AlertService } from './../../providers/alert.service';
+
+import { ChangeDetectorRef } from '@angular/core';
 /**
  * Generated class for the SaContactoPage page.
  *
@@ -32,8 +36,8 @@ export class SaContactoPage {
   telFinal:number;
   telDataSelect:string;
   prefijoFinal:number;
-  private prefijo : number = undefined;
-  private tel: number;
+  prefijo : number = undefined;
+  tel: number;
   emailTitle: any;
   telTitle: any;
   adressTitle:any;
@@ -51,14 +55,14 @@ export class SaContactoPage {
     tel: new FormControl('', Validators.minLength(6)),
     email: new FormControl('', Validators.email),
     emailList: new FormControl('', Validators.required),
-    location: new FormControl('', Validators.required),
-    addressList: new FormControl('', Validators.required),
-    direction: new FormControl('' ),
+    // location: new FormControl('', Validators.required),
+    // addressList: new FormControl('', Validators.required),
+    // direction: new FormControl('' ),
     telSelect: new FormControl('',Validators.required )
   })
-  title = 'Solicitud de Atención';
+
   dataForm:any;
-  otherEmail:string;
+  otherEmail:string = "";
   informationMaps: any;
   showAddress :boolean;
   socio: any;
@@ -69,38 +73,56 @@ export class SaContactoPage {
   telAnimation:boolean = false;
   emailAnimation:boolean = false;
   addresAnimation:boolean = false;
-
+  title:string =  'Solicitud de Atención';
 
   constructor(public navCtrl: NavController,
+              private cdRef:ChangeDetectorRef,
               public navParams: NavParams,
               public utils: Utils,
-              private alertService : AlertService,) {
-
-    this.selectOptions = {
-      title: 'Localidad',
-    };
+              private alertService : AlertService
+              ) {
+    let dataPage =  this.utils.getFormSolicitudAtencion();
+    console.log("datos de esta sección 6 CONTACTO: ", dataPage);
     this.emailTitle = {
       title: 'Email',
     };
     this.telTitle = {
       title: 'Teléfono',
     };
-    this.adressTitle = {
-      title: 'Dirección',
-    };
+
     this.getName();
     this.getTel();
     this.getEmail();
-    this.getAddress();
-    this.getLocation();
-    this.getInformationMaps();
+  }
 
-    this.pageBack();
+  getBackData() {
+
+    console.log(" => DELETE",this.utils.getBackPage());
+    if(this.utils.getBackPage()){
+
+      let dataPage =  this.utils.getFormSolicitudAtencion();
+      var count = 0 ;
+      for (let i = 0; i < dataPage.length; i++) {
+          count = count + 1;
+      }
+      this.title = 'Solicitud de Atención';
+      console.log('**ENTRO POR ACA**',dataPage[count-1].step5telemail);
+      this.emailShow = dataPage[count-1].step5telemail.emailList;//paso: cambiar variable => 2
+      this.otherEmail = dataPage[count-1].step5telemail.email;//paso: cambiar variable => 2
+      this.telDataSelect = dataPage[count-1].step5telemail.telSelect;
+      this.tel = dataPage[count-1].step5telemail.tel;
+      this.prefijo = dataPage[count-1].step5telemail.cod;
+
+      this.utils.deleteDataFormSolicitudAtencion();
+      this.cdRef.detectChanges();
+    }
   }
 
   get f() { return this.profileForm.controls; }
 
   ionViewDidLoad() {
+    this.getBackData();
+
     this.menu.setArrowBack(true);
   }
 
@@ -113,81 +135,51 @@ export class SaContactoPage {
     this.gotoPage();
   }
 
-  getInformationMaps(){
-    // console.log("showAdress",this.informationMaps);
-
-    if(this.navParams.get("showAdress")){
-      this.informationMaps = this.navParams.get("showAdress");
-      console.log(this.informationMaps != undefined)
-      if(this.informationMaps.show) {
-        this.showAddress = this.informationMaps.show;
-        this.validationLocation = this.informationMaps.location;
-        this.addressShow = this.informationMaps.address;
-      }
-    }else {
-      this.showAddress = true;
-    }
-  }
+  // getInformationMaps(){
+  //   // console.log("showAdress",this.informationMaps);
+  //
+  //   if(this.navParams.get("showAdress")){
+  //     this.informationMaps = this.navParams.get("showAdress");
+  //     console.log(this.informationMaps != undefined)
+  //     if(this.informationMaps.show) {
+  //       this.showAddress = this.informationMaps.show;
+  //       this.validationLocation = this.informationMaps.location;
+  //       this.addressShow = this.informationMaps.address;
+  //     }
+  //   }else {
+  //     this.showAddress = true;
+  //   }
+  // }
 
   previusPage() {
-    this.navCtrl.setRoot( SolicitudAtencionPage );
+    this.navCtrl.setRoot( SaAddressPage );
   }
 
   gotoPage(){
-
+    console.log("this.otherEmail",this.otherEmail);
+    this.utils.backPage(false);
     if(!this.checkTelLength()){
         this.alertService.showAlert(Config.TITLE.WRONG_NUMBER, Config.MSG.WRONG_NUMBER_ERROR,Config.ALERT_CLASS.ERROR_CSS);
         console.log("Cantidad de numeros del telefono debe sumar 10");
-    }else {
+    }else if(this.otherEmail && !this.validateEmail(this.otherEmail)){
+      this.alertService.showAlert(Config.TITLE.WRONG_EMAIL, Config.MSG.WRONG_EMAIL_ERROR,Config.ALERT_CLASS.ERROR_CSS);
+      console.log("El formato de email no es el correcto");
+    }
+    else {
       this.saveData();
-      this.navCtrl.push( SaConsultaPage );
+      this.navCtrl.push( SaServiciosPage );
     }
   }
 
   saveData(){
 
     this.dataForm = {
-      "step2": this.profileForm.value
+      "step5telemail": this.profileForm.value
     }
 
     let arrayDataForm = this.utils.getFormSolicitudAtencion();
 
-    this.utils.setFormSolicitudAtencion(this.dataForm,1);
-  }
-
-  pageBack() {
-     let arrayDataForm = this.utils.getFormSolicitudAtencion();
-    console.log("back",arrayDataForm);
-     if(arrayDataForm.length > 1) {
-         this.backDataCod = true;
-         this.telAnimation = true;
-         this.emailAnimation = true;
-         this.addresAnimation = true;
-
-         this.telValidateFinal=6;
-         this.codValidateFinal=2;
-
-
-         if(arrayDataForm[1].step2.telSelect == ""){
-           arrayDataForm[1].step2.telSelect = "Otro";
-         }
-         if(arrayDataForm[1].step2.emailList == ""){
-           arrayDataForm[1].step2.emailList = "Otro";
-         }
-         if(arrayDataForm[1].step2.addressList == ""){
-           arrayDataForm[1].step2.direction = "Otro";
-         }
-
-        this.prefijo            = arrayDataForm[1].step2.cod;
-        // document.getElementById("cod").setAttribute("value",arrayDataForm[1].step2.cod);
-        this.tel                = arrayDataForm[1].step2.tel;
-        this.otherEmail         = arrayDataForm[1].step2.email;//otro
-        this.emailShow          = arrayDataForm[1].step2.emailList;
-        this.validationLocation = arrayDataForm[1].step2.location;
-        this.addressShow        = arrayDataForm[1].step2.addressList;
-        this.telDataSelect      = arrayDataForm[1].step2.telSelect;
-        this.validationAddress  = arrayDataForm[1].step2.direction;//otro
-     }
+    this.utils.setFormSolicitudAtencion(this.dataForm,9);
   }
 
   checkTelLength(){
@@ -235,7 +227,10 @@ export class SaContactoPage {
  }
 
  validatePrefijoNumber(number, length){
-    this.prefijoFinal;
+    // console.log("prefijoFinal",this.prefijoFinal);
+    // console.log("number",number);
+    // console.log("length",length);
+    // this.prefijoFinal;
     if(number === null || number === undefined) this.prefijo = undefined;
     else if(this.utils.validationInputTypeNumber(number,length)){
         this.prefijoFinal = number;
@@ -246,6 +241,12 @@ export class SaContactoPage {
     this.codValidateFinal = this.prefijoFinal.toString().length;
 
   }
+  validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+  }
 
-
+  ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
+    this.utils.backPage(true);
+  }
 }

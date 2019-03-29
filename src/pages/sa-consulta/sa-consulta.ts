@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
-import { SaContactoPage } from '../sa-contacto/sa-contacto';
+import { SaLocationPage } from '../sa-location/sa-location';
 import { SaEdadPage } from '../sa-edad/sa-edad';
 import { NavigatorPage } from './../navigator/navigator';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utils } from './../../providers/utils';
 import { DataService } from './../../providers/data.service';
+import { ChangeDetectorRef } from '@angular/core';
 /**
  * Generated class for the SaConsultaPage page.
  *
@@ -47,19 +48,39 @@ export class SaConsultaPage {
   showPrediction:boolean;
 
   public telefono;
-  constructor( public navCtrl: NavController, public navParams: NavParams,public utils: Utils, private data :DataService ) {
+  constructor( public navCtrl: NavController, private cdRef:ChangeDetectorRef, public navParams: NavParams,public utils: Utils, private data :DataService ) {
 
     this.selectOptions = {
       title: 'Síntoma',
     };
 
     this.getSymptom();
-    this.pageBack();
+    // this.pageBack();
     this.getName();
+
+    let dataPage =  this.utils.getFormSolicitudAtencion();
+    console.log("datos de esta sección 3: ", dataPage);
   }
 
   ionViewDidLoad() {
+    this.showBackData();
     this.menu.setArrowBack(true);
+  }
+
+  showBackData() {
+    console.log(" => DELETE",this.utils.getBackPage());
+    if(this.utils.getBackPage()){
+
+      let dataPage =  this.utils.getFormSolicitudAtencion();
+      var count = 0 ;
+      for (let i = 0; i < dataPage.length; i++) {
+          count = count + 1;
+      }
+      this.symptomSelected = dataPage[count-1].step3.symptom;
+
+      this.utils.deleteDataFormSolicitudAtencion();
+      this.cdRef.detectChanges();
+    }
   }
 
   get f() { return this.profileForm.controls; }
@@ -95,10 +116,13 @@ export class SaConsultaPage {
   }
 
   previusPage() {
-    this.navCtrl.setRoot( SaContactoPage );
+    this.navCtrl.setRoot( SaLocationPage );
   }
 
   gotoPage(valueSymptom){
+
+    this.utils.backPage(false);
+
     this.saveData();
 
     if(valueSymptom == 'Odontalgia') {
@@ -130,18 +154,7 @@ export class SaConsultaPage {
 
     let arrayDataForm = this.utils.getFormSolicitudAtencion();
 
-    this.utils.setFormSolicitudAtencion(this.dataForm,2);
-  }
-
-  pageBack() {
-
-     let arrayDataForm = this.utils.getFormSolicitudAtencion();
-
-     if(arrayDataForm.length > 2) {
-
-        this.symptomAnimation = true;
-        this.symptomSelected  = arrayDataForm[2].step3.symptom;
-     }
+    this.utils.setFormSolicitudAtencion(this.dataForm,"step3");
   }
 
   getSymptom() {
@@ -210,5 +223,11 @@ export class SaConsultaPage {
 
   close() {
     this.showPrediction = false;
+  }
+
+  ionViewWillLeave() {
+    console.log("ENTRO ACA?")
+
+    this.utils.backPage(true);
   }
 }

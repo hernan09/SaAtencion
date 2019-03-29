@@ -4,7 +4,7 @@
 
 </ion-header>
 
-<ion-content  >
+<ion-content >
 
   <div class="header header-rectangular-container"></div>
   <div class="box-container">
@@ -17,57 +17,7 @@
 
     <form class="container" [formGroup]="profileForm" (ngSubmit)="getDataContact()">
 
-      <div class="box-address" *ngIf="!showAddress">
-        <div class="form-control">
-          <div class="container-select">
-            <ion-label>Localidad</ion-label>
-            <ion-select
-             [selectOptions]="selectOptions"
-             [(ngModel)]="validationLocation"
-             formControlName="location"
-             okText="Aceptar"
-             cancelText="Cancelar"
-             placeholder="Seleccionar Localidad de Atención"
-             [ngClass]="{ 'is-invalid': f.location.errors && f.location.touched,'is-valid': f.location.touched && f.location.valid ||  f.location.valid }"
-             >
-              <ion-option *ngFor="let dataLocation of location" value="{{dataLocation}}" >{{dataLocation}}</ion-option>
-            </ion-select>
-          </div>
-        </div>
-
-        <div class="form-control" *ngIf="addressShow == 'Otro'">
-            <input
-            value=""
-            type="text"
-            id="direction"
-            [(ngModel)]="validationAddress"
-            onkeyup="this.setAttribute('value', this.value);"
-            class="input-text input-user"
-            formControlName="direction"
-            [ngClass]="{'is-valid': validationAddress.length > 1}">
-
-            <label class="label-text"
-                   [ngClass]="{ 'back-value-option' : addresAnimation ||  addressShow != 'Otro'}" for="direction">Dirección</label>
-        </div>
-
-        <div class="form-control" [hidden]="addressShow == 'Otro' ">
-          <div class="container-select">
-            <ion-label>Dirección</ion-label>
-            <ion-select
-             [selectOptions]="adressTitle"
-             [(ngModel)]="addressShow"
-             formControlName="addressList"
-             okText="Aceptar"
-             cancelText="Cancelar"
-             placeholder="Seleccionar Dirección de Atención"
-             [ngClass]="{ 'is-invalid': f.addressList.errors && f.addressList.touched,'is-valid': f.addressList.touched && f.addressList.valid ||  f.addressList.valid }"
-              >
-              <ion-option *ngFor="let dataAddress of addressList" value="{{dataAddress}}" >{{dataAddress}}</ion-option>
-            </ion-select>
-          </div>
-        </div>
-      </div>
-
+      <!-- <div class="box-tel" > -->
       <div class="box-tel" [hidden]="telDataSelect == 'Otro'">
 
           <div class="form-control" >
@@ -89,73 +39,62 @@
           </div>
       </div>
 
+      <!--  INICIO-->
       <ion-grid *ngIf="telDataSelect == 'Otro'">
         <ion-row>
 
-          <ion-col col-2>
-            <label for="" class="label-input-number">0</label>
-          </ion-col>
+           <ion-col col-2>
+             <label for="" class="label-input-number">0</label>
+           </ion-col>
 
-          <ion-col col-3>
-            <div class="form-control padding">
-                  <!-- (value)="prefijo ? prefijo : '' " (focusout)="getValueInput(prefijo)" -->
-                <input
-                  id="cod"
-                  value = ""
-                  type="number"
-                  [ngClass]="{ 'is-invalid': codValidateFinal < 2 ,
-                               'is-valid': codValidateFinal >= 2  }"
-                  [(ngModel)]="prefijo"
-                  formControlName="cod"
-                  (keyup)="validatePrefijoNumber(prefijo, 4)"
-                  onkeyup="this.setAttribute('value', this.value);"
-                  class="input-text input-user"
-                >
+           <ion-col col-3>
+             <div class="form-control padding">
+                   <!-- (value)="prefijo ? prefijo : '' " (focusout)="getValueInput(prefijo)" -->
+                 <input
+                   id="cod"
+                   [value]="prefijo"
+                   type="number"
+                   [ngClass]="{ 'is-invalid': codValidateFinal < 2 ,
+                                'is-valid': codValidateFinal >= 2  }"
+                   [(ngModel)]="prefijo"
+                   formControlName="cod"
+                   (keyup)="validatePrefijoNumber(prefijo, 4)"
+                   onkeyup="this.setAttribute('value', this.value);"
+                   class="input-text input-user"
+                 >
 
-                <label class="label-text"
-                       [ngClass]="{ 'back-value-option' : backDataCod }" for="cod" >Código</label>
-            </div>
-          </ion-col>
+                 <label class="label-text"
+                        [ngClass]="{ 'back-value-option' : backDataCod }" for="cod" >Código</label>
+             </div>
+           </ion-col>
 
-          <ion-col col-2>
-            <label for="" class="label-input-number">- 15</label>
-          </ion-col>
+           <ion-col col-2>
+             <label for="" class="label-input-number">- 15</label>
+           </ion-col>
 
-          <ion-col col-5>
-            <div class="form-control padding">
-                <input
-                  id="tel"
-                  value=""
-                  type="number"
-                  [(ngModel)]="tel"
-                  [ngClass]="{ 'is-invalid': telValidateFinal < 6,'is-valid': telValidateFinal >= 6 }"
-                  formControlName="tel"
-                  (keyup)="validateTelNumber(tel, 8)"
-                  onkeyup="this.setAttribute('value', this.value);"
-                  class="input-text input-user">
-                <label class="label-text"
-                       [ngClass]="{ 'back-value-option' : telAnimation }"  for="tel">Teléfono</label>
-            </div>
-          </ion-col>
+           <ion-col col-5>
+             <div class="form-control padding">
+                 <input
+                   id="tel"
+                   [value]="tel"
+                   type="number"
+                   [(ngModel)]="tel"
+                   [ngClass]="{ 'is-invalid': telValidateFinal < 6,'is-valid': telValidateFinal >= 6 }"
+                   formControlName="tel"
+                   (keyup)="validateTelNumber(tel, 8)"
+                   onkeyup="this.setAttribute('value', this.value);"
+                   class="input-text input-user">
+                 <label class="label-text"
+                        [ngClass]="{ 'back-value-option' : telAnimation }"  for="tel">Teléfono</label>
+             </div>
+           </ion-col>
 
-        </ion-row>
-      </ion-grid>
+         </ion-row>
+       </ion-grid>
 
-      <div class="form-control email-valid" *ngIf="emailShow == 'Otro'">
-          <input
-           id="email"
-           value=""
-           type="text"
-           formControlName="email"
-           [(ngModel)]="otherEmail"
-           onkeyup="this.setAttribute('value', this.value);"
-           class="input-text input-user"
-           [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched && otherEmail.length > 0,'is-valid': f.email.touched && f.email.valid && otherEmail.length > 0 ||  f.email.valid && otherEmail.length > 0 }"
-           >
-          <label class="label-text"
-                 [ngClass]="{ 'back-value-option' : emailAnimation || emailShow != 'Otro'}" for="email">Email</label>
-      </div>
+      <!--  FIN-->
 
+      <!-- <div class="form-control" > -->
       <div class="form-control" *ngIf="emailShow != 'Otro'">
         <div class="container-select">
           <ion-label>Email</ion-label>
@@ -173,64 +112,29 @@
         </div>
       </div>
 
-      <div class="box-address" [hidden]="true">
-        <div class="form-control">
-          <div class="container-select">
-            <ion-label>Localidad</ion-label>
-            <ion-select
-             [selectOptions]="selectOptions"
-             [(ngModel)]="validationLocation"
-             formControlName="location"
-             okText="Aceptar"
-             cancelText="Cancelar"
-             placeholder="Seleccionar Localidad de Atención"
-             [ngClass]="{ 'is-invalid': f.location.errors && f.location.touched,'is-valid': f.location.touched && f.location.valid ||  f.location.valid }"
-             >
-              <ion-option *ngFor="let dataLocation of location" value="{{dataLocation}}" >{{dataLocation}}</ion-option>
-            </ion-select>
-          </div>
-        </div>
+      <div class="form-control email-valid" *ngIf="emailShow == 'Otro'">
+        <input
+         id="email"
+         [value]="otherEmail"
+         type="text"
+         formControlName="email"
+         [(ngModel)]="otherEmail"
+         onkeyup="this.setAttribute('value', this.value);"
+         class="input-text input-user"
 
-        <div class="form-control" *ngIf="addressShow == 'Otro'">
-            <input
-            value=""
-            type="text"
-            id="direction"
-            [(ngModel)]="validationAddress"
-            onkeyup="this.setAttribute('value', this.value);"
-            class="input-text input-user"
-            formControlName="direction"
-            [ngClass]="{'is-valid': validationAddress.length > 1}">
-
-            <label class="label-text"
-                   [ngClass]="{ 'back-value-option' : addresAnimation ||  addressShow != 'Otro'}" for="direction">Dirección</label>
-        </div>
-
-        <div class="form-control" [hidden]="addressShow == 'Otro' ">
-          <div class="container-select">
-            <ion-label>Dirección</ion-label>
-            <ion-select
-             [selectOptions]="adressTitle"
-             [(ngModel)]="addressShow"
-             formControlName="addressList"
-             okText="Aceptar"
-             cancelText="Cancelar"
-             placeholder="Seleccionar Dirección de Atención"
-             [ngClass]="{ 'is-invalid': f.addressList.errors && f.addressList.touched,'is-valid': f.addressList.touched && f.addressList.valid ||  f.addressList.valid }"
-              >
-              <ion-option *ngFor="let dataAddress of addressList" value="{{dataAddress}}" >{{dataAddress}}</ion-option>
-            </ion-select>
-          </div>
-        </div>
+         >
+         <!-- [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched && otherEmail.length > 0,'is-valid': f.email.touched && f.email.valid && otherEmail.length > 0 ||  f.email.valid && otherEmail.length > 0 }" -->
+        <label class="label-text"
+               [ngClass]="{ 'back-value-option' : emailAnimation || emailShow != 'Otro'}" for="email">Email</label>
       </div>
 
-      <button type="submit" *ngIf="addressShow != 'Otro'" class="btn btn-light" [disabled]="!profileForm.valid ">
-        Continuar
-      </button>
-      <button type="submit"  *ngIf="addressShow == 'Otro'" class="btn btn-light" [disabled]="profileForm.valid && validationAddress.length == 0 ">
-        Continuar
-      </button>
 
+      <button *ngIf="emailShow != 'Otro'" type="submit"  class="btn btn-light" [disabled]="!profileForm.valid ">
+        Continuar
+      </button>
+      <button *ngIf="emailShow == 'Otro'"  type="submit"  class="btn btn-light">
+        Continuar
+      </button>
     </form>
   </div>
 

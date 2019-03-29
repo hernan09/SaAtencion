@@ -1,11 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SaServiciosPage } from '../sa-servicios/sa-servicios';
+import { SaAddressPage } from '../sa-address/sa-address';
 import { SaEdadPage } from '../sa-edad/sa-edad';
 import { SaConsultaPage } from '../sa-consulta/sa-consulta';
 import { NavigatorPage } from './../navigator/navigator';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utils } from './../../providers/utils';
+
+import { ChangeDetectorRef } from '@angular/core';
 /**
  * Generated class for the SaTiempoPage page.
  *
@@ -32,19 +35,47 @@ export class SaTiempoPage {
   symptom:string;
   socio:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public utils: Utils) {
-    this.getSymptomData();
-    this.getTime();
-    this.pageBack();
+  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef,  public navParams: NavParams,public utils: Utils) {
+
     this.getName();
+
+    let dataPage =  this.utils.getFormSolicitudAtencion();
+    console.log("datos de esta sección 4 tiempo: ", dataPage);
   }
 
   ionViewDidLoad() {
+    this.getBackData();
     this.menu.setArrowBack(true);
   }
 
+  getBackData(){
+
+    console.log(" => DELETE",this.utils.getBackPage());
+    if(this.utils.getBackPage()){
+
+      let dataPage =  this.utils.getFormSolicitudAtencion();
+      var count = 0 ;
+      for (let i = 0; i < dataPage.length; i++) {
+          count = count + 1;
+      }
+      console.log("estoy EN TIEMPO PAGE: ",dataPage[count-1].section)
+      this.symptom = dataPage[count-1].section;//paso: cambiar variable => 2
+      this.radioTime = dataPage[count-1].step4.time;//paso: cambiar variable => 2
+      this.getTime();
+
+      this.utils.deleteDataFormSolicitudAtencion();
+      this.cdRef.detectChanges();
+    }else{
+      console.log("no ENTRO ");
+      this.getSymptomData();
+      this.getTime();
+    }
+  }
+
   getSymptomData() {
-    this.symptom = this.navParams.get("valueSymptom");
+    if(this.navParams.get("valueSymptom")){
+      this.symptom = this.navParams.get("valueSymptom");
+    }
     console.log("this.symptom",this.symptom);
   }
 
@@ -53,13 +84,13 @@ export class SaTiempoPage {
   }
 
   getDataTime() {
-    console.log("data", this.profileForm.value);
     let data = this.profileForm.value.time
 
     this.gotoPage(data);
   }
 
   getTime() {
+    console.log("this.symptom22222222",this.symptom)
     if(this.symptom == 'Fiebre'){
       this.time =
       [
@@ -94,7 +125,7 @@ export class SaTiempoPage {
   }
 
   gotoPage(page){
-
+    this.utils.backPage(false);
     this.saveData();
 
     if(this.symptom == 'Dolor de oido') {
@@ -119,14 +150,18 @@ export class SaTiempoPage {
       this.navCtrl.push( SaEdadPage );
     }
     else {
-      this.navCtrl.push( SaServiciosPage );
+      let sectionValue = {
+        section : "tiepoPage"
+      }
+      this.navCtrl.push( SaAddressPage  ,{'section' : sectionValue});
     }
   }
 
   saveData(){
 
     this.dataForm = {
-      "step4": this.profileForm.value
+      "step4": this.profileForm.value,
+      "section": this.symptom
     }
 
     let arrayDataForm = this.utils.getFormSolicitudAtencion();
@@ -134,15 +169,7 @@ export class SaTiempoPage {
     this.utils.setFormSolicitudAtencion(this.dataForm,3);
   }
 
-  pageBack() {
-
-     let arrayDataForm = this.utils.getFormSolicitudAtencion();
-
-     if(arrayDataForm.length > 3) {
-
-        this.radioTime  = arrayDataForm[3].step4.time;
-
-     }
+  ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
+    this.utils.backPage(true);
   }
-
 }

@@ -7,14 +7,13 @@ import { NetworkService } from './../../providers/network.service';
 import { Component } from '@angular/core';
 import { NavController, NavParams} from 'ionic-angular';
 import { SolicitudVcPage } from '../solicitud-vc/solicitud-vc';
-import { SaContactoPage } from '../sa-contacto/sa-contacto';
+import { SaLocationPage } from '../sa-location/sa-location';
 import { DataService } from '../../providers/data.service';
 import { HomePage } from '../home/home';
 import { Utils } from '../../providers/utils';
 import { ToastService } from '../../providers/toast.service';
 import { ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
 /**
  * Generated class for the SolicitudAtencionPage page.
  *
@@ -47,15 +46,44 @@ export class SolicitudAtencionPage {
       public navCtrl: NavController,
       public utils: Utils,
       private alertService : AlertService,
-      public navParams: NavParams
+      public navParams: NavParams,
+      private cdRef:ChangeDetectorRef
      ){
-      this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol" ]
+      this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol" ];
 
-      this.pageBack();
+      let dataPage =  this.utils.getFormSolicitudAtencion();
+      console.log("datos de esta sección 1: ", dataPage);
     }
 
-    ionViewCanEnter(){
-      console.log("BACK",this.utils.getFormSolicitudAtencion());
+    ionViewDidEnter(){
+      console.log("=> DELETE",this.utils.getBackPage());
+      if(this.utils.getBackPage()){
+
+        this.enable = true;
+
+        let dataPage =  this.utils.getFormSolicitudAtencion();
+        var count = 0 ;
+        for (let i = 0; i < dataPage.length; i++) {
+            count = count + 1;
+        }
+        console.log("this.radio = dataPage[count-1].step1",this.radio = dataPage[count-1].step1.users[0]);
+        console.log("this.radio = dataPage[count-1].step1",this.radio = dataPage[count-1].step1.users[1]);
+        // if(dataPage[count-1].step1.users[0] == "Incarbone Eduardo Oscar" ){
+        //   console.log("if");
+        //   this.radio = dataPage[count-1].step1.users[1];
+        // }else{
+        //   console.log("else");
+        //
+        // }
+
+        this.radio = dataPage[count-1].step1.users[0] || dataPage[count-1].step1.users[1];
+        this.tycs1 = dataPage[count-1].step1.users1;
+        this.tycs2 = dataPage[count-1].step1.users2;
+
+        this.utils.deleteDataFormSolicitudAtencion();
+        this.cdRef.detectChanges();
+
+      }
       this.menu.setArrowBack(true);
     }
 
@@ -68,66 +96,68 @@ export class SolicitudAtencionPage {
     }
 
     getDataPartner() {
+
+      // if(this.utils.getBackPage()) {
+      //   this.utils.deleteDataFormSolicitudAtencion();
+      //   this.cdRef.detectChanges();
+      // }
       // this.dataForm = {
       //   "step1": this.profileForm.value
       // }
+      console.log("pasar ala otra pagina",this.profileForm.value);
 
-      if(this.tycs1) {
+      if(this.profileForm.value.partner == "Incarbone Eduardo Oscar") {
         this.name1 = 'Incarbone Eduardo Oscar';
+        this.tycs1 = true;
+        this.tycs2 = false;
       }
-      if(this.tycs2) {
+
+      if(this.profileForm.value.partner == "Incarbone Maria Sol") {
         this.name2 = 'Incarbone Maria Sol';
+        this.tycs1 = false;
+        this.tycs2 = true;
       }
 
       let check = {
         users: [this.name1,this.name2],
-        users1:this.tycs1,
-        users2:this.tycs2
+        users1: this.tycs1,
+        users2: this.tycs2
       }
 
       this.dataForm = {
         "step1": check
       }
 
-      this.utils.setFormSolicitudAtencion(this.dataForm,0);
+      this.utils.setFormSolicitudAtencion(this.dataForm,"step1");
 
-      let alert = this.alertService.showOptionAlert(Config.TITLE.WARNING_TITLE, 'Tenemos este domicilio asociado a vos: "Emilio mitre 457". ¿Te encontras en el mismo?', Config.ALERT_OPTIONS.SI, Config.ALERT_OPTIONS.NO,Config.ALERT_CLASS.ERROR_CSS);
-      alert.onDidDismiss(res => {
-        var location = 'Córdoba';
-        var address = 'Emilio mitre 457';
-        if (res != false) {
-          //Si contesta que si al Reemplazar titular
-          this.gotoPage(true,location,address);
-        } else {
-          this.gotoPage(false,undefined,undefined);
-        }
-      });
-      alert.present();
+      // let alert = this.alertService.showOptionAlert(Config.TITLE.WARNING_TITLE, 'Tenemos este domicilio asociado a vos: "Emilio mitre 457". ¿Te encontras en el mismo?', Config.ALERT_OPTIONS.SI, Config.ALERT_OPTIONS.NO,Config.ALERT_CLASS.ERROR_CSS);
+      // alert.onDidDismiss(res => {
+      //   var location = 'Córdoba';
+      //   var address = 'Emilio mitre 457';
+      //   if (res != false) {
+      //     //Si contesta que si al Reemplazar titular
+      //     this.gotoPage(true,location,address);
+      //   } else {
+      //     this.gotoPage(false,undefined,undefined);
+      //   }
+      // });
+      // alert.present();
+      this.utils.backPage(false);
+      this.gotoPage();
     }
 
-    gotoPage(data,location,address){
-      let showAdress = {
-        show: data,
-        location : location,
-        address: address
-      }
-      this.navCtrl.push( SaContactoPage, {'showAdress' : showAdress} );
+    gotoPage(){
+
+      // let showAdress = {
+      //   show: data,
+      //   location : location,
+      //   address: address
+      // }
+      // this.navCtrl.push( SaLocationPage, {'showAdress' : showAdress} );
+      this.navCtrl.push( SaLocationPage );
     }
 
     previusPage() {
       this.navCtrl.setRoot(HomePage);
     }
-
-    pageBack() {
-      let arrayDataForm = this.utils.getFormSolicitudAtencion();
-       if(arrayDataForm.length > 0 ) {
-         this.enable = true;
-         console.log("BACK FINAL",arrayDataForm[0].step1.partner);
-
-        this.radio = arrayDataForm[0].step1.partner
-        this.tycs1 = arrayDataForm[0].step1.users1
-        this.tycs2 = arrayDataForm[0].step1.users2
-       }
-    }
-
 }

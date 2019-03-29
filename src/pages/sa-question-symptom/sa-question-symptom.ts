@@ -2,10 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SaServiciosPage } from '../sa-servicios/sa-servicios';
+import { SaAddressPage } from '../sa-address/sa-address';
 import { SaEdadPage } from '../sa-edad/sa-edad';
 import { NavigatorPage } from './../navigator/navigator';
 import { Utils } from './../../providers/utils';
-
+import { ChangeDetectorRef } from '@angular/core';
 /**
  * Generated class for the SaQuestionSymptomPage page.
  *
@@ -32,15 +33,35 @@ export class SaQuestionSymptomPage {
   question:string;
   showQuestion:boolean;
   socio:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public utils: Utils) {
+
+  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams,public utils: Utils) {
     this.getSymptomData();
     this.getAge();
-    this.pageBack();
     this.getName();
   }
 
   ionViewDidLoad() {
+    this.getBackData();
     this.menu.setArrowBack(true);
+  }
+
+  getBackData(){
+
+    console.log(" => DELETE",this.utils.getBackPage());
+    if(this.utils.getBackPage()){
+
+      let dataPage =  this.utils.getFormSolicitudAtencion();
+      var count = 0 ;
+      for (let i = 0; i < dataPage.length; i++) {
+          count = count + 1;
+      }
+      console.log("LA ULTIMA PAGINA",dataPage[count-1].question)
+      this.radioSelected = dataPage[count-1].step6.time;//paso: cambiar variable => 2
+      this.question = dataPage[count-1].question;//paso: cambiar variable => 2
+
+      this.utils.deleteDataFormSolicitudAtencion();
+      this.cdRef.detectChanges();
+    }
   }
 
   getSymptomData() {
@@ -49,12 +70,10 @@ export class SaQuestionSymptomPage {
       console.log("quetionValue",this.symptom);
 
       this.question = this.symptom.question;
-      // this.showQuestion = this.symptom.showQuestion;
     }
   }
 
   getDataTime() {
-    console.log("data", this.profileForm.value);
     this.gotoPage();
   }
 
@@ -78,14 +97,20 @@ export class SaQuestionSymptomPage {
   }
 
   gotoPage() {
+    this.utils.backPage(false);
     this.saveData();
-    this.navCtrl.push( SaServiciosPage );
+
+    let sectionValue = {
+      section : "questionSymptom"
+    }
+    this.navCtrl.push( SaAddressPage ,{'section' : sectionValue} );
   }
 
   saveData() {
 
     this.dataForm = {
-      "step6": this.profileForm.value
+      "step6": this.profileForm.value,
+      "question":this.question
     }
 
     let arrayDataForm = this.utils.getFormSolicitudAtencion();
@@ -93,15 +118,7 @@ export class SaQuestionSymptomPage {
     this.utils.setFormSolicitudAtencion(this.dataForm,5);
   }
 
-  pageBack() {
-
-     let arrayDataForm = this.utils.getFormSolicitudAtencion();
-
-     if(arrayDataForm.length > 4) {
-
-        this.radioSelected  = arrayDataForm[4].step5.time;
-
-     }
+  ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
+    this.utils.backPage(true);
   }
-
 }

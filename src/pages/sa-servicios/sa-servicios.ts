@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SaTiempoPage } from './../sa-tiempo/sa-tiempo';
+import { SaContactoPage } from './../sa-contacto/sa-contacto';
 import { SaResumenPage } from '../sa-resumen/sa-resumen';
 import { NavigatorPage } from './../navigator/navigator';
 import { Config } from './../../app/config';
@@ -71,7 +72,8 @@ export class SaServiciosPage {
   }
 
   previusPage() {
-    this.navCtrl.setRoot( SaTiempoPage );
+    console.log("PASO POR ACA -> 1")
+    this.navCtrl.setRoot( SaContactoPage );
   }
 
   showAlertAdress(data){
@@ -114,8 +116,11 @@ export class SaServiciosPage {
   }
 
   gotoPage(){
+    this.utils.backPage(false);
     this.navCtrl.push( SaResumenPage );
   }
 
-
+  ionViewWillLeave() {
+    this.utils.backPage(true);
+  }
 }

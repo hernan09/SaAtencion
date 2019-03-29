@@ -73,7 +73,7 @@
         </div>
         <!-- <textarea name="name" (keyup)="onkeyup(descriptionData,200)" [attr.maxLength]="textareaLength" formControlName="description" [(ngModel)]="descriptionData" placeholder="Ingrese una descripción del sintoma" class="description-symptom"></textarea> -->
         <!-- <div class="count">{{countDescription}} / 200</div> -->
-        <div class="form-control padding">
+        <!-- <div class="form-control padding">
             <div class="box-data-container">
                <input type="text" class="input-text input-user" [(ngModel)]="symptomValueSelect"(keyup)="search($event)" onkeyup="this.setAttribute('value', this.value);" [ngModelOptions]="{standalone: true}">
                <div class="" [ngClass]= "{'data-select':showPrediction}" *ngIf="showPrediction">
@@ -82,7 +82,7 @@
                </div>
                <label class="label-text" for="tel">Síntoma  </label>
            </div>
-        </div>
+        </div> -->
       </div>
 
       <button type="submit" class="btn btn-light" [disabled]="!profileForm.valid" *ngIf="symptomSelected != 'Otro'">

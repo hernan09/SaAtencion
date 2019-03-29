@@ -43,29 +43,34 @@ export class SaResumenPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public utils: Utils,private alertService : AlertService) {
 
+    let dataPage =  this.utils.getFormSolicitudAtencion();
+    console.log("array FINAL: ", dataPage);
+
     this.userData = this.utils.getFormSolicitudAtencion();
 
-    this.datos = this.userData[1].step2;
-    this.dataSymptom = this.userData[2].step3;
-    this.dataTime = this.userData[3].step4;
+    if(this.userData[6] != undefined){
+      this.cod = this.userData[6].step5telemail.cod;
+      this.tel = this.userData[6].step5telemail.tel;
+      this.telDataSelect = this.userData[6].step5telemail.telSelect;
+      this.direction = this.userData[5].step4address.address;
+      // this.email = this.datos.email;
+      this.emailList = this.userData[6].step5telemail.emailList;
+    }else {
+      this.cod = this.userData[5].step5telemail.cod;
+      this.tel = this.userData[5].step5telemail.tel;
+      this.telDataSelect = this.userData[5].step5telemail.telSelect;
+      this.direction = this.userData[4].step4address.address;
+      // this.email = this.datos.email;
+      this.emailList = this.userData[5].step5telemail.emailList;
+    }
 
-    console.log("datos",this.datos.addressList);
-    this.addressList = this.datos.addressList;
-    this.cod = this.datos.cod;
-    this.telDataSelect = this.datos.telSelect;
-    this.direction = this.datos.direction;
-    this.email = this.datos.email;
-    this.emailList = this.datos.emailList;
-    this.location = this.datos.location;
-    this.tel = this.datos.tel;
+    this.location = this.userData[1].step2.location;
+    this.symptom = this.userData[2].step3.symptom;
+    this.description = this.userData[2].step3.description;
 
-    this.symptom = this.dataSymptom.symptom;
-    this.description = this.dataSymptom.description;
-
-    if(this.dataTime)
-      this.time = this.dataTime.time;
+    if(this.userData[3].step4.time)
+      this.time = this.userData[3].step4.time;
     else this.time = '';
-
 
     this.getName();
   }

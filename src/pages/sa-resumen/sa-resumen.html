@@ -22,7 +22,7 @@
         <ion-grid>
           <ion-row>
             <ion-col class="col-izq"><h5 class="display-inline nro-socio">Nro. de socio: </h5></ion-col>
-            <ion-col class="col-der">{{addressList}}</ion-col>
+            <ion-col class="col-der">62 710433 8 01</ion-col>
           </ion-row>
           <ion-row *ngIf="telDataSelect != 'Otro'">
             <ion-col class="col-izq"><h5>Tel: </h5></ion-col>
@@ -31,19 +31,19 @@
           <div *ngIf="telDataSelect == 'Otro'">
             <ion-row>
               <ion-col class="col-izq"><h5>Código: </h5></ion-col>
-              <ion-col class="col-der">{{cod}}</ion-col>
+              <ion-col class="col-der">0{{cod}}</ion-col>
             </ion-row>
             <ion-row>
               <ion-col class="col-izq"><h5>Teléfono: </h5></ion-col>
-              <ion-col class="col-der">{{tel}}</ion-col>
+              <ion-col class="col-der">15 - {{tel}}</ion-col>
             </ion-row>
           </div>
 
-          <ion-row *ngIf="email != ''">
+          <ion-row *ngIf="email == 'Otro'">
             <ion-col class="col-izq"><h5>Email: </h5></ion-col>
             <ion-col class="col-der">{{email}}</ion-col>
           </ion-row>
-          <ion-row *ngIf="emailList != ''">
+          <ion-row *ngIf="emailList != 'Otro'">
             <ion-col class="col-izq"><h5>Email: </h5></ion-col>
             <ion-col class="col-der">{{emailList}}</ion-col>
           </ion-row>
@@ -51,10 +51,10 @@
             <ion-col class="col-izq"><h5>Localidad: </h5></ion-col>
             <ion-col class="col-der">{{location}}</ion-col>
           </ion-row>
-          <ion-row *ngIf="addressList != ''">
+          <!-- <ion-row *ngIf="addressList != ''">
             <ion-col class="col-izq"><h5>Dirección: </h5></ion-col>
             <ion-col class="col-der">{{addressList}}</ion-col>
-          </ion-row>
+          </ion-row> -->
           <ion-row *ngIf="direction != ''">
             <ion-col class="col-izq"><h5>Dirección: </h5></ion-col>
             <ion-col class="col-der">{{direction}}</ion-col>

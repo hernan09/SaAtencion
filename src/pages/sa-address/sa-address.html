@@ -1,0 +1,41 @@
+<ion-header>
+
+  <page-navigator [title]="title"></page-navigator>
+
+</ion-header>
+
+<ion-content>
+
+  <div class="header header-rectangular-container"></div>
+  <div class="box-container">
+
+    <div class="image img-url"></div>
+    <h3 class="title" *ngFor="let item of socio" >{{item}}</h3>
+
+    <hr class="soft-line soft-line-black">
+
+    <form class="container" [formGroup]="profileForm" (ngSubmit)="getDataContact()">
+      <div class="form-control">
+        <div class="container-select">
+          <ion-label>Dirección</ion-label>
+          <ion-select
+           [selectOptions]="selectOptions"
+           [(ngModel)]="validationLocation"
+           formControlName="address"
+           okText="Aceptar"
+           cancelText="Cancelar"
+           placeholder="Seleccionar Dirección de Atención"
+           [ngClass]="{ 'is-invalid': f.address.errors && f.address.touched,'is-valid': f.address.touched && f.address.valid ||  f.address.valid }"
+           >
+            <ion-option *ngFor="let dataLocation of addressList" value="{{dataLocation}}" >{{dataLocation}}</ion-option>
+          </ion-select>
+        </div>
+      </div>
+
+      <button type="submit"  class="btn btn-light" [disabled]="!profileForm.valid ">
+        Continuar
+      </button>
+    </form>
+  </div>
+
+</ion-content>

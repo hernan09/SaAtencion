@@ -16,16 +16,17 @@
         <h3 class="title">Seleccione el Socio para el cual se solicita el Médico</h3>
         <hr class="soft-line soft-line-black">
 
-        <div  class="tycs" >
+        <!-- <div  class="tycs" >
           <ion-checkbox (click)="btnValidate()" [(ngModel)]="tycs1"></ion-checkbox>
           <div class="user-name"> Incarbone Eduardo Oscar  </div>
         </div>
         <div  class="tycs" >
           <ion-checkbox (click)="btnValidate()"  [(ngModel)]="tycs2"></ion-checkbox>
           <div class="user-name"> Incarbone Maria Sol  </div>
-        </div>
+        </div> -->
 
-        <!-- <form  [formGroup]="profileForm" (ngSubmit)="getDataPartner()" >
+
+        <form  [formGroup]="profileForm" (ngSubmit)="getDataPartner()" >
 
           <div radio-group formControlName="partner" [(ngModel)]="radio">
 
@@ -40,10 +41,10 @@
             Continuar
           </button>
 
-        </form> -->
-        <button (click)="getDataPartner()" class="btn btn-light" [disabled]="!enable">
+        </form>
+        <!-- <button (click)="getDataPartner()" class="btn btn-light" [disabled]="!enable">
           Continuar
-        </button>
+        </button> -->
       </ion-list>
 
     </div>
