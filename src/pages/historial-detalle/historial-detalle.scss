@@ -1,6 +1,9 @@
 page-historial-detalle {
 
-
+	.scroll-content {
+		-webkit-overflow-scrolling: auto !important;
+		margin-top: 48px !important;
+	}
 
 	.dataCard {
 		margin: 15px;
