@@ -16,6 +16,7 @@ import { Utils } from '../providers/utils'
 import { ToastService } from '../providers/toast.service';
 import { SolicitudVcPage } from './../pages/solicitud-vc/solicitud-vc';
 import { SolicitudAtencionPage } from './../pages/solicitud-atencion/solicitud-atencion';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
   templateUrl : 'app.html'
@@ -90,10 +91,14 @@ export class MyApp {
     private menuCtrl :MenuController,
     private utils :Utils,
     private toastService : ToastService,
-    private alertService : AlertService
+    private alertService : AlertService,
+    private keyboard: Keyboard
   ){
 
     platform.ready().then(_ => {
+      if (this.platform.is('ios')) {
+        this.keyboard.disableScroll(true);
+      }
 
       splashScreen.hide();
 
