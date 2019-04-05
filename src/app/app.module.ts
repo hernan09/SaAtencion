@@ -113,6 +113,7 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, {
+      mode: 'md',
       platforms: {
         ios: {
           backButtonText: '',

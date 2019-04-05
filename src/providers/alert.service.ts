@@ -26,10 +26,10 @@ export class AlertService {
               }
           }],
           cssClass : cssClass,
-        })    
+        });
         this.alert.present()
-      }    
-     
+      }
+
       public showOptionAlert(title,message, opcionOk=Config.ALERT_OPTIONS.SI, opcionCancel=Config.ALERT_OPTIONS.NO, cssClass?,handlerEvent?){
         let alert = this.alertCtrl.create({
             title: title,
@@ -57,13 +57,12 @@ export class AlertService {
             ],
             cssClass : cssClass,
         });
-    
+
         return alert;
     }
-    
+
       public hideAlert() {
         if (this.alert) this.alert.dismiss().catch(e=>{})
       }
-  
-}
 
+}
