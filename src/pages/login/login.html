@@ -25,7 +25,8 @@
     <button class="btn btn-white"
       type="button"
       [disabled]="(dni? !(dni.toString().length >= 7) : true)"
-      (mousedown)="getDeviceID(dni)">
+      (mousedown)="getDeviceID(dni)"
+      (click)="getDeviceID(dni)">
       {{ button_text }}
     </button>
 
