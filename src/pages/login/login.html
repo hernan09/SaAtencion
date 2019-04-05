@@ -30,7 +30,7 @@
       {{ button_text }}
     </button>
 
-    <hr class="soft-line soft-line-white">
+    <hr [ngClass]="isIOS ? 'ios-hr' : 'soft-line-white'" class="soft-line">
 
     <a *ngIf="!newMember" href="tel:{{telefono}}" (click)="nextPhoneNumber()">
       <button class="btn btn-white">

@@ -26,6 +26,7 @@ const ERROR_MSG = {
   templateUrl: "login.html"
 })
 export class LoginPage implements Overlay {
+  isIOS: boolean = false;
   dni: number;
   telefono;
   newMember :boolean;
@@ -53,6 +54,8 @@ export class LoginPage implements Overlay {
   ) {
     this.telefono = this.dataService.getPhoneNumber();
     this.newMember = this.navParams.get("newMember");
+
+    if (this.platform.is('ios')) this.isIOS = true;
 
     if (authService.isAuthenticated() && !this.newMember) this.getDeviceID();
 
