@@ -16,7 +16,7 @@
 
       <div class="form-control">
           <input value="" (keyup)="validateDNINumber(dni,8)" onkeyup="this.setAttribute('value', this.value);" type="number" id="input1" (focus)="transitionLogin()" (blur)="transitionBlurLogin()" class="input-text input-user" [(ngModel)]="dni">
-          <label class="label-text" for="input1">{{ placeholder }}</label>
+          <label for="input1" [ngClass]="isIOS ? 'label-text ios-transition' : 'label-text'" >{{ placeholder }}</label>
           <ion-icon name="ios-person-outline" isActive="false"></ion-icon>
       </div>
 

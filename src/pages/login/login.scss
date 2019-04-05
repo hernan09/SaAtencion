@@ -1,5 +1,9 @@
 page-login {
 
+  .ios-transition {
+     transition: top 3s !important;
+  }
+
   .ios-hr {
     background-color: rgba(255, 255, 255, 0.1);
     background: radial-gradient(ellipse at center, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0) 75%);
