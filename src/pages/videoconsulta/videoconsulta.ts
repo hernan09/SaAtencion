@@ -1,7 +1,7 @@
 import { DataService } from './../../providers/data.service';
 import { Component, ChangeDetectorRef } from '@angular/core'
 import { Http } from '@angular/http'
-import { NavController, NavParams, Events } from 'ionic-angular'
+import { NavController, NavParams, Events, Platform } from 'ionic-angular'
 import { HomePage } from '../home/home'
 import { Utils } from '../../providers/utils'
 import { Tokbox } from '../../providers/tokbox'
@@ -21,12 +21,13 @@ export class VideoConsultaPage {
 
   private cid
   private dni
+  private isSafari: boolean;
   show = 'start'
   mic = true
   cam = true
-  private readyToExit = false  
-  waitingDoctor: boolean; 
-  
+  private readyToExit = false
+  waitingDoctor: boolean;
+
 
   constructor(
     public navCtrl :NavController,
@@ -37,32 +38,34 @@ export class VideoConsultaPage {
     private ref: ChangeDetectorRef,
     private toastService : ToastService,
     private dataService : DataService,
-    private events : Events  
+    private events : Events,
+    public platform : Platform
   ) {
+    this.isSafari = this.platform.is('ios');
     this.utils.showLoader();
     this.cid = navParams.get('cid') || utils.getItem('cid') || 'test'
     this.dni = navParams.get('dni') || utils.getItem('dni') || '12345678'
 
     this.dataService.saveCID(this.cid)
-    provider.VC = this 
-    this.checkCid();     
+    provider.VC = this
+    this.checkCid();
   }
-  
+
   checkCid() {
     this.utils.showLoader();
     return this.http.get(VC_SERVER_URL + '/cid/' + this.cid).subscribe(
       data => {
-        // if get succeeds, cid is blacklisted 
+        // if get succeeds, cid is blacklisted
         console.log('Conference is no longer available')
         this.show = 'unavailable'
-        this.utils.hideLoader(); 
-        this.exit();         
+        this.utils.hideLoader();
+        this.exit();
       },
       err => {
         // if get yields a 404, cid is available
         // for any other error, allow access to conf anyway
         this.dataService.saveCID(this.cid);
-        this.provider.getCredentials({ cid : this.cid, isSafari : 0 })        
+        this.provider.getCredentials({ cid : this.cid, isSafari : this.isSafari })
       }
     )
   }
@@ -78,7 +81,7 @@ export class VideoConsultaPage {
   blockCid() {
     return this.http.post(VC_SERVER_URL + '/cid', { cid : parseInt(this.cid) } ).subscribe(
       data => {
-        console.log('Conference blocked')        
+        console.log('Conference blocked')
       },
       err => {
         console.log('Could not block conference')
@@ -129,16 +132,16 @@ export class VideoConsultaPage {
     this.exit();
   }
 
-  exit() {     
+  exit() {
     if(this.show == 'unavailable'){
       this.dataService.setVCStatus(true);
       this.events.publish('vcStatus', true);
       setTimeout(_ => this.navCtrl.setRoot(HomePage), RELOAD_DELAY * 700);
-    } 
+    }
     else{
       this.navCtrl.setRoot(HomePage);
     }
-    this.utils.delItem('cid'); 
+    this.utils.delItem('cid');
   }
 
 }
