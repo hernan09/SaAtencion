@@ -104,26 +104,19 @@ export class HomePage {
 			let phonesLS = this.dataService.getLocalStorage(Config.KEY.TELEFONOS);
 			let userDataLS = this.dataService.getLocalStorage(Config.KEY.MIS_DATOS);
 			let historyLS = this.dataService.getLocalStorage(Config.KEY.HISTORIAL);
-      console.log("phonesLS",phonesLS);
-      console.log("userDataLS",userDataLS);
-      console.log("historyLS",historyLS);
+
 			if(!phonesLS){
-				console.log("No hay telefonos en LS => los telefonos",phonesLS);
 				this.dataService.updateTelefono();
 				this.telefono = this.dataService.getPhoneNumber();
 			}
 			if(!userDataLS){
-				console.log("No hay usuarios en LS => traigo los Usuarios");
-
 				this.dataService.getDatosSocio().subscribe(
 					data => {this.dataService.updateUsers()},
 					err => {console.log("Error al actualizar datos de Usuario y Telefono desde URG");
 				})
 			}
 			if(!historyLS){
-				console.log("No hay historial en LS => traigo el historial");
 				this.dataService.getHistorial(this.dni).subscribe();
-
 			}
 		}
 	}
@@ -264,15 +257,43 @@ export class HomePage {
 
 	goToSociosPage(){
 		this.utils.showLoader();
-		this.isVCAvailable();
+
+    //Un solo socio
+    let sociosDNI = this.dataService.restoreUsers();
+    console.log("sociosDNI",sociosDNI)
+    if(sociosDNI.length == 1){
+      this.oneUserVC(sociosDNI,undefined);
+    }
+    //mas de un socio
+    else{
+      // this.multipleUserVC(page,params);
+      this.isVCAvailable();
+    }
+
 	}
+
+  oneUserVC(sociosDNI,params){
+     let socioActual = this.dataService.restoreMisDatos(sociosDNI[0]);
+     this.dataService.validarVC(socioActual.dni, "NO").subscribe(
+       data =>{
+       this.validateVCResponse(data,socioActual);
+       },
+       err=>{
+         this.utils.hideLoader();
+         console.log('Erro al validateAvailableVC:', err);
+         let message = Config.MSG.SOLICITUD_VC_ERROR;
+         this.alertService.showAlert(Config.TITLE.WARNING_TITLE, message,Config.ALERT_CLASS.ERROR_CSS);
+         // this.navigatePage(HomePage, params, false);
+         this.navCtrl.setRoot(HomePage, params);
+       })
+   }
 
 	private isVCAvailable(params?){
 		this.dataService.validateAvailableVC(this.utils.getActiveUser()).subscribe(
 		  res=>{
-			  	this.utils.hideLoader();
+			  this.utils.hideLoader();
 				console.log("validateAvailableVC - res.estadoVC: ", res.estadoVC);
-				if(res.estadoVC =="Inactivo"){
+				if(res.estadoVC == "Inactivo"){
 				  let message = res.Mensaje;
 				  this.alertService.showAlert(Config.TITLE.WARNING_TITLE, message,Config.ALERT_CLASS.ERROR_CSS);
 				  this.utils.hideLoader();
@@ -288,8 +309,6 @@ export class HomePage {
               else{
                 this.navCtrl.push(SociosPage, params);
             }
-
-
 		  }},
 		  err=>{
 				this.utils.hideLoader();
