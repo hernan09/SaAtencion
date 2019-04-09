@@ -1,7 +1,7 @@
 import { DataService } from './../../providers/data.service';
 import { Component, ChangeDetectorRef } from '@angular/core'
 import { Http } from '@angular/http'
-import { NavController, NavParams, Events, Platform } from 'ionic-angular'
+import { NavController, NavParams, Events, Platform, MenuController } from 'ionic-angular'
 import { HomePage } from '../home/home'
 import { Utils } from '../../providers/utils'
 import { Tokbox } from '../../providers/tokbox'
@@ -28,7 +28,6 @@ export class VideoConsultaPage {
   private readyToExit = false
   waitingDoctor: boolean;
 
-
   constructor(
     public navCtrl :NavController,
     public navParams :NavParams,
@@ -39,9 +38,16 @@ export class VideoConsultaPage {
     private toastService : ToastService,
     private dataService : DataService,
     private events : Events,
-    public platform : Platform
-  ) {
+    public platform : Platform,
+    private menu: MenuController) {
     this.isSafari = this.platform.is('ios');
+
+    if (this.isSafari) this.platform.pause.subscribe(() => {
+      this.provider.controlHandlers.hangup();
+      this.navCtrl.setRoot(HomePage);
+      this.utils.delItem('cid');
+    });
+
     this.utils.showLoader();
     this.cid = navParams.get('cid') || utils.getItem('cid') || 'test'
     this.dni = navParams.get('dni') || utils.getItem('dni') || '12345678'
@@ -49,6 +55,15 @@ export class VideoConsultaPage {
     this.dataService.saveCID(this.cid)
     provider.VC = this
     this.checkCid();
+
+  }
+
+  ionViewDidLoad() {
+    this.menu.swipeEnable(false);
+  }
+
+  ionViewWillLeave() {
+    this.menu.swipeEnable(true);
   }
 
   checkCid() {
