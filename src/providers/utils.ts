@@ -41,7 +41,11 @@ export class Utils {
     return JSON.parse(window.localStorage.getItem(name))
   }
   public setItem(name, obj) {
+    console.log('name',name);
+    console.log('obj',obj);
     if (!name) return
+    console.log('name',name);
+    console.log('obj',obj);
     window.localStorage.setItem(name, JSON.stringify(obj))
   }
   public delItem(name) {

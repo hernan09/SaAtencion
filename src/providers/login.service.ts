@@ -15,16 +15,16 @@ export class LoginService {
     constructor(
         private utils: Utils,
         private dataService : DataService,
-        private androidPermissions: AndroidPermissions,  
+        private androidPermissions: AndroidPermissions,
       ) {
 
       }
 
-  
+
 private checkAndRequestPermissions(permission: string){
-    
+
   this.androidPermissions.hasPermission(permission).then(
-    result =>{ 
+    result =>{
       if(!result.hasPermission){
           console.log('Has permission?',result.hasPermission);
           this.androidPermissions.requestPermission(permission)
@@ -32,7 +32,7 @@ private checkAndRequestPermissions(permission: string){
     },
     err => this.androidPermissions.requestPermission(permission)
     );
-    
+
 }
 
 // UTILS
@@ -55,8 +55,10 @@ private checkAndRequestPermissions(permission: string){
       this.utils.setTitular(dni);
     } else {
       if (activeUser) {
+        console.log('activeUser grega un nuevo socio',activeUser);
         //se agrega un nuevo socio
         if (this.dataService.isTitular(activeUser) && this.isNewUser(dni)) {
+          console.log("agregoo addUser");
           this.dataService.addUser(dni, true); // true = noupdate
         }
         this.utils.setActiveUser(dni);

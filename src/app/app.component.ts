@@ -128,12 +128,15 @@ export class MyApp {
         console.log('Network type:', this.network.type)
         }, 3000)
       })
-
+      console.log("init");
       dataService.usersChange.subscribe(users => {
+        console.log("usersChange users",users);
         this.activeUser = users.find(e => e.active)
         this.otherUsers = users.filter(e => !e.active)
+        console.log("otherUsers",this.otherUsers);
         if (!this.ref['destroyed']) this.ref.detectChanges()
       })
+      console.log('no paso por usersChange.subscribe');
       dataService.app = this
       this.viewMembers = false;
 
@@ -195,6 +198,7 @@ private goToPage(page, params?, force?) {
   }
 
   goAddMember() {
+    console.log('goAddMember');
     this.nav.push(LoginPage, {newMember: true})
     this.toggleView()
   }
