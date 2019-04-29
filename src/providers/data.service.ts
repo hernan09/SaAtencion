@@ -460,8 +460,6 @@ export class DataService {
     }
 
     public saveUsers(data, noupdate?) {
-        console.log("saveUsers data",data);
-        console.log("saveUsers noupdate",noupdate);
         if (!data) return
         this.utils.setItem(Config.KEY.USERS, data)
         if (noupdate) return
@@ -503,15 +501,13 @@ export class DataService {
     public updateUsers(users?) {
         // notify subscribed components
         console.log('Updating users... ', users)
-        if (users) this.usersChange.next(this.getUsersData(users))
+        this.usersChange.next(this.getUsersData(users))
     }
 
 
     public addUser(dni, noupdate?) {
-        console.log("addUser",dni);
         if (!dni) return
         const users = this.restoreUsers()
-        console.log("addUser",dni);
         users.push(dni)
         this.saveUsers(users, noupdate)
     }

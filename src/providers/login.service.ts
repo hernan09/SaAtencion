@@ -55,10 +55,8 @@ private checkAndRequestPermissions(permission: string){
       this.utils.setTitular(dni);
     } else {
       if (activeUser) {
-        console.log('activeUser grega un nuevo socio',activeUser);
         //se agrega un nuevo socio
         if (this.dataService.isTitular(activeUser) && this.isNewUser(dni)) {
-          console.log("agregoo addUser");
           this.dataService.addUser(dni, true); // true = noupdate
         }
         this.utils.setActiveUser(dni);
