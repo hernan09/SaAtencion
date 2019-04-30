@@ -62,7 +62,8 @@
     "rxjs-compat": "^6.2.2",
     "sos-cordova-plugin-opentok": "^3.1.2",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.12"
+    "zone.js": "0.8.12",
+    "cordova-ios": "4.5.5"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.9",
@@ -83,7 +84,8 @@
       "cordova-plugin-android-permissions": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "config": {

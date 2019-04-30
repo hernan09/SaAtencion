@@ -85,7 +85,7 @@ export class SolicitudVcPage implements Overlay {
 
     ionViewDidLoad() {
         //asigno mi name al socio que recibo de la pantalla anterior
-        console.log(this.navParams.get('socio').dni);
+        console.log("socio=>",this.navParams.get('socio'));
         this.name = this.navParams.get('socio').nombre + " " + this.navParams.get('socio').apellido || "";
 
         this.dni = this.navParams.get('socio').dni || "";
