@@ -13,6 +13,8 @@ import { VideoConsultaPage } from '../videoconsulta/videoconsulta'
 import { SolicitudVcPage } from './../solicitud-vc/solicitud-vc';
 import { SociosPage } from './../socios/socios';
 
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -334,5 +336,4 @@ export class HomePage {
 				this.navCtrl.push(HomePage);
 			}
 		}
-
 }

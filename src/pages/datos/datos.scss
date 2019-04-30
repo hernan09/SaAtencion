@@ -1,4 +1,8 @@
 page-datos {
+	.scroll-content {
+		-webkit-overflow-scrolling: auto !important;
+	}
+
 	.header-circle-container{
 		margin-bottom:50px;
 	}
@@ -50,7 +54,7 @@ page-datos {
 		font-weight: bold;
 	}
 
-	
+
 	.nro-socio{
 		justify-content: center;
 	}
@@ -78,7 +82,7 @@ page-datos {
 		color: $darkgray;
 		font-size: $text_extra_big_size;
 	}
-	
+
 	.display-inline{
 		display: inline-block;
 	}

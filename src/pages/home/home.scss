@@ -72,6 +72,9 @@ page-home {
     }
 
     .scroll-content {
+        //disable bounce when scroll y-axis
+        -webkit-overflow-scrolling: auto !important;
+
         transition: 0.5s !important;
         margin-bottom: 0 !important;
         z-index: 10;
