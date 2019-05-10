@@ -144,23 +144,23 @@ export class MyApp {
     })
   }
 
-private goToPage(page, params?, force?) {
+  private goToPage(page, params?, force?) {
 
-  if(page != 'logout'){
+    if(page != 'logout'){
 
-    if (!page) return;
-    if ( page.pageName && page.pageName == "SociosPage" ){
-      console.log(">>> Entra en Page: "+ page.pageName);
-      //agrego el loader porque el servicio tarda bastante.
-      this.utils.showLoader();
-      this.isVCAvailable(page, params);
-    }else{
-      this.navigatePage(page, params, force);
+      if (!page) return;
+      if ( page.pageName && page.pageName == "SociosPage" ){
+        console.log(">>> Entra en Page: "+ page.pageName);
+        //agrego el loader porque el servicio tarda bastante.
+        this.utils.showLoader();
+        this.isVCAvailable(page, params);
+      }else{
+        this.navigatePage(page, params, force);
+      }
+    } else{
+      this.logout();
     }
-  } else{
-    this.logout();
   }
-}
 
 
   private isVCAvailable(page,params){

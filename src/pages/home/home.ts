@@ -107,7 +107,7 @@ export class HomePage {
 			let userDataLS = this.dataService.getLocalStorage(Config.KEY.MIS_DATOS);
 			let historyLS = this.dataService.getLocalStorage(Config.KEY.HISTORIAL);
 
-			if(!phonesLS){
+			if(!phonesLS) {
 				this.dataService.updateTelefono();
 				this.telefono = this.dataService.getPhoneNumber();
 			}

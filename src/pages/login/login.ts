@@ -107,6 +107,8 @@ export class LoginPage implements Overlay {
   }
 
   login(dni) {
+    console.log("Login dni",dni);
+    console.log("this.loginService.isNewUser(dni)",this.loginService.isNewUser(dni));
     if (this.loginService.isNewUser(dni)) {
       var titular = this.utils.getTitular();
         //En caso de que exista titular, se avisa de la eliminacion del usuario anterior.
@@ -127,6 +129,8 @@ export class LoginPage implements Overlay {
         this.checkDNI(dni,this.newMember)
       }
     } else {
+      // this.dataService.updateTelefono();
+
       this.utils.hideLoader();
       if (this.newMember)
         return this.alertService.showAlert(
