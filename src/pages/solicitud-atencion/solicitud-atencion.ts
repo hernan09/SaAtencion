@@ -34,6 +34,9 @@ export class SolicitudAtencionPage {
     name2: string = '';
     tycs1:boolean;
     tycs2:boolean;
+    tycs3:boolean;
+    tycs4:boolean;
+    tycs5:boolean;
     enable:boolean;
     public title ="Solicitud de Atención";
     @ViewChild(NavigatorPage) menu : NavigatorPage;
@@ -49,7 +52,7 @@ export class SolicitudAtencionPage {
       public navParams: NavParams,
       private cdRef:ChangeDetectorRef
      ){
-      this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol" ];
+      this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol",'Julio Cesar','Infran Emiliano','Hernan Dario' ];
 
       let dataPage =  this.utils.getFormSolicitudAtencion();
       console.log("datos de esta sección 1: ", dataPage);
@@ -79,16 +82,18 @@ export class SolicitudAtencionPage {
         this.radio = dataPage[count-1].step1.users[0] || dataPage[count-1].step1.users[1];
         this.tycs1 = dataPage[count-1].step1.users1;
         this.tycs2 = dataPage[count-1].step1.users2;
+        this.tycs3 = dataPage[count-1].step1.users3;
+        this.tycs4 = dataPage[count-1].step1.users4;
+        this.tycs5 = dataPage[count-1].step1.users5;
 
         this.utils.deleteDataFormSolicitudAtencion();
         this.cdRef.detectChanges();
-
       }
       this.menu.setArrowBack(true);
     }
 
     btnValidate() {
-      if(this.tycs1 || this.tycs2 || (this.tycs1 && this.tycs2)){
+      if(this.tycs1 || this.tycs2 || this.tycs3 || this.tycs4 || this.tycs5 || (this.tycs1 && this.tycs2)){
         this.enable = true;
       } else {
         this.enable = false;
@@ -110,12 +115,42 @@ export class SolicitudAtencionPage {
         this.name1 = 'Incarbone Eduardo Oscar';
         this.tycs1 = true;
         this.tycs2 = false;
+        this.tycs3 = false;
+        this.tycs4 = false;
+        this.tycs5 = false;
       }
 
       if(this.profileForm.value.partner == "Incarbone Maria Sol") {
         this.name2 = 'Incarbone Maria Sol';
         this.tycs1 = false;
         this.tycs2 = true;
+        this.tycs3 = false;
+        this.tycs4 = false;
+        this.tycs5 = false;
+      }
+      if(this.profileForm.value.partner == "Julio Cesar") {
+        this.name2 = 'Julio Cesar';
+        this.tycs1 = false;
+        this.tycs2 = false;
+        this.tycs3 = true;
+        this.tycs4 = false;
+        this.tycs5 = false;
+      }
+      if(this.profileForm.value.partner == "Infran Emiliano") {
+        this.name2 = 'Infran Emiliano';
+        this.tycs1 = false;
+        this.tycs2 = false;
+        this.tycs3 = false;
+        this.tycs4 = true;
+        this.tycs5 = false;
+      }
+      if(this.profileForm.value.partner == "Hernan Dario") {
+        this.name2 = 'Hernan Dario';
+        this.tycs1 = false;
+        this.tycs2 = false;
+        this.tycs3 = false;
+        this.tycs4 = false;
+        this.tycs5 = true;
       }
 
       let check = {

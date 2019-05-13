@@ -78,6 +78,7 @@ export class SaLocationPage {
 
   getName(){
     this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;//paso: cambiar posiscion a 1 => 3
+    console.log("socio",this.socio);
   }
 
   getDataContact() {
@@ -109,9 +110,9 @@ export class SaLocationPage {
     this.navCtrl.setRoot( SolicitudAtencionPage );
   }
 
-   ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
-     console.log("LOCATION getBackPage",this.utils.getBackPage());
+ ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
+   console.log("LOCATION getBackPage",this.utils.getBackPage());
 
-     this.utils.backPage(true);
-   }
+   this.utils.backPage(true);
+ }
 }

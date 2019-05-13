@@ -34,11 +34,13 @@ export class SaConsultaPage {
   textareaLength:number=20;
   profileForm = new FormGroup({
     symptom: new FormControl('', Validators.required),
+    otherSymptom: new FormControl(''),
     description : new FormControl('')
   })
   title = 'Solicitud de Atención';
   dataForm:any;
   symptomSelected:string;
+  otherSymptomSelected:string;
   prefijoFinal:string;
   socio:any;
   //filter
@@ -46,6 +48,8 @@ export class SaConsultaPage {
   result:string = '';
   arrayFinalSymptom :string[] = new Array() ;
   showPrediction:boolean;
+
+  moreSymtom:boolean = false;
 
   public telefono;
   constructor( public navCtrl: NavController, private cdRef:ChangeDetectorRef, public navParams: NavParams,public utils: Utils, private data :DataService ) {
@@ -77,6 +81,7 @@ export class SaConsultaPage {
           count = count + 1;
       }
       this.symptomSelected = dataPage[count-1].step3.symptom;
+      this.otherSymptomSelected = dataPage[count-1].step3.symptom;
 
       this.utils.deleteDataFormSolicitudAtencion();
       this.cdRef.detectChanges();
@@ -94,6 +99,10 @@ export class SaConsultaPage {
       this.gotoPage(symptomFinal);
       console.log("otra página");
     }
+  }
+
+  otherSymtomSelected(){
+    this.gotoPage('Fiebre');
   }
 
   getName(){
@@ -223,6 +232,10 @@ export class SaConsultaPage {
 
   close() {
     this.showPrediction = false;
+  }
+
+  showMoreSymtom() {
+    this.moreSymtom = true;
   }
 
   ionViewWillLeave() {
