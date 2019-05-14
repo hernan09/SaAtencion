@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController  } from 'ionic-angular';
 import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
 import { SaLocationPage } from '../sa-location/sa-location';
 import { SaEdadPage } from '../sa-edad/sa-edad';
@@ -43,6 +43,9 @@ export class SaConsultaPage {
   otherSymptomSelected:string;
   prefijoFinal:string;
   socio:any;
+  hideCallEmergency:boolean;
+  showBtnNext:boolean;
+  callEmergency:boolean;
   //filter
   symptomValueSelect:string;
   result:string = '';
@@ -52,7 +55,12 @@ export class SaConsultaPage {
   moreSymtom:boolean = false;
 
   public telefono;
-  constructor( public navCtrl: NavController, private cdRef:ChangeDetectorRef, public navParams: NavParams,public utils: Utils, private data :DataService ) {
+  constructor( public navCtrl: NavController,
+      private cdRef:ChangeDetectorRef,
+      public navParams: NavParams,
+      public utils: Utils,
+      private data :DataService,
+      public alertController: AlertController ) {
 
     this.selectOptions = {
       title: 'Síntoma',
@@ -91,8 +99,10 @@ export class SaConsultaPage {
   get f() { return this.profileForm.controls; }
 
   getDataSymptom() {
+    var symptomFinal = ''
     console.log("data", this.profileForm.value);
-    let symptomFinal = this.profileForm.value.symptom
+    if(this.profileForm.value != 'Otro') symptomFinal = this.profileForm.value.symptom;
+    else { symptomFinal = this.symptomValueSelect }
     if (symptomFinal == 'Fiebre' || symptomFinal == 'Dolor de oido' || symptomFinal == 'Dolor o molestia de garganta'){
       this.gotoPage(symptomFinal);
     } else {
@@ -102,11 +112,45 @@ export class SaConsultaPage {
   }
 
   otherSymtomSelected(){
-    this.gotoPage('Fiebre');
+    console.log("sintoma del predictivo",this.symptomValueSelect);
+    this.gotoPage(this.symptomValueSelect);
   }
 
   getName(){
     this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;
+    console.log("SOCIO",this.socio)
+    this.hideCallEmergency = !(this.socio[1] == 'Julio Cesar') || !(this.socio[1] == 'Infran Emiliano');
+    this.showBtnNext = this.socio[1] == 'Infran Emiliano';
+    // this.callEmergency =(this.symptomSelected == 'Otro' && this.socio[1] == 'Hernan Dario') || (this.symptomSelected == 'Otro' && this.socio[1] == 'Incarbone Eduardo Oscar') ;
+
+    if(this.socio[1] == 'Hernan Dario'){
+      this.presentAlertConfirm();
+    }
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+
+      message: 'Según nuestro registros, su última atención fue por fiebre. ¿Sigue con este síntoma?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm close');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.gotoPage('Fiebre');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   onkeyup(number,length) {
