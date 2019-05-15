@@ -38,6 +38,7 @@ export class Utils {
   }
 
   public getItem(name) {
+    console.log("LOCAL STORAGE name",name)
     return JSON.parse(window.localStorage.getItem(name))
   }
   public setItem(name, obj) {

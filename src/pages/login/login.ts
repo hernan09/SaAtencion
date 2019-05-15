@@ -96,14 +96,18 @@ export class LoginPage implements Overlay {
           this.login(dni);
         });
     } catch (err) {
-      this.login(dni);
-    }
+        this.login(dni);
+      }
     }
     else{
       this.toastService.hideToast();
       this.toastService.showToast(Config.MSG.DISCONNECTED,0);
     }
+  }
 
+  activeServiceTel(){
+    console.log("=>Por EVENTO CLICK");
+    this.loginService.activeServiceTel(true);
   }
 
   login(dni) {
@@ -129,7 +133,6 @@ export class LoginPage implements Overlay {
         this.checkDNI(dni,this.newMember)
       }
     } else {
-      // this.dataService.updateTelefono();
 
       this.utils.hideLoader();
       if (this.newMember)
@@ -137,7 +140,7 @@ export class LoginPage implements Overlay {
           Config.MSG.SORRY,
           Config.MSG.ADD_USER_ERROR,
           Config.ALERT_CLASS.ERROR_CSS
-        );
+        ); 
       this.loginService.login(dni);
       this.navCtrl.setRoot(HomePage);
     }

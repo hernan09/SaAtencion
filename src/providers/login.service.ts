@@ -10,7 +10,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 @Injectable()
 export class LoginService {
 
-
+    activeServTel:boolean = false;
 
     constructor(
         private utils: Utils,
@@ -37,6 +37,7 @@ private checkAndRequestPermissions(permission: string){
 
 // UTILS
  public login(dni) {
+  console.log('LOGINSERVICE dni',dni);
 
   this.checkAndRequestPermissions(this.androidPermissions.PERMISSION.CAMERA);
   this.checkAndRequestPermissions(this.androidPermissions.PERMISSION.RECORD_AUDIO);
@@ -54,6 +55,7 @@ private checkAndRequestPermissions(permission: string){
       this.dataService.addUser(dni, true); // true = noupdate
       this.utils.setTitular(dni);
     } else {
+
       if (activeUser) {
         //se agrega un nuevo socio
         if (this.dataService.isTitular(activeUser) && this.isNewUser(dni)) {
@@ -69,6 +71,11 @@ private checkAndRequestPermissions(permission: string){
           this.utils.setTitular(dni);
         }
       }
+
+      let phonesLS = this.dataService.getLocalStorage(Config.KEY.TELEFONOS);
+      // console.log("=> phonesLS",phonesLS);
+      // console.log("=> verificando activeServTel",this.activeServTel);
+      if(this.activeServTel && phonesLS != null) this.dataService.updateTelefono();
     }
 
     this.utils.setItem(Config.KEY.EXPIRES, this.calcExpireTime());
@@ -81,6 +88,11 @@ private checkAndRequestPermissions(permission: string){
 
   calcExpireTime() {
     return Date.now() + Config.OPTIONS.EXPIRE_TIME * 60000;
+  }
+
+  activeServiceTel(data){
+    console.log("Service tel ",data);
+    this.activeServTel = data;
   }
 
 }
