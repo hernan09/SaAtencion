@@ -92,7 +92,8 @@ export class SaEdadPage {
       this.question = this.symptom.question;
       this.showQuestion = this.symptom.showQuestion;
     } else {
-      this.question = '¿El paciente tiene antecedentes de convulciones febriles o ha  convulsionado alguna vez por fiebre?'
+      this.question = '¿El paciente tiene antecedentes de convulsiones febriles o ha convulcionado alguna vez por fiebre ?';
+      
       console.log("otro sintoma");
     }
   }
@@ -137,7 +138,7 @@ export class SaEdadPage {
         }
       } else{
         let quetionValue = {
-          question : "¿El paciente tiene antecedentes de convulciones febriles o ha convulsionado alguna vez por fiebre?"
+          question : "¿El paciente tiene antecedentes de convulsiones febriles o ha convulcionado alguna vez por fiebre?"
         }
         if(data == 'Si'){
           this.navCtrl.push( SaQuestionSymptomPage, {'quetionValue' : quetionValue} );
@@ -154,6 +155,7 @@ export class SaEdadPage {
   saveData(){
 
     this.dataForm = {
+      
       "step5": this.profileForm.value,
       "section":this.symptom,
       "question":this.question

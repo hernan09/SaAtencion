@@ -37,6 +37,7 @@ export class SolicitudAtencionPage {
     tycs3:boolean;
     tycs4:boolean;
     tycs5:boolean;
+    tycs6:boolean;
     enable:boolean;
     public title ="Solicitud de Atención";
     @ViewChild(NavigatorPage) menu : NavigatorPage;
@@ -52,7 +53,7 @@ export class SolicitudAtencionPage {
       public navParams: NavParams,
       private cdRef:ChangeDetectorRef
      ){
-      this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol",'Julio Cesar','Infran Emiliano','Hernan Dario' ];
+      this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol",'Julio Cesar','Infran Emiliano','Hernan Dario','Andres Lauga' ];
 
       let dataPage =  this.utils.getFormSolicitudAtencion();
       console.log("datos de esta sección 1: ", dataPage);
@@ -85,6 +86,7 @@ export class SolicitudAtencionPage {
         this.tycs3 = dataPage[count-1].step1.users3;
         this.tycs4 = dataPage[count-1].step1.users4;
         this.tycs5 = dataPage[count-1].step1.users5;
+        this.tycs6 = dataPage[count-1].step1.users6;
 
         this.utils.deleteDataFormSolicitudAtencion();
         this.cdRef.detectChanges();
@@ -93,7 +95,7 @@ export class SolicitudAtencionPage {
     }
 
     btnValidate() {
-      if(this.tycs1 || this.tycs2 || this.tycs3 || this.tycs4 || this.tycs5 || (this.tycs1 && this.tycs2)){
+      if(this.tycs1 || this.tycs2 || this.tycs3 || this.tycs4 || this.tycs5 ||this.tycs6 || (this.tycs1 && this.tycs2)){
         this.enable = true;
       } else {
         this.enable = false;
@@ -118,6 +120,7 @@ export class SolicitudAtencionPage {
         this.tycs3 = false;
         this.tycs4 = false;
         this.tycs5 = false;
+        this.tycs6 = false;
       }
 
       if(this.profileForm.value.partner == "Incarbone Maria Sol") {
@@ -127,6 +130,7 @@ export class SolicitudAtencionPage {
         this.tycs3 = false;
         this.tycs4 = false;
         this.tycs5 = false;
+        this.tycs6 = false;
       }
       if(this.profileForm.value.partner == "Julio Cesar") {
         this.name2 = 'Julio Cesar';
@@ -135,6 +139,7 @@ export class SolicitudAtencionPage {
         this.tycs3 = true;
         this.tycs4 = false;
         this.tycs5 = false;
+        this.tycs6 = false;
       }
       if(this.profileForm.value.partner == "Infran Emiliano") {
         this.name2 = 'Infran Emiliano';
@@ -143,6 +148,7 @@ export class SolicitudAtencionPage {
         this.tycs3 = false;
         this.tycs4 = true;
         this.tycs5 = false;
+        this.tycs6 = false;
       }
       if(this.profileForm.value.partner == "Hernan Dario") {
         this.name2 = 'Hernan Dario';
@@ -151,12 +157,23 @@ export class SolicitudAtencionPage {
         this.tycs3 = false;
         this.tycs4 = false;
         this.tycs5 = true;
+        this.tycs6 = false;
+      }
+      if(this.profileForm.value.partner == "Andres Lauga") {
+        this.name2 = 'Andres Lauga';
+        this.tycs1 = false;
+        this.tycs2 = false;
+        this.tycs3 = false;
+        this.tycs4 = false;
+        this.tycs5 = false;
+        this.tycs6 = true;
       }
 
       let check = {
         users: [this.name1,this.name2],
         users1: this.tycs1,
-        users2: this.tycs2
+        users2: this.tycs2,
+       
       }
 
       this.dataForm = {
