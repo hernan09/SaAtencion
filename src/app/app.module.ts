@@ -63,6 +63,7 @@ import { ImageService } from './../providers/image.service';
 import { GroupedNotificationService } from './../providers/grouped.notificacion.service';
 import { AlertBuilder } from './../providers/builders/alert.builder';
 import { VideoConsultaService } from './../providers/video.consulta.service';
+import { SelectSearchableModule } from 'ionic-select-searchable';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     IonicModule.forRoot(MyApp),
     FormsModule,
     HttpModule,
+    SelectSearchableModule
   ],
 
   bootstrap: [IonicApp],

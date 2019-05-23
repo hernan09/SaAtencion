@@ -8,6 +8,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utils } from './../../providers/utils';
 import { DataService } from './../../providers/data.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { SelectSearchableComponent } from  'ionic-select-searchable';
+
+ 
 /**
  * Generated class for the SaConsultaPage page.
  *
@@ -22,7 +25,96 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 
 export class SaConsultaPage {
+  
   @ViewChild(NavigatorPage) menu : NavigatorPage;
+  predictivo=null;
+  
+  predictivos=[{
+    "name":"constipacion",
+    "value":"Fiebre"
+},
+{
+    "name":"afiebrado",
+    "value":"Fiebre"
+},
+{
+    "name":"febricula",
+    "value":"Fiebre"  
+},
+{
+    "name":"dolor de garganta",
+    "value":"Dolor de oido"
+},
+{
+    "name":"tengo algo en el odio",
+    "value":"Dolor de oido"
+},
+{
+    "name":"dolor de oreja",
+    "value":"Dolor de oido"
+},
+{
+    "name":"dolor de garganta",
+    "value":"Dolor o molestia de garganta"
+},
+{
+    "name":"duele la garganta",
+    "value":"Dolor o molestia de garganta"
+},
+{
+    "name":"odontalgia",
+    "value":"Odontalgia"
+},
+{
+    "name":"dolor de diente",
+    "value":"Odontalgia"
+},
+{
+    "name":"dolor de muela",
+    "value":"Odontalgia"
+},
+{
+    "name":"duele al tragar",
+    "value":"Dolor o molestia de garganta"
+},
+{
+    "name":"Constipacion",
+    "value":"Constipacion"
+},
+{
+    "name":"estreñimiento",
+    "value":"Constipacion"
+},
+{
+    "name":"estreñido",
+    "value":"Constipacion"
+},
+{
+    "name":"le late lento el corazon",
+    "value":"Bradicardia"
+},
+{
+    "name":"le late mal el corazon",
+    "value":"Bradicardia"
+},
+{
+    "name":"el corazon le late lento",
+    "value":"Bradicardia"
+},
+{
+    "name":"confundido",
+    "value":"Confusion-Desorientacion-Obnubilacion-Estupor"
+},
+{
+    "name":"confuso",
+    "value":"Confusion-Desorientacion-Obnubilacion-Estupor"
+},
+{
+    "name":"confusion",
+    "value":"Confusion-Desorientacion-Obnubilacion-Estupor"
+}
+];
+
   selectOptions:any;
   symptom:any;
   symptomValue:string="";

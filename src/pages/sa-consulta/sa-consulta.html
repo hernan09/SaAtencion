@@ -103,9 +103,23 @@
         </div>
         <!-- <div class="user-cesar"> -->
         <div [hidden]="!(socio[1] == 'Infran Emiliano'|| socio[1] == 'Andres Lauga')" class="user-cesar">
-         /
+         
           <div class="form-control padding">
-              <ion-searchbar  animated></ion-searchbar>
+            <select-searchable class="input-text input-user"
+            item-content
+            [(ngModel)]="symptomValueSelect"
+            [items]="predictivos"
+            itemValueField="value"
+            itemTextField="name"
+            [canSearch]="true"
+            (keyup)="search($event)"
+            onkeyup="this.setAttribute('value', this.value)"
+            [ngModelOptions]="{standalone: true}"
+            >
+              
+
+              
+            </select-searchable>
               <!-- <div class="box-data-container">
                  <input type="text" class="input-text input-user" [(ngModel)]="symptomValueSelect"(keyup)="search($event)" onkeyup="this.setAttribute('value', this.value);" [ngModelOptions]="{standalone: true}">
                  <div class="" [ngClass]= "{'data-select':showPrediction}" *ngIf="showPrediction">
