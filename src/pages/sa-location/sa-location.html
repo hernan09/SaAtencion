@@ -27,8 +27,8 @@
            placeholder="Seleccionar Localidad de Atención"
            [ngClass]="{ 'is-invalid': f.location.errors && f.location.touched,'is-valid': f.location.touched && f.location.valid ||  f.location.valid }"
            >
-           <!--let localidad of localidades -->
-            <ion-option *ngFor="let dataLocation of location " value="{{dataLocation}}" >{{dataLocation}}</ion-option>
+           <!--let dataLocation of location -->
+            <ion-option *ngFor="let localidad of localidades " value="{{localidad.name}}" >{{localidad.id}}</ion-option>
           </ion-select>
 
         </div>

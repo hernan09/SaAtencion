@@ -319,15 +319,27 @@ export class DataService {
             })
     }
     public validarSA(dni:string): Observable<any> {
-
         //Se obtiene el token actualizado según auth
         let headers: Headers = this.authService.getActualHeaders();
         const strDatos = {"accion":"validarSocioSolicitudAtencion"}
         let params= `?dni=${dni}&strDatos=${JSON.stringify(strDatos)}`;
-        console.log("validarSA Request : " + params);
+        //let params=`?dni=${dni}+"&strDatos=" + ${JSON.stringify(strDatos)}`
         //let options = new RequestOptions({headers:myheaders, search:myParams });
-           
-        return this.http.get(SERVER_URL + API.validarSA + params, {headers})
+           console.log('serverURL',SERVER_URL)
+           console.log('API.validarSA',API.validarSA)
+        //console.log("validarSA Request : " + params);
+        let params2 = encodeURIComponent(`?dni=${dni}&strDatos={"accion":"validarSocioSolicitudAtencion"}`)
+       // let params= "?dni="+dni+"&soloservicio="+soloservicio;
+       headers.append('Authorization', '827f6d02bd3c76e3d76859973b6f4596');    
+       let myParams = new URLSearchParams();
+
+        myParams.set('dni', dni);
+        //myParams.set('strDatos', encodeURIComponent(JSON.stringify(strDatos)))
+
+        let reqOptions = new RequestOptions()
+       
+        return this.http.get(SERVER_URL+API.validarSA+params)
+    
             .map(response => {return response;})
             .catch(err => {
                 if (err.status === 401) {
