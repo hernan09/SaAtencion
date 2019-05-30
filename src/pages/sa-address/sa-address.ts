@@ -34,10 +34,17 @@ export class SaAddressPage {
   selectOptions: any;
   backSection:any;
   
+  localidades:any
   constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public alertcontroller:AlertController) {
     
+
+    
+
+    
+
+    
        
-    this.getAddress();
+    //this.getAddress();
     this.getName();
 
     this.selectOptions = {

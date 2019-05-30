@@ -105,6 +105,7 @@ export class LoginPage implements Overlay {
 
   login(dni) {
     if (this.loginService.isNewUser(dni)) {
+      console.log('user nuevo')
       var titular = this.utils.getTitular();
         //En caso de que exista titular, se avisa de la eliminacion del usuario anterior.
       if (titular && !this.utils.getActiveUser()) {

@@ -27,6 +27,7 @@
            placeholder="Seleccionar Dirección de Atención"
            [ngClass]="{ 'is-invalid': f.address.errors && f.address.touched,'is-valid': f.address.touched && f.address.valid ||  f.address.valid }"
            >
+           <!--  -->
             <ion-option *ngFor="let dataLocation of addressList" value="{{dataLocation}}" >{{dataLocation}}</ion-option>
           </ion-select>
         </div>

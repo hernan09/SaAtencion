@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utils } from './../../providers/utils';
 import { NavigatorPage } from './../navigator/navigator';
 import { ViewChild } from '@angular/core';
-
+import { DataService } from '../../providers/data.service';
 import { SaConsultaPage } from '../sa-consulta/sa-consulta';
 import { SolicitudAtencionPage } from '../solicitud-atencion/solicitud-atencion';
 
@@ -35,12 +35,19 @@ export class SaLocationPage {
   socio: any;
   validationLocation:string = "";
   selectOptions: any;
-
-  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils) {
+  localidades:any
+  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public dataservice:DataService) {
     let dataPage =  this.utils.getFormSolicitudAtencion();
     console.log("datos de esta sección 2: ", dataPage);
     this.getLocation();
     this.getName();
+    
+    //this.dataservice.validarSA("10000080").subscribe(data=>{
+      
+    //  this.localidades=data
+      //console.log(this.localidades)
+   // })
+
 
     this.selectOptions = {
       title: 'Localidad',

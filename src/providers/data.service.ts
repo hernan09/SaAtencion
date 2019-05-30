@@ -202,7 +202,7 @@ export class DataService {
                     return this.authService.auth().mergeMap(res => {
                         if (res === true) {
                             return this.authService.retryPOST(datos, API.registroDispositivo)
-                                    .map(res=> {console.log("data.service - retry Device registration ");
+                                    .map(res=> {console.log("data.service - retry Device registration");
                                     return res;})
                             .catch(err => {return this.throwObservableError(err);})
                         }
@@ -326,7 +326,7 @@ export class DataService {
         let params= `?dni=${dni}&strDatos=${JSON.stringify(strDatos)}`;
         console.log("validarSA Request : " + params);
         //let options = new RequestOptions({headers:myheaders, search:myParams });
-
+           
         return this.http.get(SERVER_URL + API.validarSA + params, {headers})
             .map(response => {return response;})
             .catch(err => {
