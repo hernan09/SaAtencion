@@ -49,7 +49,7 @@ export class DataService {
         private utils: Utils,
         private authService: AuthService,
         private alertService : AlertService,
-    
+
     ) {
         this.authService.auth().subscribe()
         this.restoreTelefonos()
@@ -118,10 +118,10 @@ export class DataService {
                             .map(this.handleMisDatos.bind(this, dni))
                             .catch(err => { return this.showMisDatosError(err,dni); })
                         }
-                        return this.showMisDatosError(err,dni); 
+                        return this.showMisDatosError(err,dni);
                     })
                 }
-                return this.showMisDatosError(err,dni); 
+                return this.showMisDatosError(err,dni);
             })
     }
 
@@ -139,7 +139,7 @@ export class DataService {
         return [this.restoreMisDatos(dni)];
     }
 
-  
+
     public getHistorial(dni?): Observable<any> {
         dni = dni || this.utils.getActiveUser()
         console.log('BK: getHistorial Request:', dni);
@@ -177,14 +177,14 @@ export class DataService {
         this.error('historial', err)
         return [this.restoreHistorial(dni)] || []
     }
-    
+
     public getHistorialNotifications(dni?) {
         dni = dni || this.utils.getActiveUser()
         console.log('getHistorial Request:', dni)
         this.restoreHistorial(dni)
     }
 
-    
+
     public registrarDispositivo(idDevice, dni): Observable<Response> {
 
         const datos = { "dni": dni, "deviceId": idDevice };
@@ -255,8 +255,8 @@ export class DataService {
         this.error('sintomas', err);
         return this.restoreSintomas(dni) || []
     }
-    
-    
+
+
 
     public solicitarVC(data): Observable<any> {
         //Se obtiene el token actualizado según auth
@@ -318,40 +318,40 @@ export class DataService {
                 return Observable.throw(err || 'Server error')
             })
     }
-    public validarSA(dni:string): Observable<any> {
-
-        //Se obtiene el token actualizado según auth
-        let headers: Headers = this.authService.getActualHeaders();
-        const strDatos = {"accion":"validarSocioSolicitudAtencion"}
-        let params= `?dni=${dni}&strDatos=${JSON.stringify(strDatos)}`;
-        console.log("validarSA Request : " + params);
-        //let options = new RequestOptions({headers:myheaders, search:myParams });
-           
-        return this.http.get(SERVER_URL + API.validarSA + params, {headers})
-            .map(response => {return response;})
-            .catch(err => {
-                if (err.status === 401) {
-                    console.log('BK : Reintenta savalidar por auth ')
-                    // Token might be expired, try to refresh token
-                    return this.authService.auth().mergeMap(res => {
-                        if (res === true) {
-                            this.authService.retryGETService(API.validarSA, {headers, params })
-                                .map(response2 => { return response2})
-                                .catch(err => { return Observable.throw(err);})
-                        }
-                        return Observable.throw(err)
-                    })
-                }
-                return Observable.throw(err || 'Server error')
-            })
-
-        }
+    // public validarSA(dni:string): Observable<any> {
+    //
+    //     //Se obtiene el token actualizado según auth
+    //     let headers: Headers = this.authService.getActualHeaders();
+    //     const strDatos = {"accion":"validarSocioSolicitudAtencion"}
+    //     let params= `?dni=${dni}&strDatos=${JSON.stringify(strDatos)}`;
+    //     console.log("validarSA Request : " + params);
+    //     //let options = new RequestOptions({headers:myheaders, search:myParams });
+    //
+    //     return this.http.get(SERVER_URL + API.validarSA + params, {headers})
+    //         .map(response => {return response;})
+    //         .catch(err => {
+    //             if (err.status === 401) {
+    //                 console.log('BK : Reintenta savalidar por auth ')
+    //                 // Token might be expired, try to refresh token
+    //                 return this.authService.auth().mergeMap(res => {
+    //                     if (res === true) {
+    //                         this.authService.retryGETService(API.validarSA, {headers, params })
+    //                             .map(response2 => { return response2})
+    //                             .catch(err => { return Observable.throw(err);})
+    //                     }
+    //                     return Observable.throw(err)
+    //                 })
+    //             }
+    //             return Observable.throw(err || 'Server error')
+    //         })
+    //
+    //     }
 
     public validarVC(dni:string, soloservicio:string): Observable<any> {
-        
+
         //Se obtiene el token actualizado según auth
         let headers: Headers = this.authService.getActualHeaders();
-        
+
         let params= "?dni="+dni+"&soloservicio="+soloservicio;
         console.log("validarVC Request : " + params);
         //let options = new RequestOptions({headers:myheaders, search:myParams });
@@ -420,7 +420,7 @@ export class DataService {
         if (!data) return
         this.utils.setAlert(data)
     }
-    
+
 
     public saveCID(data) {
         if (!data) return
@@ -444,19 +444,19 @@ export class DataService {
         return this.utils.getItem(Config.KEY.VC_STATUS);
       }
 
-      public setVCStatus(data){       
+      public setVCStatus(data){
         this.utils.setItem(Config.KEY.VC_STATUS, data);
-      } 
-      
+      }
+
       public getSurveyStatus(){
         return this.utils.getItem(Config.KEY.SURVEY_STATUS);
       }
 
-      public setSurveyStatus(data){       
+      public setSurveyStatus(data){
         this.utils.setItem(Config.KEY.SURVEY_STATUS, data);
-      }  
+      }
 
-       
+
     public getLocalStorage(prop, dni?) {
         dni = dni || this.utils.getActiveUser()
         if (!dni) {
@@ -491,10 +491,10 @@ export class DataService {
         this.updateUsers(data)
     }
 
-     
+
     public getUsersData(users?) {
         const activeUser = this.utils.getActiveUser()
-      
+
         if (users) {
             users = users
         }
@@ -593,12 +593,12 @@ export class DataService {
                 this.error('Erro al solicitarVC', err);
                 return Observable.throw(err);
         });
-      
-      
+
+
       };
 
-      
-      
+
+
     error(prop, err) {
         console.error('Could not get [' + prop + ']: ' + (err || 'Server error'))
     }

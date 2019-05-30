@@ -117,10 +117,11 @@ export class SaServiciosPage {
 
   gotoPage(){
     this.utils.backPage(false);
-    this.navCtrl.push( SaResumenPage );
+    // this.navCtrl.push( SaResumenPage );
+    this.navCtrl.push( HomePage );
   }
 
   ionViewWillLeave() {
-    this.utils.backPage(true);
+    // this.utils.backPage(true);
   }
 }

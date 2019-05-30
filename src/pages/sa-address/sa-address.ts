@@ -33,18 +33,11 @@ export class SaAddressPage {
   validationLocation:string = "";
   selectOptions: any;
   backSection:any;
-  
+
   localidades:any
   constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public alertcontroller:AlertController) {
-    
 
-    
-
-    
-
-    
-       
-    //this.getAddress();
+    this.getAddress();
     this.getName();
 
     this.selectOptions = {
@@ -87,7 +80,7 @@ export class SaAddressPage {
           section:null
         }
       }
-      
+
     }
   }
 
@@ -144,7 +137,7 @@ export class SaAddressPage {
   }
 
   ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
-    this.utils.backPage(true);
+    // this.utils.backPage(true);
   }
 
   async presentAlertConfirm() {
