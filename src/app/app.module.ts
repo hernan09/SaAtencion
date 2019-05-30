@@ -1,9 +1,10 @@
 import { Keyboard } from '@ionic-native/keyboard';
 import { BrowserModule } from '@angular/platform-browser'
 import { ErrorHandler, NgModule } from '@angular/core'
-import { HttpModule } from '@angular/http'
+import { HttpModule , JsonpModule } from '@angular/http'
 import { FormsModule } from '@angular/forms'
 import { Device } from '@ionic-native/device';
+
 
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular'
 
@@ -64,7 +65,7 @@ import { GroupedNotificationService } from './../providers/grouped.notificacion.
 import { AlertBuilder } from './../providers/builders/alert.builder';
 import { VideoConsultaService } from './../providers/video.consulta.service';
 import { SelectSearchableModule } from 'ionic-select-searchable';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     MyApp,
@@ -131,7 +132,9 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     IonicModule.forRoot(MyApp),
     FormsModule,
     HttpModule,
-    SelectSearchableModule
+    JsonpModule,
+    SelectSearchableModule,
+    HttpClientModule,
   ],
 
   bootstrap: [IonicApp],
@@ -160,6 +163,7 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     VideoConsultaService,
     Keyboard,
     AndroidPermissions,
+    
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 

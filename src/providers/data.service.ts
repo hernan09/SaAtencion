@@ -318,7 +318,34 @@ export class DataService {
                 return Observable.throw(err || 'Server error')
             })
     }
+    public validarSA(dni:string): Observable<any> {
 
+        //Se obtiene el token actualizado según auth
+        let headers: Headers = this.authService.getActualHeaders();
+        const strDatos = {"accion":"validarSocioSolicitudAtencion"}
+        let params= `?dni=${dni}&strDatos=${JSON.stringify(strDatos)}`;
+        console.log("validarSA Request : " + params);
+        //let options = new RequestOptions({headers:myheaders, search:myParams });
+
+        return this.http.get(SERVER_URL + API.validarSA + params, {headers})
+            .map(response => {return response;})
+            .catch(err => {
+                if (err.status === 401) {
+                    console.log('BK : Reintenta savalidar por auth ')
+                    // Token might be expired, try to refresh token
+                    return this.authService.auth().mergeMap(res => {
+                        if (res === true) {
+                            this.authService.retryGETService(API.validarSA, {headers, params })
+                                .map(response2 => { return response2})
+                                .catch(err => { return Observable.throw(err);})
+                        }
+                        return Observable.throw(err)
+                    })
+                }
+                return Observable.throw(err || 'Server error')
+            })
+
+        }
 
     public validarVC(dni:string, soloservicio:string): Observable<any> {
         
@@ -429,7 +456,7 @@ export class DataService {
         this.utils.setItem(Config.KEY.SURVEY_STATUS, data);
       }  
 
-
+       
     public getLocalStorage(prop, dni?) {
         dni = dni || this.utils.getActiveUser()
         if (!dni) {
@@ -464,10 +491,10 @@ export class DataService {
         this.updateUsers(data)
     }
 
-
+     
     public getUsersData(users?) {
         const activeUser = this.utils.getActiveUser()
-
+      
         if (users) {
             users = users
         }

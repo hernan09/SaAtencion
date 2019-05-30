@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController  } from 'ionic-angular';
 import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
 import { SaLocationPage } from '../sa-location/sa-location';
@@ -8,9 +8,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utils } from './../../providers/utils';
 import { DataService } from './../../providers/data.service';
 import { ChangeDetectorRef } from '@angular/core';
-import { SelectSearchableComponent } from  'ionic-select-searchable';
 
- 
+import { Http, HttpModule } from '@angular/http';
+//import { predicJsonData } from '../../assets/predic.json';
+
 /**
  * Generated class for the SaConsultaPage page.
  *
@@ -24,97 +25,13 @@ import { SelectSearchableComponent } from  'ionic-select-searchable';
   templateUrl: 'sa-consulta.html',
 })
 
-export class SaConsultaPage {
+export class SaConsultaPage  {
   
   @ViewChild(NavigatorPage) menu : NavigatorPage;
-  predictivo=null;
+ 
+  items:any;
   
-  predictivos=[{
-    "name":"constipacion",
-    "value":"Fiebre"
-},
-{
-    "name":"afiebrado",
-    "value":"Fiebre"
-},
-{
-    "name":"febricula",
-    "value":"Fiebre"  
-},
-{
-    "name":"dolor de garganta",
-    "value":"Dolor de oido"
-},
-{
-    "name":"tengo algo en el odio",
-    "value":"Dolor de oido"
-},
-{
-    "name":"dolor de oreja",
-    "value":"Dolor de oido"
-},
-{
-    "name":"dolor de garganta",
-    "value":"Dolor o molestia de garganta"
-},
-{
-    "name":"duele la garganta",
-    "value":"Dolor o molestia de garganta"
-},
-{
-    "name":"odontalgia",
-    "value":"Odontalgia"
-},
-{
-    "name":"dolor de diente",
-    "value":"Odontalgia"
-},
-{
-    "name":"dolor de muela",
-    "value":"Odontalgia"
-},
-{
-    "name":"duele al tragar",
-    "value":"Dolor o molestia de garganta"
-},
-{
-    "name":"Constipacion",
-    "value":"Constipacion"
-},
-{
-    "name":"estreñimiento",
-    "value":"Constipacion"
-},
-{
-    "name":"estreñido",
-    "value":"Constipacion"
-},
-{
-    "name":"le late lento el corazon",
-    "value":"Bradicardia"
-},
-{
-    "name":"le late mal el corazon",
-    "value":"Bradicardia"
-},
-{
-    "name":"el corazon le late lento",
-    "value":"Bradicardia"
-},
-{
-    "name":"confundido",
-    "value":"Confusion-Desorientacion-Obnubilacion-Estupor"
-},
-{
-    "name":"confuso",
-    "value":"Confusion-Desorientacion-Obnubilacion-Estupor"
-},
-{
-    "name":"confusion",
-    "value":"Confusion-Desorientacion-Obnubilacion-Estupor"
-}
-];
-
+  predictionData:any;
   selectOptions:any;
   symptom:any;
   symptomValue:string="";
@@ -140,19 +57,24 @@ export class SaConsultaPage {
   callEmergency:boolean;
   //filter
   symptomValueSelect:string;
+  PredictSymptom:string;
+  PredictShowSymptom:string;
   result:string = '';
   arrayFinalSymptom :string[] = new Array() ;
-  showPrediction:boolean;
+  showPrediction:boolean=false;
 
   moreSymtom:boolean = false;
 
   public telefono;
+ 
   constructor( public navCtrl: NavController,
       private cdRef:ChangeDetectorRef,
       public navParams: NavParams,
       public utils: Utils,
       private data :DataService,
-      public alertController: AlertController ) {
+      public alertController: AlertController,
+      public http:Http,
+      ) {
 
     this.selectOptions = {
       title: 'Síntoma',
@@ -161,14 +83,52 @@ export class SaConsultaPage {
     this.getSymptom();
     // this.pageBack();
     this.getName();
+    //predictivo
+    this.initializeItems();
+   
+    
+
 
     let dataPage =  this.utils.getFormSolicitudAtencion();
     console.log("datos de esta sección 3: ", dataPage);
   }
+//predictivo logica
+initializeItems() {
+ this.items=this.predictionData
+ 
+}
+getPredic(){
+  this.http.get('./assets/predic.json').subscribe(datapredic=>{
+     this.predictionData=datapredic.json()
+     
+ })
+ 
+}
+
+
+
+getItems(ev: any) {
+  // Reset items back to all of the items
+  this.initializeItems();
+  this.showPrediction=true
+  // set val to the value of the searchbar
+  const val = ev.target.value;
+
+  // if the value is an empty string don't filter the items
+  if (val && val.trim() != '') {
+    this.items = this.items.filter((item) => {
+      
+        
+      return (item.SINTOMA.toLowerCase().indexOf(val.toLowerCase()) > -1);
+    })
+  }
+}
+
 
   ionViewDidLoad() {
     this.showBackData();
     this.menu.setArrowBack(true);
+    this.getPredic();
   }
 
   showBackData() {
@@ -204,8 +164,16 @@ export class SaConsultaPage {
   }
 
   otherSymtomSelected(){
-    console.log("sintoma del predictivo",this.symptomValueSelect);
-    this.gotoPage(this.symptomValueSelect);
+    console.log("sintoma del predictivo",this.PredictShowSymptom);
+    for(let i=0;i<=this.items.length-1;i++){
+      if(this.PredictShowSymptom==this.items[i].SINTOMA){
+
+
+        this.PredictSymptom=this.items[i].DIAGNOSTICO
+      }
+    }
+    
+    this.gotoPage(this.PredictSymptom);
   }
 
   getName(){
@@ -229,7 +197,7 @@ export class SaConsultaPage {
           text: 'No',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
+          handler: () => {
             console.log('Confirm close');
           }
         }, {
@@ -245,7 +213,7 @@ export class SaConsultaPage {
     await alert.present();
   }
 
-  onkeyup(number,length) {
+  onChange(number,length) {
     console.log(event);
     console.log(this.descriptionData.length);
     this.prefijoFinal;
@@ -297,7 +265,6 @@ export class SaConsultaPage {
       "step3": this.profileForm.value
     }
 
-    let arrayDataForm = this.utils.getFormSolicitudAtencion();
 
     this.utils.setFormSolicitudAtencion(this.dataForm,"step3");
   }
@@ -313,7 +280,7 @@ export class SaConsultaPage {
   /*filter did you mean*/
   filterData(array,data) {
     let prediction1 = array;
-    var i,j,x,result,predictionData ='';
+    var i,x,result,predictionData ='';
     for (i = 0; i < prediction1.length; i++) {
       result = this.symptomValueSelect;
       console.log("RESULT",result);
@@ -337,7 +304,7 @@ export class SaConsultaPage {
     console.log("data",data.target.value);
     this.symptomValueSelect = data.target.value;
     if(!this.symptomValueSelect) return;
-    if(this.symptomValueSelect.length > 3){  
+    if(this.symptomValueSelect/*.length > 3*/){  
 
       let prediction1 = ['costipacion' ,'afiebrado' , 'febricula' , 'temperatura alta' , 'piel caliente' , 'hipertermia' , 'piel calenturada','sentirse caliente', 'cuerpo calenturado' , 'escalofríos' , 'fiebre'];
       this.filterData(prediction1,'Fiebre');
@@ -368,9 +335,11 @@ export class SaConsultaPage {
   }
 
   setValueSymptom(value) {
-    this.showPrediction = false;
-    this.symptomValueSelect = value;
-  }
+     this.showPrediction = false;
+     this.PredictShowSymptom=value;
+    }
+    
+  
 
   close() {
     this.showPrediction = false;

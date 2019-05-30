@@ -29,6 +29,7 @@ export class Config {
 		sintomas: '/sintoma/sintomas',
 		solicitarVC : '/vc/solicitar',
 		validarVC : '/vc/validar',
+		validarSA : '/sa/validar',
 		registroDispositivo: '/socio/registrarDispositivo'
 	}
 

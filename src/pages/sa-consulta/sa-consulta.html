@@ -15,7 +15,7 @@
 
       <h3 class="title" *ngFor="let item of socio" >{{item}}</h3>
 
-      <h5 class="sub-title">Seleccione el síntoma que más le aqueja en estos momentos</h5>
+      <h5 class="sub-title">Ingrese el síntoma que más le aqueja en estos momentos</h5>
 
       <hr class="soft-line soft-line-black">
 
@@ -103,23 +103,15 @@
         </div>
         <!-- <div class="user-cesar"> -->
         <div [hidden]="!(socio[1] == 'Infran Emiliano'|| socio[1] == 'Andres Lauga')" class="user-cesar">
-         
+           
           <div class="form-control padding">
-            <select-searchable class="input-text input-user"
-            item-content
-            [(ngModel)]="symptomValueSelect"
-            [items]="predictivos"
-            itemValueField="value"
-            itemTextField="name"
-            [canSearch]="true"
-            (keyup)="search($event)"
-            onkeyup="this.setAttribute('value', this.value)"
-            [ngModelOptions]="{standalone: true}"
-            >
-              
-
-              
-            </select-searchable>
+              <ion-searchbar placeholder="" [animated]="true" (ionInput)="getItems($event)"[(ngModel)]="PredictShowSymptom"[ngModelOptions]="{standalone: true}" ></ion-searchbar>
+              <ion-list *ngIf="showPrediction" >
+                <ion-item *ngFor="let item of items"(click)="setValueSymptom(item.SINTOMA)">
+                  {{ item.SINTOMA }}
+                </ion-item>
+              </ion-list>
+            
               <!-- <div class="box-data-container">
                  <input type="text" class="input-text input-user" [(ngModel)]="symptomValueSelect"(keyup)="search($event)" onkeyup="this.setAttribute('value', this.value);" [ngModelOptions]="{standalone: true}">
                  <div class="" [ngClass]= "{'data-select':showPrediction}" *ngIf="showPrediction">
@@ -167,7 +159,7 @@
     </div>
 
 
-    <button type="submit" class="btn btn-light" (click)="otherSymtomSelected()" [disabled]="!symptomValueSelect" *ngIf="this.socio[1] == 'Infran Emiliano'||this.socio[1] == 'Andres Lauga'" >
+    <button type="submit" class="btn btn-light" (click)="otherSymtomSelected()" [disabled]="!PredictShowSymptom" *ngIf="this.socio[1] == 'Infran Emiliano'||this.socio[1] == 'Andres Lauga'" >
       Continuar
     </button>
     <div *ngIf="symptomSelected == 'Otro'">

@@ -58,7 +58,8 @@ export class SolicitudVcPage implements Overlay {
         private toastService:ToastService,
         private alertService : AlertService,
         private keyboard: Keyboard) {
-
+        
+            
         this.telefono = dataService.getPhoneNumber();
         dataService.getSintomas().subscribe(this.handleData.bind(this), this.handleData.bind(this))
         this.showSelectText = "Seleccionar";

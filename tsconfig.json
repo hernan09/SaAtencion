@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "allowSyntheticDefaultImports": true,
+    
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    
     "lib": [
       "dom",
       "es2015"
@@ -14,6 +15,11 @@
     "sourceMap": true,
     "target": "es5",
     
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/typings.d.ts"
+    ],
     "baseUrl": "./src",    
     "paths": {
     "@app/env": [
@@ -27,6 +33,7 @@
   "exclude": [
     "node_modules"
   ],
+  
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false
