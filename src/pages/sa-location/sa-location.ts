@@ -39,14 +39,14 @@ export class SaLocationPage {
   constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public dataservice:DataService) {
     let dataPage =  this.utils.getFormSolicitudAtencion();
     console.log("datos de esta sección 2: ", dataPage);
-    this.getLocation();
+    //this.getLocation();
     this.getName();
 
-    //this.dataservice.validarSA("10000080").subscribe(data=>{
+    this.dataservice.validarSA("10000080").subscribe(data=>{
 
-    //  this.localidades=data
-      //console.log(this.localidades)
-   // })
+      this.localidades=data
+      console.log(this.localidades)
+    })
 
 
     this.selectOptions = {
