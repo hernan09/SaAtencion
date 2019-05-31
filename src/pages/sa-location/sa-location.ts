@@ -9,7 +9,7 @@ import { SaConsultaPage } from '../sa-consulta/sa-consulta';
 import { SolicitudAtencionPage } from '../solicitud-atencion/solicitud-atencion';
 import { AuthService } from '../../providers/auth.service';
 import { ChangeDetectorRef } from '@angular/core';
-
+import { LoadingController } from 'ionic-angular';
 /**
  * Generated class for the SaLocationPage page.
  *
@@ -37,14 +37,14 @@ export class SaLocationPage {
   validationLocation:string = "";
   selectOptions: any;
   localidades:any
-  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public dataservice:DataService,public authService :AuthService) {
+  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public dataservice:DataService,public authService :AuthService,public loading:LoadingController) {
     let dataPage =  this.utils.getFormSolicitudAtencion();
     console.log("datos de esta sección 2: ", dataPage);
     //this.getLocation();
     this.getName();
 
     this.dataservice.validarSA("10000080").subscribe(data=>{
-        this.authService.auth()
+        
       this.localidades = data.localidades
       console.log(this.localidades)
     })
@@ -55,12 +55,22 @@ export class SaLocationPage {
     };
 
   }
-
+  ionViewWillEnter(){
+    this.presentLoading();
+  }
   ionViewDidLoad() {
+
     this.getBackData();//paso: agregar getBackData => 1
     this.menu.setArrowBack(true);
+    
   }
-
+  presentLoading() {
+    const loader = this.loading.create({
+      content: "Espere un momento por favor...",
+      duration: 2000
+    });
+    loader.present();
+  }
   getBackData(){
 
     console.log(" => DELETE",this.utils.getBackPage());
