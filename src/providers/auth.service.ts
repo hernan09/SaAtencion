@@ -111,12 +111,12 @@ export class AuthService {
           });
         } else {
           if (err.status === 502 || err.status === 500) {
-            //para que muestre el mensaje solicitado correctamente            
+            //para que muestre el mensaje solicitado correctamente
             this.alertService.showAlert(Config.TITLE.WARNING_TITLE, Config.MSG.CONNECTION_ERROR,Config.ALERT_CLASS.ERROR_CSS);
             this.utils.hideLoader();
             return;
           }
-          else if (err.status === 409) {                       
+          else if (err.status === 409) {
             let mensaje;
             try{
               mensaje = err.json().mensaje;
