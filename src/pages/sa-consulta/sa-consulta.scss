@@ -114,7 +114,7 @@ page-sa-consulta {
     width: 100%;
     border-radius: 10px;
     padding: 10px;
-    
+
   }
 
   .count {
@@ -158,8 +158,8 @@ page-sa-consulta {
 }
 .searchbar-md .searchbar-input{
   padding: 0;
-  
-  
+
+
 }
   .btn-more-symtom {
     margin-top: 10%;
@@ -189,6 +189,18 @@ page-sa-consulta {
     }
   }
 
+  .form-control {
+    -webkit-transition: top 2s; /* Safari */
+    transition: top 2s;
+  }
 
+  .top-search {
+    position: relative;
+    top: -95px;
+  }
 
+  .initial-search {
+    position: initial;
+    top: 0px;
+  }
 }
