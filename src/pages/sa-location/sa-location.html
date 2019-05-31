@@ -28,7 +28,7 @@
            [ngClass]="{ 'is-invalid': f.location.errors && f.location.touched,'is-valid': f.location.touched && f.location.valid ||  f.location.valid }"
            >
            <!--let dataLocation of location -->
-            <ion-option *ngFor="let localidad of localidades " value="{{localidad.name}}" >{{localidad.id}}</ion-option>
+            <ion-option *ngFor="let localidad of localidades " value="{{localidad.codigoPostal}}" >{{localidad.localidad}}</ion-option>
           </ion-select>
 
         </div>

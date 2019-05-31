@@ -170,6 +170,6 @@ export class SaTiempoPage {
   }
 
   ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
-    this.utils.backPage(true);
+    // this.utils.backPage(true);
   }
 }

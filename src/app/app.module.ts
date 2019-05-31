@@ -47,7 +47,7 @@ import { SaResumenPage } from './../pages/sa-resumen/sa-resumen';
 import { SaQuestionSymptomPage } from './../pages/sa-question-symptom/sa-question-symptom';
 import { SaLocationPage } from './../pages/sa-location/sa-location';
 import { SaAddressPage } from './../pages/sa-address/sa-address';
-
+import { popapsCont } from '../providers/poapCont';
 // services
 import { AuthService } from '../providers/auth.service'
 import { DataService } from '../providers/data.service'
@@ -163,6 +163,7 @@ import { HttpClientModule } from '@angular/common/http';
     VideoConsultaService,
     Keyboard,
     AndroidPermissions,
+    popapsCont,
     
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

@@ -93,7 +93,7 @@ export class SaEdadPage {
       this.showQuestion = this.symptom.showQuestion;
     } else {
       this.question = '¿El paciente tiene antecedentes de convulsiones febriles o ha convulcionado alguna vez por fiebre ?';
-      
+
       console.log("otro sintoma");
     }
   }
@@ -155,7 +155,7 @@ export class SaEdadPage {
   saveData(){
 
     this.dataForm = {
-      
+
       "step5": this.profileForm.value,
       "section":this.symptom,
       "question":this.question
@@ -167,6 +167,6 @@ export class SaEdadPage {
   }
 
   ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
-    this.utils.backPage(true);
+    // this.utils.backPage(true);
   }
 }

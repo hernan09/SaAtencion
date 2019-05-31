@@ -41,11 +41,11 @@ export class SaLocationPage {
     console.log("datos de esta sección 2: ", dataPage);
     //this.getLocation();
     this.getName();
-    
+
     this.dataservice.validarSA("10000080").subscribe(data=>{
-      
-       this.localidades=data
-      
+
+      this.localidades = data.localidades
+      console.log(this.localidades)
     })
 
 
@@ -120,6 +120,6 @@ export class SaLocationPage {
  ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
    console.log("LOCATION getBackPage",this.utils.getBackPage());
 
-   this.utils.backPage(true);
+   // this.utils.backPage(true);
  }
 }

@@ -26,11 +26,11 @@ import { Http, HttpModule } from '@angular/http';
 })
 
 export class SaConsultaPage  {
-  
+
   @ViewChild(NavigatorPage) menu : NavigatorPage;
- 
+
   items:any;
-  
+
   predictionData:any;
   selectOptions:any;
   symptom:any;
@@ -66,7 +66,7 @@ export class SaConsultaPage  {
   moreSymtom:boolean = false;
 
   public telefono;
- 
+
   constructor( public navCtrl: NavController,
       private cdRef:ChangeDetectorRef,
       public navParams: NavParams,
@@ -85,8 +85,8 @@ export class SaConsultaPage  {
     this.getName();
     //predictivo
     this.initializeItems();
-   
-    
+
+
 
 
     let dataPage =  this.utils.getFormSolicitudAtencion();
@@ -95,14 +95,14 @@ export class SaConsultaPage  {
 //predictivo logica
 initializeItems() {
  this.items=this.predictionData
- 
+
 }
 getPredic(){
   this.http.get('./assets/predic.json').subscribe(datapredic=>{
      this.predictionData=datapredic.json()
-     
+
  })
- 
+
 }
 
 
@@ -117,8 +117,8 @@ getItems(ev: any) {
   // if the value is an empty string don't filter the items
   if (val && val.trim() != '') {
     this.items = this.items.filter((item) => {
-      
-        
+
+
       return (item.SINTOMA.toLowerCase().indexOf(val.toLowerCase()) > -1);
     })
   }
@@ -172,7 +172,7 @@ getItems(ev: any) {
         this.PredictSymptom=this.items[i].DIAGNOSTICO
       }
     }
-    
+
     this.gotoPage(this.PredictSymptom);
   }
 
@@ -304,7 +304,7 @@ getItems(ev: any) {
     console.log("data",data.target.value);
     this.symptomValueSelect = data.target.value;
     if(!this.symptomValueSelect) return;
-    if(this.symptomValueSelect/*.length > 3*/){  
+    if(this.symptomValueSelect/*.length > 3*/){
 
       let prediction1 = ['costipacion' ,'afiebrado' , 'febricula' , 'temperatura alta' , 'piel caliente' , 'hipertermia' , 'piel calenturada','sentirse caliente', 'cuerpo calenturado' , 'escalofríos' , 'fiebre'];
       this.filterData(prediction1,'Fiebre');
@@ -322,7 +322,7 @@ getItems(ev: any) {
       this.filterData(prediction5,'Constipacion');
 
       let prediction6 = ['BRADICARDIA' , 'LE LATE LENTO EL CORAZON' , 'ME LATE LENTO EL CORAZON' , 'ME LATE LENTO EL CORAZON' , 'LATE LENTO EL CORAZON' , 'EL CORAZON LE LATE LENTO' , 'EL CORAZON ME LATE LENTO' , 'EL CORAZON LATE LENTO' , 'PULSO BAJO' , 'TIENE EL PULSO BAJO', 'TENGO EL PULSO BAJO' , 'ESTA CON EL PULSO BAJO' , 'ESTOY CON EL PULSO BAJO' , 'FRECUENCIA CARDIACA BAJA' , 'TIENE LA FRECUENCIA CARDIACA BAJA' , 'TENGO LA FRECUENCIA CARDIACA BAJA' , 'ESTA CON LA FRECUENCIA CARDIACA BAJA' , 'ESTOY CON LA FRECUENCIA CARDIACA BAJA' , 'FRECUENCIA CARDIACA LENTA' , 'TIENE LA FRECUENCIA CARDIACA LENTA', 'ESTOY CON L FRECUENCIA CARDIACA LENTA' , 'ESTA CON LA FRECUENCIA CARDIACA LENTA' , 'TENGO LA FRECUENCIA CARDIACA LENTA' , 'LATIDOS LENTOS' , 'TIENE LOS LATIDOS LENTOS' , 'TIENE LENTOS LOS LATIDOS' , 'TENGO LENTOS LOS LATIDOS' , 'TENGO LOS LATIDOS LENTOS' , 'ESTA CON LATIDOS LENTOS' , 'ESTA CON LOS LATIDOS DEL CORAZON LENTOS', 'ESTOY CON LATIDOS LENTOS' , 'ESTOY CON LOS LATIDOS DEL CORAZON LENTOS' , 'POCOS LATIDOS' , 'TIENE POCOS LATIDOS' , 'ESTA CON POCOS LATIDOS' , 'TENGO POCOS LATIDOS' , 'ESTOY CON POCOS LATIDOS' , 'POCAS PULSACIONES' , 'ESTA CON POCAS PULSACIONES' , 'ESTOY CON POCAS PULSACIONES', 'TIENE POCAS PULSACIONES' , 'TENGO POCAS PULSACIONES' , 'POCOS PULSO' , 'TIENE POCO PULSO' , 'TENGO POCO PULSO' , 'ESTA CON POCO PULSO' , 'TENGO POCO PULSO' , 'FRECUENCIA CARDIACA MENOR A 50 LATIDOS POR MINUTO' , 'TIENE UNA FRECUENCIA CARDIACA MENOR A 50 LATIDOS POR MINUTO' , 'ESTA CON UNA FRECUENCIA CARDIACA MENOR A 50 LATIDOS POR MINUTO', 'TENGO UNA FRECUENCIA CARDIACA MENOR A 50 LATIDOS POR MINUTO' , 'ESTOY CON UNA FRECUENCIA CARDIACA MENOR A 50 LATIDOS POR MINUTO']
-      this.filterData(prediction6,'Bradicardia');  
+      this.filterData(prediction6,'Bradicardia');
 
       let prediction7 = ['CONFUSION' , 'CONFUNDIDO' , 'CONFUSO' , 'ESTA CONFUNDIDO' , 'PERDIDO' , 'ESTA PERDIDO' , 'DESORIENTADO' , 'ESTA DESORIENTADO' , 'DESORIENTACION' , 'SE QUEDA DORMIDO', 'SOMNOLIENTO' , 'ESTA SOMNOLIENTO' , 'OBNUBILADO' , 'OBNUBILACION' , 'ESTA OBNUBILADO' , 'HABLA INCOHERENCIAS' , 'ACTUA DIFERENTE' , 'DICE INCOHERENCIAS' , 'NO RECONOCE' , 'NO ME RECONOCE', 'ESTA RARO' , 'ESTUPOR' , 'ESTA ESTUPOROSO' , 'ESTUPOROSO' , 'INCOHERENTE' , 'SOPOROSO' , 'ESTA SOPOROSO' , 'xx' , 'xx' , 'xx']
       this.filterData(prediction7,'Confusion-Desorientacion-Obnubilacion-Estupor');
@@ -338,8 +338,8 @@ getItems(ev: any) {
      this.showPrediction = false;
      this.PredictShowSymptom=value;
     }
-    
-  
+
+
 
   close() {
     this.showPrediction = false;
@@ -352,6 +352,6 @@ getItems(ev: any) {
   ionViewWillLeave() {
     console.log("ENTRO ACA?")
 
-    this.utils.backPage(true);
+    // this.utils.backPage(true);
   }
 }

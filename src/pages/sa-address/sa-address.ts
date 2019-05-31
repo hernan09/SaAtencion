@@ -12,6 +12,8 @@ import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
 import { SaQuestionSymptomPage } from '../sa-question-symptom/sa-question-symptom';
 
 import { ChangeDetectorRef } from '@angular/core';
+import { popapsCont } from '../../providers/poapCont';
+
 
 @IonicPage()
 @Component({
@@ -33,18 +35,11 @@ export class SaAddressPage {
   validationLocation:string = "";
   selectOptions: any;
   backSection:any;
-  
+
   localidades:any
-  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public alertcontroller:AlertController) {
-    
+  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public alertcontroller:AlertController,public popapsCont:popapsCont) {
 
-    
-
-    
-
-    
-       
-    //this.getAddress();
+    this.getAddress();
     this.getName();
 
     this.selectOptions = {
@@ -87,7 +82,7 @@ export class SaAddressPage {
           section:null
         }
       }
-      
+
     }
   }
 
@@ -144,31 +139,37 @@ export class SaAddressPage {
   }
 
   ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
-    this.utils.backPage(true);
+    // this.utils.backPage(true);
   }
 
   async presentAlertConfirm() {
-    const alert = await this.alertcontroller.create({
+    this.popapsCont.contadorPopaps++;
+    if(this.popapsCont.contadorPopaps>=2){
+      this.navCtrl.push(SaAddressPage)
+    }else{
+      const alert = await this.alertcontroller.create({
 
-      message: '¿Desea agregar otro síntoma?',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm close');
+        message: '¿Desea agregar otro síntoma?',
+        buttons: [
+          {
+            text: 'No',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Confirm close');
+            }
+          }, {
+            text: 'Si',
+            handler: () => {
+              console.log('Confirm Okay');
+              this.backtoSymptom();
+            }
           }
-        }, {
-          text: 'Si',
-          handler: () => {
-            console.log('Confirm Okay');
-            this.backtoSymptom();
-          }
-        }
-      ]
-    });
-
-    await alert.present();
+        ]
+      });
+  
+      await alert.present();
+    }
+   
   }
 }

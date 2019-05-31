@@ -34,7 +34,7 @@ export class AuthService {
   // SERVICE CALLS
   public auth(): Observable<any> {
     return this.http
-      .post(SERVER_URL + API.login, authBody, { headers: authHeaders })
+      .post(SERVER_URL + API.auth, authBody, { headers: authHeaders })
       .map(res => {
         console.log("BK: /auth");
         let token = res.json().accessToken;

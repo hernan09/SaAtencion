@@ -119,6 +119,6 @@ export class SaQuestionSymptomPage {
   }
 
   ionViewWillLeave() {//paso: agregar  ionViewWillUnload => 5
-    this.utils.backPage(true);
+    // this.utils.backPage(true);
   }
 }
