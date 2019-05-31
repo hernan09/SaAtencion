@@ -7,8 +7,9 @@ import { ViewChild } from '@angular/core';
 import { DataService } from '../../providers/data.service';
 import { SaConsultaPage } from '../sa-consulta/sa-consulta';
 import { SolicitudAtencionPage } from '../solicitud-atencion/solicitud-atencion';
-
+import { AuthService } from '../../providers/auth.service';
 import { ChangeDetectorRef } from '@angular/core';
+
 /**
  * Generated class for the SaLocationPage page.
  *
@@ -36,14 +37,14 @@ export class SaLocationPage {
   validationLocation:string = "";
   selectOptions: any;
   localidades:any
-  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public dataservice:DataService) {
+  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public dataservice:DataService,public authService :AuthService) {
     let dataPage =  this.utils.getFormSolicitudAtencion();
     console.log("datos de esta sección 2: ", dataPage);
     //this.getLocation();
     this.getName();
 
     this.dataservice.validarSA("10000080").subscribe(data=>{
-
+        this.authService.auth()
       this.localidades = data.localidades
       console.log(this.localidades)
     })

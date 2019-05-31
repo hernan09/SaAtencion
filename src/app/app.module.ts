@@ -133,7 +133,6 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpModule,
     JsonpModule,
-    SelectSearchableModule,
     HttpClientModule,
   ],
 

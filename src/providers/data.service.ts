@@ -324,9 +324,10 @@ export class DataService {
         const strDatos = {"accion":"validarSocioSolicitudAtencion"}
         //solo se le aplica al objeto
         let params= `?dni=${dni}&strDatos=${encodeURIComponent(JSON.stringify(strDatos))}`;
-
+        
         console.log("validarSA Request : " + params);
         //let options = new RequestOptions({headers:myheaders, search:myParams });
+        
         return this.http.get(SERVER_URL + API.validarSA + params, {headers})
             .map(response => response.json())
             .catch(err => {
