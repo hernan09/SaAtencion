@@ -145,7 +145,7 @@ export class SaAddressPage {
   async presentAlertConfirm() {
     this.popapsCont.contadorPopaps++;
     if(this.popapsCont.contadorPopaps>=2){
-      this.navCtrl.push(SaAddressPage)
+      console.log("ya agrego 2 sintomas")
     }else{
       const alert = await this.alertcontroller.create({
 
