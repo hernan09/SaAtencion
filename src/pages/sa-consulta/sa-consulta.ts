@@ -64,6 +64,7 @@ export class SaConsultaPage  {
   showPrediction:boolean=false;
 
   moreSymtom:boolean = false;
+  animationSearch:boolean = false;
 
   public telefono;
 
@@ -347,6 +348,16 @@ getItems(ev: any) {
 
   showMoreSymtom() {
     this.moreSymtom = true;
+  }
+
+  topSearch(data){
+    console.log("focus IN topSearch",data);
+    this.animationSearch = data;
+  }
+
+  initialSearch(data){
+    console.log("focus OUT initialSearch",data);
+    this.animationSearch = data;
   }
 
   ionViewWillLeave() {

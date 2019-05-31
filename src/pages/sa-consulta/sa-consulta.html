@@ -13,9 +13,9 @@
 
     <form class="container"  (ngSubmit)="getDataSymptom()">
 
-      <h3 class="title" *ngFor="let item of socio" >{{item}}</h3>
+      <h3 class="title" *ngFor="let item of socio">{{item}}</h3>
 
-      <h5 class="sub-title">Ingrese el síntoma que más le aqueja en estos momentos</h5>
+      <h5 class="sub-title" *ngIf="!animationSearch">Ingrese el síntoma que más le aqueja en estos momentos</h5>
 
       <hr class="soft-line soft-line-black">
 
@@ -103,15 +103,15 @@
         </div>
         <!-- <div class="user-cesar"> -->
         <div [hidden]="!(socio[1] == 'Infran Emiliano'|| socio[1] == 'Andres Lauga')" class="user-cesar">
-           
-          <div class="form-control padding">
-              <ion-searchbar placeholder="" [animated]="true" (ionInput)="getItems($event)"[(ngModel)]="PredictShowSymptom"[ngModelOptions]="{standalone: true}" ></ion-searchbar>
+
+          <div class="form-control padding" [ngClass]="{'top-search': animationSearch }">
+              <ion-searchbar placeholder="" [animated]="true" (ionInput)="getItems($event)"[(ngModel)]="PredictShowSymptom" [ngModelOptions]="{standalone: true}" (click)="topSearch(true)" (focusout)="initialSearch(false)"></ion-searchbar>
               <ion-list *ngIf="showPrediction" >
                 <ion-item *ngFor="let item of items"(click)="setValueSymptom(item.SINTOMA)">
                   {{ item.SINTOMA }}
                 </ion-item>
               </ion-list>
-            
+
               <!-- <div class="box-data-container">
                  <input type="text" class="input-text input-user" [(ngModel)]="symptomValueSelect"(keyup)="search($event)" onkeyup="this.setAttribute('value', this.value);" [ngModelOptions]="{standalone: true}">
                  <div class="" [ngClass]= "{'data-select':showPrediction}" *ngIf="showPrediction">
