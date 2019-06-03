@@ -1,18 +1,19 @@
-<ion-header [ngClass]="{'transition-focus': addClassTransition}">
-
+<ion-header >
+  <!-- [ngClass]="{'transition-focus': addClassTransition}" -->
   <div class="header-circle-container">
       <div class="div-inner"><div class="login-logo"></div></div>
   </div>
 
 </ion-header>
 
-<ion-content padding  [ngClass]="{'transition-focus': addClassTransition}">
+<ion-content padding >
+<!-- [ngClass]="{'transition-focus': addClassTransition}" -->
 <!--asdasd-->
   <div class="login">
 
     <div class="form">
 
-      <div class="osde-label" *ngIf="newMember">AGREGAR SOCIO</div>
+      <!-- <div class="osde-label" *ngIf="newMember">AGREGAR SOCIO</div> -->
 
       <div class="form-control">
           <input value="" (keyup)="validateDNINumber(dni,8)" onkeyup="this.setAttribute('value', this.value);" type="number" id="input1" (focus)="transitionLogin()" (blur)="transitionBlurLogin()" class="input-text input-user" [(ngModel)]="dni">
@@ -39,6 +40,6 @@
 
   </div>
 
-  <div class="login-footer" [ngClass]="addClassTransition? 'hide-version' : 'show-version'" *ngIf="!newMember">Versión {{version}}</div>
-
+  <div class="login-footer"  *ngIf="!newMember">Versión {{version}}</div>
+  <!-- [ngClass]="addClassTransition? 'hide-version' : 'show-version'" -->
 </ion-content>

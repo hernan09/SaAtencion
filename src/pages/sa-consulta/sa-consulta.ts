@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController  } from 'ionic-angular';
 import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
 import { SaLocationPage } from '../sa-location/sa-location';
 import { SaEdadPage } from '../sa-edad/sa-edad';
@@ -75,6 +75,7 @@ export class SaConsultaPage  {
       private data :DataService,
       public alertController: AlertController,
       public http:Http,
+     
       ) {
 
     this.selectOptions = {

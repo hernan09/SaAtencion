@@ -103,17 +103,12 @@
         </div>
         <!-- <div class="user-cesar"> -->
         <div [hidden]="!(socio[1] == 'Infran Emiliano'|| socio[1] == 'Andres Lauga')" class="user-cesar">
-<<<<<<< HEAD
-           
-          <div class="form-control padding">
-              <ion-searchbar  placeholder="" [animated]="true" (ionInput)="getItems($event)"[(ngModel)]="PredictShowSymptom"[ngModelOptions]="{standalone: true}" ></ion-searchbar>
-=======
 
           <div class="form-control padding" [ngClass]="{'top-search': animationSearch }">
               <ion-searchbar placeholder="" [animated]="true" (ionInput)="getItems($event)"[(ngModel)]="PredictShowSymptom" [ngModelOptions]="{standalone: true}" (click)="topSearch(true)" (focusout)="initialSearch(false)"></ion-searchbar>
->>>>>>> 3400388d4f3dcd21a8c0289fef22f431882831c7
+
               <ion-list *ngIf="showPrediction" >
-                <ion-item *ngFor="let item of items"(click)="setValueSymptom(item.SINTOMA)">
+                <ion-item *ngFor="let item of items| slice:0:5;"(click)="setValueSymptom(item.SINTOMA)">
                   {{ item.SINTOMA }}
                 </ion-item>
               </ion-list>
