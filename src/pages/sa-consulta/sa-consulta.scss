@@ -188,6 +188,9 @@ page-sa-consulta {
       padding-left:  10px
     }
   }
+  .box-container{
+    height: 320px;
+  }
 
   .form-control {
     -webkit-transition: top 2s; /* Safari */
@@ -196,11 +199,13 @@ page-sa-consulta {
 
   .top-search {
     position: relative;
-    top: -95px;
+    top: -180px;
+   
   }
-
+   
   .initial-search {
     position: initial;
     top: 0px;
   }
+ 
 }
