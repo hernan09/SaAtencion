@@ -43,17 +43,16 @@ export class SaLocationPage {
     this.getName();
 
     this.dataservice.validarSA("10000080").subscribe(data=>{
-        
+
       this.localidades = data.localidades
       console.log(this.localidades)
     })
 
-
     this.selectOptions = {
       title: 'Localidad',
     };
-
   }
+
   ionViewWillEnter(){
     this.presentLoading();
   }
@@ -70,6 +69,7 @@ export class SaLocationPage {
     });
     loader.present();
   }
+
   getBackData(){
     console.log(" => DELETE",this.utils.getBackPage());
     if(this.utils.getBackPage()){
@@ -93,6 +93,7 @@ export class SaLocationPage {
   }
 
   getName(){
+    console.log('=>socio:',this.utils.getFormSolicitudAtencion()[0])
     this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;//paso: cambiar posiscion a 1 => 3
   }
 
