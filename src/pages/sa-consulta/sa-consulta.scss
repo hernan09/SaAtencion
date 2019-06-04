@@ -196,10 +196,12 @@ page-sa-consulta {
     -webkit-transition: top 2s; /* Safari */
     transition: top 2s;
   }
-
+  .box-container{
+    height: 320px;
+  }
   .top-search {
     position: relative;
-    top: -95px;
+    top: -200px;
   }
 
   .initial-search {

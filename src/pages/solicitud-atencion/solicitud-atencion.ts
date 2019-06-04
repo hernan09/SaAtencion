@@ -87,15 +87,9 @@ export class SolicitudAtencionPage {
         this.tycs4 = dataPage[count-1].step1.users4;
         this.tycs5 = dataPage[count-1].step1.users5;
         this.tycs6 = dataPage[count-1].step1.users6;
-<<<<<<< HEAD
-
-        //this.utils.deleteDataFormSolicitudAtencion();
-        //this.cdRef.detectChanges();
-=======
         //se quito el historial y para que no haga push cada vez que vuelva atras
         // this.utils.deleteDataFormSolicitudAtencion();
         // this.cdRef.detectChanges();
->>>>>>> d5e5d4633e773d0f603befde0f87847adf67d075
       }
       this.utils.deleteDataFormSolicitudAtencion();
       this.cdRef.detectChanges();

@@ -172,7 +172,7 @@ getItems(ev: any) {
       if(this.PredictShowSymptom==this.items[i].SINTOMA){
 
 
-        this.PredictSymptom=this.items[i].DIAGNOSTICO.toLowerCase()
+        this.PredictSymptom=this.items[i].DIAGNOSTICO
       }
     }
 
