@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController  } from 'ionic-angular';
 import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
 import { SaLocationPage } from '../sa-location/sa-location';
 import { SaEdadPage } from '../sa-edad/sa-edad';
@@ -75,6 +75,7 @@ export class SaConsultaPage  {
       private data :DataService,
       public alertController: AlertController,
       public http:Http,
+     
       ) {
 
     this.selectOptions = {
@@ -116,6 +117,7 @@ getItems(ev: any) {
   const val = ev.target.value;
 
   // if the value is an empty string don't filter the items
+  
   if (val && val.trim() != '') {
     this.items = this.items.filter((item) => {
 
@@ -170,11 +172,12 @@ getItems(ev: any) {
       if(this.PredictShowSymptom==this.items[i].SINTOMA){
 
 
-        this.PredictSymptom=this.items[i].DIAGNOSTICO
+        this.PredictSymptom=this.items[i].DIAGNOSTICO.toLowerCase()
       }
     }
 
     this.gotoPage(this.PredictSymptom);
+    console.log(this.PredictSymptom)
   }
 
   getName(){
@@ -264,7 +267,9 @@ getItems(ev: any) {
 
     this.dataForm = {
       "step3": this.profileForm.value
+      
     }
+    console.log('dataform',this.dataForm)
 
 
     this.utils.setFormSolicitudAtencion(this.dataForm,"step3");

@@ -52,15 +52,15 @@
         <input value="" type="text" [(ngModel)]="email" formControlName="email" onkeyup="this.setAttribute('value', this.value);"  id="email" class="input-text input-user">
         <label for="email" class="label-text" >Email</label>
       </div>
-
+         
       <div class="form-control">
         <div class="container-select">
-
+           
           <ion-label for="symptomSelect">Sintoma</ion-label>
           <ion-select [selectOptions]="selectOptions" formControlName="symptom" id="symptomSelect" class="myCustomSelect" (ionChange)="onChangeSymptom($event)" okText="Aceptar" cancelText="Cancelar" [(ngModel)]="symptom" placeholder="Seleccionar">
             <ion-option modal-title="ABC" *ngFor='let symptomOption of symptoms' [value]="symptomOption.code">{{symptomOption.description}}</ion-option>
           </ion-select>
-
+          
         </div>
       </div>
 
