@@ -87,10 +87,12 @@ export class SolicitudAtencionPage {
         this.tycs4 = dataPage[count-1].step1.users4;
         this.tycs5 = dataPage[count-1].step1.users5;
         this.tycs6 = dataPage[count-1].step1.users6;
-
-        this.utils.deleteDataFormSolicitudAtencion();
-        this.cdRef.detectChanges();
+        //se quito el historial y para que no haga push cada vez que vuelva atras
+        // this.utils.deleteDataFormSolicitudAtencion();
+        // this.cdRef.detectChanges();
       }
+      this.utils.deleteDataFormSolicitudAtencion();
+      this.cdRef.detectChanges();
       this.menu.setArrowBack(true);
     }
 
@@ -173,12 +175,14 @@ export class SolicitudAtencionPage {
         users: [this.name1,this.name2],
         users1: this.tycs1,
         users2: this.tycs2,
-       
+
       }
 
       this.dataForm = {
         "step1": check
       }
+
+      console.log("dataForm ",this.dataForm);
 
       this.utils.setFormSolicitudAtencion(this.dataForm,"step1");
 
