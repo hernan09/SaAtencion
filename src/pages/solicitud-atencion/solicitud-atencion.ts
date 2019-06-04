@@ -88,8 +88,8 @@ export class SolicitudAtencionPage {
         this.tycs5 = dataPage[count-1].step1.users5;
         this.tycs6 = dataPage[count-1].step1.users6;
 
-        this.utils.deleteDataFormSolicitudAtencion();
-        this.cdRef.detectChanges();
+        //this.utils.deleteDataFormSolicitudAtencion();
+        //this.cdRef.detectChanges();
       }
       this.menu.setArrowBack(true);
     }
