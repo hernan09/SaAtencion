@@ -9,7 +9,6 @@ import { SaConsultaPage } from '../sa-consulta/sa-consulta';
 import { SolicitudAtencionPage } from '../solicitud-atencion/solicitud-atencion';
 import { AuthService } from '../../providers/auth.service';
 import { ChangeDetectorRef } from '@angular/core';
-
 /**
  * Generated class for the SaLocationPage page.
  *
@@ -44,7 +43,7 @@ export class SaLocationPage {
     this.getName();
 
     this.dataservice.validarSA("10000080").subscribe(data=>{
-       
+        
       this.localidades = data.localidades
       console.log(this.localidades)
     })
@@ -59,11 +58,11 @@ export class SaLocationPage {
     this.presentLoading();
   }
 
-   
   ionViewDidLoad() {
     this.getBackData();//paso: agregar getBackData => 1
     this.menu.setArrowBack(true);
   }
+
   presentLoading() {
     const loader = this.loading.create({
       content: "Espere un momento por favor...",
@@ -71,9 +70,7 @@ export class SaLocationPage {
     });
     loader.present();
   }
-
   getBackData(){
-
     console.log(" => DELETE",this.utils.getBackPage());
     if(this.utils.getBackPage()){
 
@@ -97,11 +94,9 @@ export class SaLocationPage {
 
   getName(){
     this.socio = this.utils.getFormSolicitudAtencion()[0].step1.users;//paso: cambiar posiscion a 1 => 3
-    console.log("socio",this.socio);
   }
 
   getDataContact() {
-    console.log("data", this.profileForm.value);
     this.gotoPage();
   }
 
