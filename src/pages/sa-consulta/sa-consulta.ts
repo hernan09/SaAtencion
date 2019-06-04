@@ -172,11 +172,12 @@ getItems(ev: any) {
       if(this.PredictShowSymptom==this.items[i].SINTOMA){
 
 
-        this.PredictSymptom=this.items[i].DIAGNOSTICO
+        this.PredictSymptom=this.items[i].DIAGNOSTICO.toLowerCase()
       }
     }
 
     this.gotoPage(this.PredictSymptom);
+    console.log(this.PredictSymptom)
   }
 
   getName(){
@@ -266,7 +267,9 @@ getItems(ev: any) {
 
     this.dataForm = {
       "step3": this.profileForm.value
+      
     }
+    console.log('dataform',this.dataForm)
 
 
     this.utils.setFormSolicitudAtencion(this.dataForm,"step3");
