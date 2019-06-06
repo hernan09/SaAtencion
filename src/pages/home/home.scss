@@ -1,50 +1,51 @@
 page-home {
     .medico-asignado{
-        margin-top: 15px;
-        display:block;
+      margin-top: 15px;
+      display:block;
+      color: $black;
     }
     .sin-noti {
-        top: 12px;
-        height: 80px;
-        width: 80px;
+      top: 12px;
+      height: 80px;
+      width: 80px;
     }
     .image {
-        background-size: cover !important;
-		    top : -40px;
+      background-size: cover !important;
+	    top : -40px;
     }
     .image-message {
-		    top: -50px;
+	    top: -50px;
     }
     .shadow-block {
-        height: 200px;
-        padding: 25px;
+      height: 200px;
+      padding: 25px;
     }
     .container.color-blue {
-        position: absolute;
-        top: 40px;
+      position: absolute;
+      top: 40px;
     }
     .button-full {
-        height: 47px;
-        width: 90%;
+      height: 47px;
+      width: 90%;
     }
     .button-full-md {
-        margin-left: 5%;
-        margin-right: 5%;
+      margin-left: 5%;
+      margin-right: 5%;
     }
     .btn.btn-blue {
-        margin-bottom: 20px;
+      margin-bottom: 20px;
     }
     .button-md {
-        text-transform: capitalize;
+      text-transform: capitalize;
     }
     .container {
-        margin: 5px 0;
+      margin: 5px 0;
     }
     ion-toolbar {
-        transition: 0.5s;
+      transition: 0.5s;
     }
     ion-content.subHiddenMargin .scroll-content {
-        transition: 0.5s !important;
+      transition: 0.5s !important;
     }
     .box-container {
       top: -44px;
@@ -54,7 +55,7 @@ page-home {
         font-weight: 300;
         font-size: 1.5em;
         margin-top: 6%;
-        color: $darkgray;
+        color: $black;
         margin-bottom: 16px;
         line-height: 1.3em;
       }
@@ -74,7 +75,6 @@ page-home {
     .scroll-content {
         //disable bounce when scroll y-axis
         -webkit-overflow-scrolling: auto !important;
-
         transition: 0.5s !important;
         margin-bottom: 0 !important;
         z-index: 10;
@@ -119,6 +119,7 @@ page-home {
             font-size: 10px;
         }
     }
+
     .alerta-item-1 {
         display: flex;
         background-color: #eee;
@@ -165,62 +166,63 @@ page-home {
 			-webkit-box-shadow: -1px 6px 32px -1px rgba(208,208,208,0.71);
 			-moz-box-shadow: -1px 6px 32px -1px rgba(208,208,208,0.71);
 			box-shadow: -1px 6px 32px -1px rgba(208,208,208,0.71);
-        }
+    }
 
-        .close{
-            height:38px;
-        }
+    .close{
+      height:38px;
+    }
 
 		.close-box {
 			position: relative !important;
 			background-color: white;
 
 			ion-icon {
-                position: absolute;
-                top: 5px;
-                right: 15px;
-                margin: auto;
-                width: 15px;
-                height: 38px;
-                font-size: 28px;
-                color: rgba(0, 0, 0, 0.3);
-                padding: 0;
+        position: absolute;
+        top: 5px;
+        right: 15px;
+        margin: auto;
+        width: 15px;
+        height: 38px;
+        font-size: 28px;
+        color: rgba(0, 0, 0, 0.3);
+        padding: 0;
 			}
 
 			.line {
-                position: absolute;
-                top: 0;
-                height: 38px;
-                width: 1px;
-                background-color: rgba(0, 0, 0, 0.3);
-                margin: auto;
+        position: absolute;
+        top: 0;
+        height: 38px;
+        width: 1px;
+        background-color: rgba(0, 0, 0, 0.3);
+        margin: auto;
 			}
 		}
 
 	  .alerta-list {
-			position: relative;
-            top: -50px;
-            padding: 0 3%;
+      position: relative;
+      top: -50px;
+      padding: 0 3%;
 
 			.box-container-alert {
 
 				@include box-container-alert();
 
 				.img-alert {
-					height: 100%;
-					width: 100%;
-                    display: flex;
-                    align-items:center;
-                }
-                .img-alert > img{
-                    max-width:100%;
-                }
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items:center;
+        }
+
+        .img-alert > img{
+            max-width:100%;
+        }
 
 				.text {
 					padding: 10px;
 
 					p {
-						color: $gray;
+						color: $black;
 						font-size: $text_extra_big_size;
 						margin: 8px 0;
 					}
@@ -237,15 +239,21 @@ page-home {
 
 				.box-alert-2 {
 					padding: 10px 12px;
-			    	font-size: $text_extra_big_size;
+          font-size: $text_extra_big_size;
 
 					p {
 						 margin: 2px 0;
+             color: $black;
 					}
 				}
 
-
+        h5 {
+          font-weight: bold;
+          margin: 0;
+          color: $osde_darkblue;
+        }
 		  }
+
 			/*Alerta 3 y 4 --------------------------------------------------*/
 
 			.box-container-alert-two {
@@ -269,10 +277,9 @@ page-home {
 						.poll-question {
 							padding: 5px 0 5px 15%;
 							font-size: $title_size;
-							color: $gray;
+							color: $black;
 							font-weight: 300;
 						}
-
 					}
 				}
 
@@ -286,19 +293,19 @@ page-home {
 					text-align: center;
 
 					h4 {
-						color: $osde_darkblue;
-                        margin: 10px 0 2px 0;
-                        font-weight: bold;
+            color: $osde_green;
+            margin: 10px 0 2px 0;
+            font-weight: bold;
 					}
 
 					h5{
-                        color: $osde_darkblue;
-                        font-weight: bold;
+            color: $osde_darkblue;
+            font-weight: bold;
 					}
 
 					span {
-						font-size: 15px;
-						color: $gray;
+						font-size: 1.4em;
+						color: $black;
 					}
 
 					p{
@@ -371,10 +378,9 @@ page-home {
         font-size: 1.5em !important;
     }
 
-	hr.soft-line {
-		margin: 15px auto 15px auto;
+	  hr.soft-line {
+		  margin: 15px auto 15px auto;
     }
-
 
 	@media screen and (max-width: 300px){
 		.image{
@@ -386,16 +392,16 @@ page-home {
 }
 
 #encuetasItem {
-    margin-bottom: 80px !important;
+  margin-bottom: 80px !important;
 }
 
 #callLabel {
-    line-height: 30px !important;
+  line-height: 30px !important;
 }
 
 #homeFooter {
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
