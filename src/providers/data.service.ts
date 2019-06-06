@@ -1,15 +1,16 @@
-import { Observable } from 'rxjs';
-import { HomePage } from './../pages/home/home';
-import { NavController } from 'ionic-angular';
+import { Observable, observable } from 'rxjs';
+import { HomePage } from '../pages/home/home';
+import { NavController ,Nav} from 'ionic-angular';
 import { AlertService } from './alert.service';
 import { AuthService } from './auth.service';
-import { Injectable } from '@angular/core'
+import { Injectable, ViewChild } from '@angular/core'
 import {RequestOptions, Request, RequestMethod, Http, Headers, Response} from '@angular/http';
 import 'rxjs/Rx'
 import 'rxjs/add/operator/map'
 import { Subject } from 'rxjs/Subject'
 import { Utils } from './utils'
 import { Config } from '../app/config'
+import { CombineLatestOperator } from 'rxjs/internal-compatibility';
 
 
 const { API, SERVER_URL, authBody } = Config;
@@ -21,7 +22,7 @@ const authHeaders = new Headers({
 
 @Injectable()
 export class DataService {
-
+    @ViewChild(Nav) nav: Nav;
     app
 
     public telefonos = [
@@ -49,6 +50,7 @@ export class DataService {
         private utils: Utils,
         private authService: AuthService,
         private alertService : AlertService,
+        
 
     ) {
         this.authService.auth().subscribe()
@@ -343,8 +345,12 @@ export class DataService {
                         }
                         return Observable.throw(err)
                     })
-                }
-                return Observable.throw(err || 'Server error')
+                }//else if(err.status===500){
+
+                    return Observable.throw(err || 'Server error')
+                 
+                //}
+                
             })
 
         }

@@ -5,7 +5,7 @@ import { AlertService } from '../../providers/alert.service';
 import { Config } from './../../app/config';
 import { NetworkService } from './../../providers/network.service';
 import { Component } from '@angular/core';
-import { NavController, NavParams} from 'ionic-angular';
+import { NavController, NavParams, AlertController} from 'ionic-angular';
 import { SolicitudVcPage } from '../solicitud-vc/solicitud-vc';
 import { SaLocationPage } from '../sa-location/sa-location';
 import { DataService } from '../../providers/data.service';
@@ -14,6 +14,7 @@ import { Utils } from '../../providers/utils';
 import { ToastService } from '../../providers/toast.service';
 import { ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { async } from 'rxjs/internal/scheduler/async';
 /**
  * Generated class for the SolicitudAtencionPage page.
  *
@@ -51,10 +52,16 @@ export class SolicitudAtencionPage {
       public utils: Utils,
       private alertService : AlertService,
       public navParams: NavParams,
-      private cdRef:ChangeDetectorRef
+      private cdRef:ChangeDetectorRef,
+      public alertctrl: AlertController
      ){
       this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol",'Julio Cesar','Infran Emiliano','Hernan Dario','Andres Lauga' ];
-
+      
+      if(this.data.length==1){
+        //tiene que pasar con step 1
+       
+    
+      }
       let dataPage =  this.utils.getFormSolicitudAtencion();
       console.log("datos de esta sección 1: ", dataPage);
     }
@@ -102,6 +109,24 @@ export class SolicitudAtencionPage {
       } else {
         this.enable = false;
       }
+    }
+    
+    async loaderLocal(){
+      const alert = await this.alertctrl.create({
+
+        message: 'Bienvenido',
+        buttons: [
+           {
+            text: 'Continuar',
+            handler: () => {
+              console.log('Confirm Okay');
+              this.gotoPage()
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
     }
 
     getDataPartner() {

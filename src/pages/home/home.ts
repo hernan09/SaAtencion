@@ -13,6 +13,7 @@ import { VideoConsultaPage } from '../videoconsulta/videoconsulta'
 import { SolicitudVcPage } from './../solicitud-vc/solicitud-vc';
 import { SociosPage } from './../socios/socios';
 import { SolicitudAtencionPage } from './../solicitud-atencion/solicitud-atencion';
+import { SaLocationPage } from '../sa-location/sa-location';
 
 @Component({
   selector: 'page-home',
@@ -32,7 +33,7 @@ export class HomePage {
 	cid=''
 	dni=''
 	isCIDBlocked : boolean;
-
+  dataArray = [];
 	poll_options = [
 		{ value : 3, class : 'good', label : 'MUY BUENA' },
 		{ value : 2, class : 'meh', label : 'REGULAR' },
@@ -41,7 +42,7 @@ export class HomePage {
 	title = 'Inicio'
 
   btnSelection : number;
-
+  
 	constructor (
 		private ref :ChangeDetectorRef,
 		private navCtrl :NavController,
@@ -57,6 +58,8 @@ export class HomePage {
     this.utils.setFormSolicitudAtencion([],-1);
 		this.dataService.updateUsers();
 		this.checkVCStatus();
+		
+	  this.dataArray=["Incarbone Eduardo Oscar","Incarbone Maria Sol",'Julio Cesar','Infran Emiliano','Hernan Dario','Andres Lauga']
 
 		this.alertas_home = notiService.getAlertas().filter(alerta => alerta.visible == true)
 		this.alertas_home.length > 0 ? this.showHomeIcon = false : this.showHomeIcon = true
@@ -262,7 +265,8 @@ export class HomePage {
 	}
 
   gotoSA(){
-    this.navCtrl.push( SolicitudAtencionPage );
+		this.contarUser()
+			//this.navCtrl.push( SolicitudAtencionPage );
   }
 
 	goToSociosPage(){
@@ -301,6 +305,19 @@ export class HomePage {
 				this.alertService.showAlert(Config.TITLE.WARNING_TITLE, message,Config.ALERT_CLASS.ERROR_CSS);
 				this.navCtrl.setRoot(HomePage, params);
 		  })
+		}
+		 
+		contarUser(params?){
+			let sociosDNI = this.dataService.restoreUsers();
+			if(sociosDNI.length == 1){
+				let socioActual = this.dataService.restoreMisDatos(sociosDNI[0]);
+				this.dataService.validarVC(socioActual.dni, "NO").subscribe(data =>{
+					this.navCtrl.push(SaLocationPage)
+				});
+		}
+	else{
+		this.navCtrl.push(SociosPage, params);
+}
 		}
 
 		validateVCResponse(responseValidateVC,socioActual) {

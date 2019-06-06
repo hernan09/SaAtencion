@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Config } from './../../app/config';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utils } from './../../providers/utils';
@@ -9,6 +10,12 @@ import { SaConsultaPage } from '../sa-consulta/sa-consulta';
 import { SolicitudAtencionPage } from '../solicitud-atencion/solicitud-atencion';
 import { AuthService } from '../../providers/auth.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { AlertController } from 'ionic-angular';
+import { LoginPage } from '../../pages/login/login';
+import { AlertService } from '../../providers/alert.service';
+import { HomePage } from '../../pages/home/home';
+import { empty } from 'rxjs';
+import { error } from '@angular/compiler/src/util';
 /**
  * Generated class for the SaLocationPage page.
  *
@@ -36,17 +43,30 @@ export class SaLocationPage {
   validationLocation:string = "";
   selectOptions: any;
   localidades:any
-  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public dataservice:DataService,public authService :AuthService, public loading:LoadingController) {
+  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public dataservice:DataService,public authService :AuthService, public loading:LoadingController,public alertcontroler:AlertController,public alertService:AlertService) {
     let dataPage =  this.utils.getFormSolicitudAtencion();
     console.log("datos de esta sección 2: ", dataPage);
     //this.getLocation();
     this.getName();
-
-    this.dataservice.validarSA("10000080").subscribe(data=>{
-
+    //trae el dni del login para incorporarlo en el servicio de localidades
+   let datosLC= this.dataservice.getLocalStorage(Config.KEY.MIS_DATOS)
+    console.log('datoslc',datosLC.dni)
+    
+    this.dataservice.validarSA(datosLC.dni).subscribe(data=>{
       this.localidades = data.localidades
-      console.log(this.localidades)
+      if(this.localidades==""){
+        //casuistica de arreglo vacio
+       let message = Config.MSG.ADD_USER_ERROR_EMPTY;
+       this.alertService.showAlert(Config.TITLE.WE_ARE_SORRY, message,Config.ALERT_CLASS.ERROR_CSS);
+       this.navCtrl.push(HomePage)
+      }
+    },err=>{
+      console.log('err',err)
+      let message = Config.MSG.ERROR;
+      this.alertService.showAlert(Config.TITLE.WARNING_TITLE, message,Config.ALERT_CLASS.ERROR_CSS);
+      this.navCtrl.push(HomePage)
     })
+
 
     this.selectOptions = {
       title: 'Localidad',
@@ -61,6 +81,9 @@ export class SaLocationPage {
     this.getBackData();//paso: agregar getBackData => 1
     this.menu.setArrowBack(true);
   }
+
+   
+
 
   presentLoading() {
     const loader = this.loading.create({
@@ -108,7 +131,10 @@ export class SaLocationPage {
     // }
     this.utils.backPage(false);//paso: agegar backpage => 4
     this.saveData();
-    this.navCtrl.push( SaConsultaPage );
+    //this.navCtrl.push( SaConsultaPage );
+    let message = Config.MSG.TIMEOUT_ERROR;
+      this.alertService.showAlert(Config.TITLE.WE_ARE_SORRY, message,Config.ALERT_CLASS.ERROR_CSS);
+      this.navCtrl.push(HomePage)
   }
 
   saveData(){

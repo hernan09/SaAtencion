@@ -67,6 +67,7 @@ export class Config {
 		WRONG_EMAIL : 'Formato de email incorrecto',
 		SA_ADRESS : 'Médico a domicilio',
 		SA_VIDEO_CALL : 'Consulta Médica',
+		SA_LOCALIDADES:'Continuar'
 	}
 
 
@@ -112,6 +113,8 @@ export class Config {
 		DATA_SAVED: 'Los datos han sido guardados',
 		SA_CONFIRMAR_MEDICO: '¿Desea confirmar Médico a domicilio?',
 		SA_CONFIRMAR_CM: '¿Desea confirmar la video Consulta Médica?',
+		ADD_USER_ERROR_EMPTY:'Lo sentimos el servicio no esta activo por el momento',
+		SEND_LOCALIDAD:'seleccione su localidad'
 	}
 
 	public static ALERT_CLASS ={
