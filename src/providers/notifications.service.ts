@@ -94,7 +94,11 @@ export class NotificationsService {
         data: notification.payload.additionalData,
         androidNotificationId: notification.payload.notificationID
       };
-      console.log("Notification Received:", noti);
+      console.log("Notification Received:", noti.data.borrarAnteriores == "S");
+      if(noti.data.borrarAnteriores == "S"){
+        console.log("=>Oculta notificaciones!!")
+        this.hideNotifications();
+      }
       this.newNotification(noti);
 
       const isVideoConsulta = noti.data.tipoAtencion == "6";
