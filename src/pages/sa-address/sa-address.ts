@@ -12,7 +12,7 @@ import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
 import { SaQuestionSymptomPage } from '../sa-question-symptom/sa-question-symptom';
 
 import { ChangeDetectorRef } from '@angular/core';
-import { popapsCont } from '../../providers/poapCont';
+// import { popapsCont } from '../../providers/poapCont';
 
 
 @IonicPage()
@@ -37,7 +37,7 @@ export class SaAddressPage {
   backSection:any;
 
   localidades:any
-  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public alertcontroller:AlertController,public popapsCont:popapsCont) {
+  constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public alertcontroller:AlertController) {
 
     this.getAddress();
     this.getName();
@@ -143,9 +143,10 @@ export class SaAddressPage {
   }
 
   async presentAlertConfirm() {
-    this.popapsCont.contadorPopaps++;
-    if(this.popapsCont.contadorPopaps>=2){
-      console.log("ya agrego 2 sintomas")
+    // this.popapsCont.contadorPopaps++;
+    if(false){
+    // if(this.popapsCont.contadorPopaps>=2){
+      // console.log("ya agrego 2 sintomas")
     }else{
       const alert = await this.alertcontroller.create({
 
@@ -167,9 +168,9 @@ export class SaAddressPage {
           }
         ]
       });
-  
+
       await alert.present();
     }
-   
+
   }
 }

@@ -7,7 +7,7 @@ import { NavigatorPage } from './../navigator/navigator';
 import { Config } from './../../app/config';
 import { AlertService } from './../../providers/alert.service';
 import { AlertController } from 'ionic-angular';
-import { HomePage } from '../home/home';
+import { HomePage } from '../home/home'; 
 import { Utils } from './../../providers/utils';
 /**
  * Generated class for the SaServiciosPage page.

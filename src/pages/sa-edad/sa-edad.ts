@@ -6,7 +6,7 @@ import { SaAddressPage } from '../sa-address/sa-address';
 import { SaTiempoPage } from '../sa-tiempo/sa-tiempo';
 import { SaConsultaPage } from '../sa-consulta/sa-consulta';
 import { SaQuestionSymptomPage } from '../sa-question-symptom/sa-question-symptom';
-import { NavigatorPage } from './../navigator/navigator';
+import { NavigatorPage } from './../navigator/navigator'; 
 import { Utils } from './../../providers/utils';
 import { ChangeDetectorRef } from '@angular/core';
 /**

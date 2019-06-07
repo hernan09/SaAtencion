@@ -111,6 +111,9 @@ export class Config {
 		SOLICITUD_VC_ERROR: "No es posible utilizar el servicio de Video Consulta en este momento. Comunicate con nosotros de la manera tradicional.",
 		ALERT_CLEANER : 'Se va a eliminar la alerta. ¿Desea continuar?',
 		DATA_SAVED: 'Los datos han sido guardados',
+		SA_CONFIRMAR_MEDICO: '¿Desea confirmar Médico a domicilio?',
+		SA_CONFIRMAR_CM: '¿Desea confirmar la video Consulta Médica?',
+		ADD_USER_ERROR_EMPTY:'Lo sentimos el servicio no esta activo por el momento',
 	}
 
 	public static ALERT_CLASS ={

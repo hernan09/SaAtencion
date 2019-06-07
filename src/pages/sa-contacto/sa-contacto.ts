@@ -8,7 +8,7 @@ import { SolicitudAtencionPage } from '../solicitud-atencion/solicitud-atencion'
 import { SaAddressPage } from '../sa-address/sa-address';
 import { ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Config } from './../../app/config';
+import { Config } from './../../app/config'; 
 import { AlertService } from './../../providers/alert.service';
 
 import { ChangeDetectorRef } from '@angular/core';

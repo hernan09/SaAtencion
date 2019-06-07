@@ -6,7 +6,7 @@ import { NavigatorPage } from './../navigator/navigator';
 import { Config } from './../../app/config';
 import { AlertService } from './../../providers/alert.service';
 import { HomePage } from '../home/home';
-/**
+/** 
  * Generated class for the SaResumenPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on

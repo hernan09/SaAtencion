@@ -6,7 +6,7 @@ import { SaAddressPage } from '../sa-address/sa-address';
 import { SaEdadPage } from '../sa-edad/sa-edad';
 import { NavigatorPage } from './../navigator/navigator';
 import { Utils } from './../../providers/utils';
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core'; 
 /**
  * Generated class for the SaQuestionSymptomPage page.
  *

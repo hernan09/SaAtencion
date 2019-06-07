@@ -7,7 +7,7 @@ import { NetworkService } from './../../providers/network.service';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController} from 'ionic-angular';
 import { SolicitudVcPage } from '../solicitud-vc/solicitud-vc';
-import { SaLocationPage } from '../sa-location/sa-location';
+import { SaLocationPage } from '../sa-location/sa-location'; 
 import { DataService } from '../../providers/data.service';
 import { HomePage } from '../home/home';
 import { Utils } from '../../providers/utils';

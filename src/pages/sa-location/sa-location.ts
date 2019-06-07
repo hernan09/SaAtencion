@@ -16,7 +16,7 @@ import { AlertService } from '../../providers/alert.service';
 import { HomePage } from '../../pages/home/home';
 import { empty } from 'rxjs';
 import { error } from '@angular/compiler/src/util';
-/**
+/** 
  * Generated class for the SaLocationPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on

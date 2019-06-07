@@ -225,7 +225,7 @@ export class SaConsultaPage  {
 
   gotoPage(valueSymptom){
 
-    this.utils.backPage(false);
+    this.utils.backPage(false);  
 
     this.saveData();
 

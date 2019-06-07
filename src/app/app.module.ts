@@ -46,7 +46,7 @@ import { SaResumenPage } from './../pages/sa-resumen/sa-resumen';
 import { SaQuestionSymptomPage } from './../pages/sa-question-symptom/sa-question-symptom';
 import { SaLocationPage } from './../pages/sa-location/sa-location';
 import { SaAddressPage } from './../pages/sa-address/sa-address';
-import { popapsCont } from '../providers/poapCont';
+// import { popapsCont } from '../providers/poapCont';
 // services
 import { AuthService } from '../providers/auth.service'
 import { DataService } from '../providers/data.service'
@@ -164,11 +164,12 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     AlertBuilder,
     VideoConsultaService,
     Keyboard,
-    popapsCont,
     AndroidPermissions,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 
 })
+
+
 
 export class AppModule {}
