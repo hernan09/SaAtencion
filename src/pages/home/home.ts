@@ -60,11 +60,10 @@ export class HomePage {
 
 		this.alertas_home = notiService.getAlertas().filter(alerta => alerta.visible == true)
 		this.alertas_home.length > 0 ? this.showHomeIcon = false : this.showHomeIcon = true
-
+    console.log("=> alertas: ", this.alertas_home);
 		this.videoconsulta = !!utils.getItem('cid')
 		this.cid = navParams.get('cid') || utils.getItem('cid') || 'test'
 		this.dni = navParams.get('dni') || utils.getItem('dni') || this.utils.getActiveUser();
-
 
 		notiService.alertasChange.subscribe(alertas => {
 			console.log("Recibo alertas actualizadas");
@@ -76,7 +75,6 @@ export class HomePage {
 		events.subscribe('vcStatus', (data) => {
 			this.isCIDBlocked = data;
 		 });
-
 
 		setTimeout(_ => {
 			this.checkIfVCBlocked();
@@ -194,7 +192,6 @@ export class HomePage {
 
 		let alert = this.alertService.showOptionAlert(Config.TITLE.WARNING_TITLE, Config.MSG.ALERT_CLEANER, Config.ALERT_OPTIONS.ACEPTAR, Config.ALERT_OPTIONS.CANCELAR, Config.ALERT_CLASS.ERROR_CSS);
 
-
 		alert.onDidDismiss(res => {
 			if (res != false) {
 				this.notiService.hideAlertById(alerta.androidNotificationId);
@@ -229,7 +226,6 @@ export class HomePage {
 	ionViewWillLeave() {
 		this.checkVCStatus();
 	}
-
 
 	closePoll() {
 		const poll = this.alertas_home.slice(-1)[0].poll
