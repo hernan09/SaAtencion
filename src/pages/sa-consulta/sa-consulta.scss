@@ -3,16 +3,27 @@ page-sa-consulta {
     margin-bottom: 10px !important;
   }
 
+  .is-invalid {
+    border-color: red !important;
+    border-bottom: 2px solid red !important;
+  }
+
+  .is-valid {
+    border-color: green !important;
+    border-bottom: 2px solid green !important;
+  }
+
   .title {
     text-align: center;
     font-size: $title_size;
+    color: #1f4f9a;
   }
 
   .sub-title {
     text-align: center;
     font-size: $text_extra_big_size;
     margin: 5px;
-    font-weight: 200;
+    font-weight: 400;
   }
 
   .padding {
@@ -24,8 +35,14 @@ page-sa-consulta {
     bottom: -46px;
   }
 
+  .border {
+    margin-bottom: 5%;
+  }
+
   .container-select {
-    margin-bottom: 20%;
+    margin-bottom: 10%;
+    position: relative;
+
     ion-label {
       margin: 0;
       font-size: $text_regular_size;
@@ -33,10 +50,162 @@ page-sa-consulta {
     }
 
     ion-select {
-      max-width: 300px;
+      max-width: 100%;
       padding-left: 0;
       border-bottom: 1px solid black;
     }
   }
 
+  .label-text {
+    color: black;
+  }
+
+  .text-input::-moz-placeholder {
+    color: black;
+  }
+
+  .text-input:-ms-input-placeholder {
+    color: black;
+  }
+
+  .text-input::-webkit-input-placeholder {
+    text-indent: 0;
+    color: black;
+  }
+
+  .is-invalid {
+    border-color: red !important;
+    border-bottom: 2px solid red !important;
+  }
+
+  .is-valid {
+    border-color: green !important;
+    border-bottom: 2px solid green !important;
+  }
+
+  .box-warning{
+    height: 100px;
+    border: 1px solid #ecebeb;
+    border-radius: 5px;
+    -webkit-box-shadow: 8px 9px 10px -5px #dadada;
+    box-shadow: 8px 9px 10px -5px #dadada;
+
+    .img-warning {
+      height: 100%;
+      width: 100%;
+      height: 75px;
+      background-image: url(../assets/img/medicator_demora.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+    p {
+      font-size: $text_regular_size;
+      margin: 10% 0%;
+    }
+  }
+
+  .position-call {
+    position: relative;
+    top: 32px;
+  }
+
+  .description-symptom {
+    height: 52px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+
+  }
+
+  .count {
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 4px;
+  }
+
+  .box-data-container {
+    position: relative;
+    margin-bottom: 5px;
+  }
+  #ionselect{
+    width: 60%;
+    margin: auto;
+  }
+  .data-select{
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 5px;
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    background: white;
+    color: black;
+    z-index: 99999999;
+    font-size: 1.5em;
+
+    div {
+      padding: 10px 0;
+      border-bottom: 1px solid grey;
+    }
+    .close-prediction {
+      text-align: right;
+      padding-right: 5%;
+      color: $osde_blue;
+    }
+  }
+
+  .searchbar-search-icon{
+    display: none;
+  }
+  .searchbar-md .searchbar-input{
+    padding: 0;
+  }
+
+  .btn-more-symtom {
+    margin-top: 10%;
+    border: 1px solid grey;
+    padding: 12px;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 1.2em;
+
+    ion-icon {
+      color:green;
+      margin-right: 3%;
+      position: relative;
+      top: 2px;
+      font-size: 16px;
+    }
+  }
+
+  .user-cesar {
+
+    textarea {
+      width: 100%;
+      height: 54px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid grey;
+      padding-left:  10px
+    }
+
+  }
+
+  .form-control {
+    -webkit-transition: top 2s; /* Safari */
+    transition: top 2s;
+  }
+  .box-container{
+    height: 320px;
+  }
+  .top-search {
+    position: relative;
+    top: -200px;
+  }
+
+  .initial-search {
+    position: initial;
+    top: 0px;
+  }
 }

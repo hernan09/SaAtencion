@@ -4,70 +4,137 @@
 
 </ion-header>
 
-<ion-content  >
+<ion-content >
 
   <div class="header header-rectangular-container"></div>
   <div class="box-container">
 
     <div class="image img-url"></div>
-    <h3 class="title">Incarbone Eduardo Oscar</h3>
-    <h5 class="sub-title">Datos de Contacto</h5>
+    <h3 class="title" *ngFor="let item of socio" >{{item}}</h3>
+    <h5 class="sub-title">Datos de Socio</h5>
 
     <hr class="soft-line soft-line-black">
 
     <form class="container" [formGroup]="profileForm" (ngSubmit)="getDataContact()">
 
-      <ion-grid>
-        <ion-row>
+      <!-- <div class="box-tel" > -->
+      <div class="box-tel" [hidden]="telDataSelect == 'Otro'">
 
-          <ion-col col-2>
-            <label for="" class="label-input-number">0</label>
-          </ion-col>
+          <div class="form-control" >
 
-          <ion-col col-3>
-            <div class="form-control padding">
-                <input value="" type="number"  [(ngModel)]="prefijo" formControlName="cod" (keyup)="validatePrefijoNumber(prefijo, 4)" onkeyup="this.setAttribute('value', this.value);" id="cod" class="input-text input-user">
-                <label class="label-text" >Cod</label>
-            </div>
-          </ion-col>
-
-          <ion-col col-2>
-            <label for="" class="label-input-number">- 15</label>
-          </ion-col>
-
-          <ion-col col-5>
-            <div class="form-control padding">
-                <input value="" type="number" [(ngModel)]="tel" formControlName="tel" (keyup)="validateTelNumber(tel, 8)" onkeyup="this.setAttribute('value', this.value);"  id="tel" class="input-text input-user">
-                <label class="label-text" >Tel</label>
-            </div>
-          </ion-col>
-
-        </ion-row>
-      </ion-grid>
-
-      <div class="form-control">
-          <input value="" type="text"  formControlName="email" onkeyup="this.setAttribute('value', this.value);"  id="email" class="input-text input-user">
-          <label class="label-text" >Email</label>
+              <div class="container-select">
+                <ion-label>Tel</ion-label>
+                <ion-select
+                formControlName="telSelect"
+                [selectOptions]="telTitle"
+                 [(ngModel)]="telDataSelect"
+                 okText="Aceptar"
+                 cancelText="Cancelar"
+                 placeholder="Seleccionar Telefono"
+                [ngClass]="{ 'is-invalid': f.telSelect.errors && f.telSelect.touched,'is-valid': f.telSelect.touched && f.telSelect.valid ||  f.telSelect.valid }"
+                 >
+                  <ion-option *ngFor="let dataTel of telSelect" value="{{dataTel}}" >{{dataTel}}</ion-option>
+                </ion-select>
+              </div>
+          </div>
       </div>
 
-      <div class="form-control">
+      <!--  INICIO-->
+      <ion-grid *ngIf="telDataSelect == 'Otro'">
+        <ion-row>
+
+           <ion-col col-2>
+             <label for="" class="label-input-number">0</label>
+           </ion-col>
+
+           <ion-col col-3>
+             <div class="form-control padding">
+                   <!-- (value)="prefijo ? prefijo : '' " (focusout)="getValueInput(prefijo)" -->
+                 <input
+                   id="cod"
+                   [value]="prefijo"
+                   type="number"
+                   [ngClass]="{ 'is-invalid': codValidateFinal < 2 ,
+                                'is-valid': codValidateFinal >= 2  }"
+                   [(ngModel)]="prefijo"
+                   formControlName="cod"
+                   (keyup)="validatePrefijoNumber(prefijo, 4)"
+                   onkeyup="this.setAttribute('value', this.value);"
+                   class="input-text input-user"
+                 >
+
+                 <label class="label-text"
+                        [ngClass]="{ 'back-value-option' : backDataCod }" for="cod" >Código</label>
+             </div>
+           </ion-col>
+
+           <ion-col col-2>
+             <label for="" class="label-input-number">- 15</label>
+           </ion-col>
+
+           <ion-col col-5>
+             <div class="form-control padding">
+                 <input
+                   id="tel"
+                   [value]="tel"
+                   type="number"
+                   [(ngModel)]="tel"
+                   [ngClass]="{ 'is-invalid': telValidateFinal < 6,'is-valid': telValidateFinal >= 6 }"
+                   formControlName="tel"
+                   (keyup)="validateTelNumber(tel, 8)"
+                   onkeyup="this.setAttribute('value', this.value);"
+                   class="input-text input-user">
+                 <label class="label-text"
+                        [ngClass]="{ 'back-value-option' : telAnimation }"  for="tel">Teléfono</label>
+             </div>
+           </ion-col>
+
+         </ion-row>
+       </ion-grid>
+
+      <!--  FIN-->
+
+      <!-- <div class="form-control" > -->
+      <div class="form-control" *ngIf="emailShow != 'Otro'">
         <div class="container-select">
-          <ion-label>Localidad</ion-label>
-          <ion-select [selectOptions]="selectOptions"   formControlName="location" okText="Aceptar" cancelText="Cancelar"  placeholder="Seleccionar">
-            <ion-option *ngFor="let dataLocation of location" value="{{dataLocation}}" >{{dataLocation}}</ion-option>
+          <ion-label>Email</ion-label>
+          <ion-select
+          [selectOptions]="emailTitle"
+          [(ngModel)]="emailShow"
+          formControlName="emailList"
+          okText="Aceptar"
+          cancelText="Cancelar"
+          placeholder="Seleccionar el Email del socio a atender"
+          [ngClass]="{ 'is-invalid': f.emailList.errors && f.emailList.touched,'is-valid': f.emailList.touched && f.emailList.valid  ||  f.emailList.valid  }"
+          >
+            <ion-option *ngFor="let dataEmail of emailList" value="{{dataEmail}}" >{{dataEmail}}</ion-option>
           </ion-select>
         </div>
       </div>
 
-      <div class="form-control">
-          <input value="" type="text" id="direction"  formControlName="direction"  onkeyup="this.setAttribute('value', this.value);"  class="input-text input-user">
-          <label class="label-text" >Dirección</label>
+      <div class="form-control email-valid" *ngIf="emailShow == 'Otro'">
+        <input
+         id="email"
+         [value]="otherEmail"
+         type="text"
+         formControlName="email"
+         [(ngModel)]="otherEmail"
+         onkeyup="this.setAttribute('value', this.value);"
+         class="input-text input-user"
+
+         >
+         <!-- [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched && otherEmail.length > 0,'is-valid': f.email.touched && f.email.valid && otherEmail.length > 0 ||  f.email.valid && otherEmail.length > 0 }" -->
+        <label class="label-text"
+               [ngClass]="{ 'back-value-option' : emailAnimation || emailShow != 'Otro'}" for="email">Email</label>
       </div>
 
-      <button type="submit" class="btn btn-light" [disabled]="!profileForm.valid">
+
+      <button *ngIf="emailShow != 'Otro'" type="submit"  class="btn btn-light" [disabled]="!profileForm.valid ">
         Continuar
       </button>
-
+      <button *ngIf="emailShow == 'Otro'"  type="submit"  class="btn btn-light">
+        Continuar
+      </button>
     </form>
   </div>
 

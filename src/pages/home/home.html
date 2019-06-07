@@ -180,9 +180,22 @@
 
 <ion-footer id="homeFooter" *ngIf="showHomeIcon">
 	<hr class="soft-line soft-line-black">
-	<a (click)="goToSociosPage()">
-		<button mode="md" ion-button full icon-start class="btn btn-blue">
-			Solicitar video consulta
+	<a (click)="gotoSA()">
+		<button ion-button full icon-start class="btn btn-green">
+			<ion-icon name="ios-briefcase-outline"></ion-icon>
+			<label>Solicitar Médico a Domicilio</label>
 		</button>
 	</a>
+	<a (click)="goToSociosPage()">
+		<button ion-button full icon-start class="btn btn-blue">
+			<ion-icon name="ios-videocam-outline"></ion-icon>
+			<label>Solicitar Video Consulta</label>
+		</button>
+	</a>
+	<!-- <a href="tel:{{telefono}}" (click)="nextPhoneNumber()" >
+		<button ion-button full icon-start class="btn btn-green margin-bottom-btn">
+			<ion-icon name="call"></ion-icon>
+			<label>Contactate telefónicamente</label>
+		</button>
+	</a> -->
 </ion-footer>

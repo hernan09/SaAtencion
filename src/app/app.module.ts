@@ -41,7 +41,7 @@ import { SaContactoPage } from './../pages/sa-contacto/sa-contacto';
 import { SaConsultaPage } from './../pages/sa-consulta/sa-consulta';
 import { SaTiempoPage } from './../pages/sa-tiempo/sa-tiempo';
 import { SaServiciosPage } from './../pages/sa-servicios/sa-servicios';
-
+import { popapsCont } from '../providers/poapCont';
 // services
 import { AuthService } from '../providers/auth.service'
 import { DataService } from '../providers/data.service'
@@ -149,6 +149,7 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     AlertBuilder,
     VideoConsultaService,
     Keyboard,
+    popapsCont,
     AndroidPermissions,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

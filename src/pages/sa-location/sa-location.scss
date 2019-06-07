@@ -1,4 +1,4 @@
-page-sa-contacto {
+page-sa-location {
   .scroll-content > *:last-of-type  {
     margin-bottom: 10px !important;
   }
@@ -41,10 +41,6 @@ page-sa-contacto {
     margin-bottom: -77px;
   }
 
-  ion-item {
-    padding-left: 0 !important;
-  }
-
   .container-select {
     margin-bottom: 50px;
     position: relative;
@@ -63,23 +59,6 @@ page-sa-contacto {
       border-bottom: 2px solid black;
     }
   }
-  input.input-text[type="number"]{
-      font-size:$text_regular_size;
-  }
-  .grid{
-    margin-bottom:5px;
-  }
-  .grid,.col{
-    padding:0;
-  }
-
-  .col{
-    font-size:$text_extra_big_size;
-  }
-
-  ion-row > ion-col:nth-child(1),ion-row > ion-col:nth-child(3){
-    text-align:center;
-  }
 
   .is-invalid {
     border-color: red !important;
@@ -89,8 +68,4 @@ page-sa-contacto {
     border-color: green !important;
     border-bottom: 2px solid green !important;
   }
-
-  // .label-text {
-  //   color: black;
-  // }
 }

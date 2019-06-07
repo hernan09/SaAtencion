@@ -1,4 +1,4 @@
-<ion-header [ngClass]="{'transition-focus': addClassTransition}">
+<ion-header >
 
   <div class="header-circle-container">
       <div class="div-inner"><div class="login-logo"></div></div>
@@ -6,7 +6,7 @@
 
 </ion-header>
 
-<ion-content padding  [ngClass]="{'transition-focus': addClassTransition}">
+<ion-content padding >
 
   <div class="login">
 
@@ -40,6 +40,6 @@
 
   </div>
 
-  <div class="login-footer" [ngClass]="addClassTransition? 'hide-version' : 'show-version'" *ngIf="!newMember">Versión {{version}}</div>
+  <div class="login-footer" *ngIf="!newMember">Versión {{version}}</div>
 
 </ion-content>

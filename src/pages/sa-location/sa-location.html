@@ -1,0 +1,48 @@
+<ion-header>
+
+  <page-navigator [title]="title"></page-navigator>
+
+</ion-header>
+
+<ion-content >
+
+  <div class="header header-rectangular-container"></div>
+  <div class="box-container">
+
+    <div class="image img-url"></div>
+    <h3 class="title" *ngFor="let item of socio" >{{item}}</h3>
+
+    <hr class="soft-line soft-line-black">
+
+    <form class="container" [formGroup]="profileForm" (ngSubmit)="getDataContact()">
+      <div class="form-control">
+        <div class="container-select">
+          <ion-label>Localidad</ion-label>
+          <ion-select
+           
+           [selectOptions]="selectOptions"
+           [(ngModel)]="validationLocation"
+           formControlName="location"
+           okText="Aceptar"
+           cancelText="Cancelar"
+           placeholder="Seleccionar Localidad de Atención"
+           [ngClass]="{ 'is-valid':true}"
+           >
+
+           <!--[ngClass]="{ 'is-invalid': f.location.errors && f.location.touched,'is-valid': f.location.touched && f.location.valid ||  f.location.valid }"
+           -->
+           <!--let dataLocation of location  -->
+            <ion-option *ngFor="let localidad of localidades " value="{{localidad.codigoPostal}}">{{localidad.localidad}}</ion-option>
+          </ion-select>
+
+        </div>
+
+      </div>
+
+      <button type="submit"  class="btn btn-light" [disabled]="!profileForm.valid ">
+        Continuar
+      </button>
+    </form>
+  </div>
+
+</ion-content>

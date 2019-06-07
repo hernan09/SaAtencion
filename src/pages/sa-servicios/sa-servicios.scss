@@ -2,14 +2,15 @@ page-sa-servicios {
 
   .title {
     text-align: center;
-    font-size: $text_regular_size;
+    font-size: $title_size;
+    color: #1f4f9a;
   }
 
   .sub-title {
     text-align: center;
     font-size: $text_extra_big_size;
     margin: 5px;
-    font-weight: 200;
+    font-weight: 400;
   }
 
   .scroll-content > *:last-of-type {
@@ -22,21 +23,34 @@ page-sa-servicios {
   }
 
   .box-service {
+    height: 140px;
     border: 1px solid #ecebeb;
     border-radius: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 26px;
     -webkit-box-shadow: 8px 9px 10px -5px rgba(218,218,218,1);
     -moz-box-shadow: 8px 9px 10px -5px rgba(218,218,218,1);
     box-shadow: 8px 9px 10px -5px rgba(218,218,218,1);
   }
 
   .box-option {
+
+    h5 {
+      height: 23px;
+      width: 100%;
+      padding-top: 14px;
+      margin: 0;
+      /* text-align: left; */
+      /* padding-left: 10px; */
+      color: green;
+    }
+
     .image-service{
       height: 100%;
       width: 100%;
+      height: 70px;
       background-position: center;
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: contain;
     }
 
     .image-url{
@@ -44,17 +58,24 @@ page-sa-servicios {
     }
 
     label{
-      font-size: $text_small_size;
+      font-size: $text_big_size !important;
       color: gray;
     }
 
     p{
-      font-size: $text_regular_size;
+      font-size: $text_big_size !important;
     }
 
-    .time{
-      margin-top: $title_size;
+    .space {
+      margin-top: 10px;
     }
+
+    // .time{
+    //   // margin-top: $title_size;
+    //   p {
+    //     margin-top: 5px;
+    //   }
+    // }
   }
 
   .box-ambulance{

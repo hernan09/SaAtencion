@@ -1,0 +1,83 @@
+<ion-header>
+
+  <page-navigator [title]="title"></page-navigator>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="header header-rectangular-container"></div>
+
+  <div class="box-container">
+
+      <ion-list >
+        <div class="image img-url"></div>
+
+        <h3 class="title" *ngFor="let item of socio" >{{item}}</h3>
+
+        <h5 class="sub-title">Revisa que tus datos estén correctos</h5>
+
+        <hr class="soft-line soft-line-black">
+
+        <ion-grid>
+          <ion-row>
+            <ion-col class="col-izq"><h5 class="display-inline nro-socio">Nro. de socio: </h5></ion-col>
+            <ion-col class="col-der">62 710433 8 01</ion-col>
+          </ion-row>
+          <ion-row *ngIf="telDataSelect != 'Otro'">
+            <ion-col class="col-izq"><h5>Tel: </h5></ion-col>
+            <ion-col class="col-der">{{telDataSelect}}</ion-col>
+          </ion-row>
+          <div *ngIf="telDataSelect == 'Otro'">
+            <ion-row>
+              <ion-col class="col-izq"><h5>Código: </h5></ion-col>
+              <ion-col class="col-der">0{{cod}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="col-izq"><h5>Teléfono: </h5></ion-col>
+              <ion-col class="col-der">15 - {{tel}}</ion-col>
+            </ion-row>
+          </div>
+
+          <ion-row *ngIf="email == 'Otro'">
+            <ion-col class="col-izq"><h5>Email: </h5></ion-col>
+            <ion-col class="col-der">{{email}}</ion-col>
+          </ion-row>
+          <ion-row *ngIf="emailList != 'Otro'">
+            <ion-col class="col-izq"><h5>Email: </h5></ion-col>
+            <ion-col class="col-der">{{emailList}}</ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col class="col-izq"><h5>Localidad: </h5></ion-col>
+            <ion-col class="col-der">{{location}}</ion-col>
+          </ion-row>
+          <!-- <ion-row *ngIf="addressList != ''">
+            <ion-col class="col-izq"><h5>Dirección: </h5></ion-col>
+            <ion-col class="col-der">{{addressList}}</ion-col>
+          </ion-row> -->
+          <ion-row *ngIf="direction != ''">
+            <ion-col class="col-izq"><h5>Dirección: </h5></ion-col>
+            <ion-col class="col-der">{{direction}}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col class="col-izq"><h5>Sintoma: </h5></ion-col>
+            <ion-col class="col-der">{{symptom}}</ion-col>
+          </ion-row>
+          <div class="description" *ngIf="description">
+            <div ><h5>Descripción del Sintoma</h5></div>
+            <div class="info">{{description}}</div>
+          </div>
+          <ion-row *ngIf="time != ''">
+            <ion-col class="col-izq"><h5>Edad: </h5></ion-col>
+            <ion-col class="col-der">{{time}}</ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <button  (click) = "showAlertAdress(videoConsulta)" class="btn btn-light position-btn">
+          Finalizar
+        </button>
+
+     </ion-list>
+  </div>
+</ion-content>

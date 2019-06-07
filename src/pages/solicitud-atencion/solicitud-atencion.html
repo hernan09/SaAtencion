@@ -13,26 +13,38 @@
 
       <ion-list radio-group >
 
-        <h3 class="title">Seleccione el Socio</h3>
+        <h3 class="title">Seleccione el Socio para el cual se solicita el Médico</h3>
         <hr class="soft-line soft-line-black">
 
-        <form  [formGroup]="profileForm" (ngSubmit)="getDataPartner()">
+        <!-- <div  class="tycs" >
+          <ion-checkbox (click)="btnValidate()" [(ngModel)]="tycs1"></ion-checkbox>
+          <div class="user-name"> Incarbone Eduardo Oscar  </div>
+        </div>
+        <div  class="tycs" >
+          <ion-checkbox (click)="btnValidate()"  [(ngModel)]="tycs2"></ion-checkbox>
+          <div class="user-name"> Incarbone Maria Sol  </div>
+        </div> -->
 
-          <div radio-group formControlName="partner">
 
-            <ion-item *ngFor="let user of data" >
+        <form  [formGroup]="profileForm" (ngSubmit)="getDataPartner()" >
+
+          <div radio-group formControlName="partner" [(ngModel)]="radio">
+
+            <ion-item *ngFor="let user of allName" >
               <ion-label>{{user}}</ion-label>
               <ion-radio [value]="user"></ion-radio>
             </ion-item>
 
           </div>
 
-          <button type="submit" class="btn btn-light" [disabled]="!profileForm.valid">
+          <button id="btnpartner" type="submit" class="btn btn-light" [disabled]="!profileForm.valid">
             Continuar
           </button>
 
         </form>
-
+        <!-- <button (click)="getDataPartner()" class="btn btn-light" [disabled]="!enable">
+          Continuar
+        </button> -->
       </ion-list>
 
     </div>

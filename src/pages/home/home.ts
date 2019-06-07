@@ -270,6 +270,18 @@ export class HomePage {
 
 	}
 
+  gotoSA(params){
+    let sociosDNI = this.dataService.restoreUsers();
+    //let socioActual = this.dataService.restoreMisDatos(sociosDNI[0])
+    console.log('=>sociosDNI',sociosDNI);
+    if(sociosDNI.length == 1){
+      this.navCtrl.push(SaLocationPage,{'dni':sociosDNI});
+    }
+    else{
+      this.navCtrl.push(SolicitudAtencionPage,{'dni':sociosDNI});
+    }
+  }
+
   oneUserVC(sociosDNI,params){
      let socioActual = this.dataService.restoreMisDatos(sociosDNI[0]);
      this.dataService.validarVC(socioActual.dni, "NO").subscribe(
