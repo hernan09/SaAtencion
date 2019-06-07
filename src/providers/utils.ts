@@ -121,6 +121,54 @@ export class Utils {
     }
   }
 
+  /*Solicitud de Atencion*/
+
+  setFormSolicitudAtencion(data, position) {
+    console.log("*******************AGREGADO data: ",data);
+    if(position != -1)
+      this.dataFormSA.push(data);
+    else
+      this.dataFormSA = [];
+    // console.log("=> Agregado: ",this.dataFormSA);
+    // if(position != -1){
+    //
+    //
+    //   if(this.dataFormSA.length < position){
+    //     this.dataFormSA.push(data);
+    //     console.log("agregado: ",this.dataFormSA);
+    //   } else{
+    //     this.dataFormSA[position] = data;
+    //     console.log("editado: ",this.dataFormSA);
+    //   }
+    // }
+    // else{
+    //   this.dataFormSA = [];
+    // }
+  }
+
+  getOldFormSolicitudAtencion(){
+    return this.oldDataFormSA;
+  }
+
+  deleteDataFormSolicitudAtencion(){
+    console.log("*******************ELIMINADO data");
+    this.dataFormSA.pop();
+  }
+
+  getFormSolicitudAtencion(){
+    return this.dataFormSA;
+  }
+
+  backPage(data){
+    this.backPageSA = data;
+  }
+
+  getBackPage(){
+    return this.backPageSA;
+  }
+
+  /*------------------------*/
+
 }
 
 
