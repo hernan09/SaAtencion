@@ -54,7 +54,7 @@ private checkAndRequestPermissions(permission: string){
       console.log("login service - login:  New User: ",this.utils.getActiveUser())
       this.dataService.addUser(dni, true); // true = noupdate
       this.utils.setTitular(dni);
-    } else {
+    } else { 
 
       if (activeUser) {
         //se agrega un nuevo socio
