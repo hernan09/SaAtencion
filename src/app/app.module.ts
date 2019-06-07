@@ -41,6 +41,11 @@ import { SaContactoPage } from './../pages/sa-contacto/sa-contacto';
 import { SaConsultaPage } from './../pages/sa-consulta/sa-consulta';
 import { SaTiempoPage } from './../pages/sa-tiempo/sa-tiempo';
 import { SaServiciosPage } from './../pages/sa-servicios/sa-servicios';
+import { SaEdadPage } from './../pages/sa-edad/sa-edad';
+import { SaResumenPage } from './../pages/sa-resumen/sa-resumen';
+import { SaQuestionSymptomPage } from './../pages/sa-question-symptom/sa-question-symptom';
+import { SaLocationPage } from './../pages/sa-location/sa-location';
+import { SaAddressPage } from './../pages/sa-address/sa-address';
 import { popapsCont } from '../providers/poapCont';
 // services
 import { AuthService } from '../providers/auth.service'
@@ -82,7 +87,12 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     SaContactoPage,
     SaConsultaPage,
     SaTiempoPage,
-    SaServiciosPage
+    SaServiciosPage,
+    SaEdadPage,
+    SaResumenPage,
+    SaQuestionSymptomPage,
+    SaLocationPage,
+    SaAddressPage
   ],
 
   entryComponents: [
@@ -107,7 +117,12 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     SaContactoPage,
     SaConsultaPage,
     SaTiempoPage,
-    SaServiciosPage
+    SaServiciosPage,
+    SaEdadPage,
+    SaResumenPage,
+    SaQuestionSymptomPage,
+    SaLocationPage,
+    SaAddressPage
   ],
 
   imports: [

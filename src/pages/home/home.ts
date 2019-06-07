@@ -4,6 +4,9 @@ import { VideoConsultaService } from './../../providers/video.consulta.service';
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core'
 import { NavController, NavParams, Content } from 'ionic-angular'
 
+import { SolicitudAtencionPage } from './../solicitud-atencion/solicitud-atencion';
+import { SaLocationPage } from '../sa-location/sa-location';
+
 import { NotificationsService } from '../../providers/notifications.service'
 import { DataService } from '../../providers/data.service'
 import { Utils } from '../../providers/utils'
