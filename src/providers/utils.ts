@@ -16,6 +16,9 @@ export class Utils {
 
 	notificationsCounter :any
 	notificationsCounterChange :Subject<number> = new Subject<number>()
+  dataFormSA: any = [];
+  oldDataFormSA: any = [];
+  backPageSA:boolean = false;
 
   constructor(
     public alertCtrl :AlertController,
@@ -168,10 +171,7 @@ export class Utils {
   }
 
   /*------------------------*/
-
 }
-
-
 
 export const DUMMY_NOTIS = [{
   title: 'Nueva Solicitud',
