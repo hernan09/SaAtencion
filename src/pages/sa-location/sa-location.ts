@@ -16,7 +16,7 @@ import { AlertService } from '../../providers/alert.service';
 import { HomePage } from '../../pages/home/home';
 import { empty } from 'rxjs';
 import { error } from '@angular/compiler/src/util';
-/** 
+/**
  * Generated class for the SaLocationPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
@@ -79,7 +79,7 @@ export class SaLocationPage {
     let datosLC= this.dataservice.getLocalStorage(Config.KEY.MIS_DATOS)
     console.log('datoslc',datosLC.dni)
 
-    this.dataservice.validarSA('10000080').subscribe(data=>{
+    this.dataservice.validarSA(datosLC.dni).subscribe(data=>{
 
       this.localidades = data.localidades;
       let defaultSelect = data.localidadDefault;
