@@ -1,25 +1,28 @@
-import { GroupedNotificationService } from './grouped.notificacion.service';
-import { ImageService } from './image.service';
-import { AlertService } from './alert.service';
-import { ModalService } from './modal.service';
-import { Config } from './../app/config';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { VideoConsultaPage } from "../../pages/videoconsulta/videoconsulta";
+import { GroupedNotificationService } from '../../providers/grouped.notificacion.service';
+import { ImageService } from '../../providers/image.service';
+import { AlertService } from '../../providers/alert.service';
+import { ModalService } from '../../providers/modal.service';
+import { Config } from '../../app/config';
 import { Injectable } from "@angular/core";
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Subject } from "rxjs/Subject";
-
 import { OneSignal } from "@ionic-native/onesignal";
-
-
-import { HomePage } from "../pages/home/home";
-import {  BienvenidaVcPage } from '../pages/bienvenida-vc/bienvenida-vc';
-
-import { DataService } from "./data.service";
-import { Utils, DUMMY_NOTIS } from "./utils";
-import { LoginPage } from "../pages/login/login";
+import { HomePage } from "../home/home";
+import { DataService } from "../../providers/data.service";
+import { Utils, DUMMY_NOTIS } from "../../providers/utils";
+import { LoginPage } from "../login/login";
 import {Observable} from 'rxjs/Observable';
 import { Events } from 'ionic-angular';
-
+/**
+ * Generated class for the BienvenidaVcPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 const SIM_DELAY: number = Config.OPTIONS.NOTI_SIM_DELAY;
 
 const ALERTA: any = {
@@ -45,37 +48,41 @@ const ALERTA: any = {
     idAttention:""
   }
 };
-
+@IonicPage()
 @Injectable()
-export class NotificationsService {
+@Component({
+  selector: 'page-bienvenida-vc',
+  templateUrl: 'bienvenida-vc.html',
+})
+export class BienvenidaVcPage {
   private doneVC: boolean;
-
+  private cid;
+  private dni;
   alertasEmpty: Array<any> = [];
 
   alertas: Array<any> = this.dataService.restoreAlertas() ||
   this.alertasEmpty.concat();
 
   alertasChange: Subject<any> = new Subject<any>();
-
-
-
-  constructor(
-    private oneSignal: OneSignal,
+  constructor(public navCtrl: NavController, public navParams: NavParams,private oneSignal: OneSignal,
     private dataService: DataService,
     private utils: Utils,
     private modalService : ModalService,
     private alertService : AlertService,
     private imageService : ImageService,
     private groupedNotificationService : GroupedNotificationService,
-    private events : Events,
-  ) {
-    if (SIM_DELAY) {
-      const simulation = setInterval(() => {
-        DUMMY_NOTIS.length
-          ? this.newNotification(DUMMY_NOTIS.shift())
-          : clearInterval(simulation);
-      }, SIM_DELAY * 1000);
-    }
+    private events : Events,) {
+
+      if (SIM_DELAY) {
+        const simulation = setInterval(() => {
+          DUMMY_NOTIS.length
+            ? this.newNotification(DUMMY_NOTIS.shift())
+            : clearInterval(simulation);
+        }, SIM_DELAY * 1000);
+      }
+      this.utils.showLoader();
+    this.cid = navParams.get('cid') || utils.getItem('cid') || 'test'
+    this.dni = navParams.get('dni') || utils.getItem('dni') || '12345678'
   }
 
   init(navCtrl) {
@@ -153,6 +160,10 @@ export class NotificationsService {
       navCtrl.setRoot(LoginPage);
     }
   }
+  
+   openVideo(){
+    this.navCtrl.push(VideoConsultaPage,{'cid':this.cid,'dni':this.dni})
+  }
 
   private openVideoCall(navCtrl, noti: any) {
     this.dataService.setVCStatus(false);
@@ -169,7 +180,7 @@ export class NotificationsService {
           if (res != false) {
            
             //pasamano de datos a mi pagina nueva luego a videoconsulta
-            navCtrl.setRoot(BienvenidaVcPage, { cid, dni: noti.data.dni });
+            navCtrl.setRoot(VideoConsultaPage, { cid, dni: noti.data.dni });
             console.log('aca voy a poner el salto demi pagina')
           }else{
             navCtrl.setRoot(HomePage, { cid, dni: noti.data.dni });
@@ -385,3 +396,6 @@ export class NotificationsService {
     return alerta;
   }
 }
+
+
+

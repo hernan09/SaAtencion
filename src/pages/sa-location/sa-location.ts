@@ -42,7 +42,7 @@ export class SaLocationPage {
   socio: any;
   validationLocation:string;
   selectOptions: any;
-  localidades:any
+  localidades:any;
   allName = [];
   backHome : boolean = false;
   constructor(public navCtrl: NavController,private cdRef:ChangeDetectorRef, public navParams: NavParams, public utils: Utils,public dataservice:DataService,public authService :AuthService, public loading:LoadingController,public alertcontroler:AlertController,public alertService:AlertService) {
@@ -79,7 +79,7 @@ export class SaLocationPage {
     let datosLC= this.dataservice.getLocalStorage(Config.KEY.MIS_DATOS)
     console.log('datoslc',datosLC.dni)
 
-    this.dataservice.validarSA('10000080').subscribe(data=>{
+    this.dataservice.validarSA(datosLC.dni).subscribe(data=>{
 
       this.localidades = data.localidades;
       let defaultSelect = data.localidadDefault;

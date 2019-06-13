@@ -173,10 +173,12 @@ export class LoginPage implements Overlay {
 
   transitionLogin() {
     this.addClassTransition = true
+    this.newMember=true
   }
 
   transitionBlurLogin(){
     this.addClassTransition = false;
+    this.newMember=false
   }
 
   //validation dni

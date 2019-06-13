@@ -1,12 +1,23 @@
-<ion-header [hidden]="show=='video'">
+ <ion-header [hidden]="show=='video'">
 
   <ion-navbar>
-    <ion-title>Video Consulta</ion-title>
+    <ion-title>Estamos por comenzar</ion-title>
   </ion-navbar>
-  <div class="header header-rectangular-container header-rectangular-container-small"></div>
+  <!-- <div class="header header-rectangular-container header-rectangular-container-small"></div> 
+   <div ></div> -->
+</ion-header> 
+<!-- <ion-header >
+  
+   <div class="header-circle-container">
+     
+      <div class="div-inner">
+          
+         <h1>Estamos por comenzar</h1>
+      
+      </div>
+  </div> 
 
-</ion-header>
-
+</ion-header> -->
 <ion-content [class.no-header]="show=='video'" [class.padding]="show!='video'">
 
   <div *ngIf="show=='unavailable'" class="shadow-block gracias-pop fade">
@@ -39,10 +50,10 @@
       </div>
     </div>
 
-    <div class="controls">
+    <!-- <div class="controls">
      <div class="cam-btn" (click)="toggleCam()" [class.disabled]="!cam" ></div>
       <div class="mic-btn" (click)="toggleMic()" [class.disabled]="!mic" ></div>
-    </div>
+    </div> -->
 
   </div>
 

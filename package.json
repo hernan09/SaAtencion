@@ -21,7 +21,9 @@
     "prod": "MY_ENV=prod ionic cordova run android --prod",
     "build:test": "MY_ENV=test ionic cordova build android",
     "build:preprod": "MY_ENV=preprod ionic cordova build android",
-    "build:prod": "MY_ENV=prod ionic cordova build android --prod"
+    "build:prod": "MY_ENV=prod ionic cordova build android --prod",
+    "liveload": "ionic cordova run android --livereload",
+    "deploy:android": "adb uninstall com.movil.urg && MY_ENV=test ionic cordova run android --devices"
   },
   "dependencies": {
     "@angular/common": "6.0.0",

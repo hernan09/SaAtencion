@@ -109,4 +109,6 @@
     <plugin name="com.tokbox.cordova.opentok" />
     <plugin name="phonegap-plugin-mobile-accessibility" spec="^1.0.5" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
+    <allow-navigation href="http://192.168.45.133:8101" />
+    <allow-navigation href="http://192.168.45.133:8100" />
 </widget>

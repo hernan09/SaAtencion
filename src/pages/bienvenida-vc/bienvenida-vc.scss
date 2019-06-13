@@ -1,0 +1,65 @@
+page-bienvenida-vc {
+ 
+    ion-navbar.toolbar 
+    {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        border-bottom-left-radius: 100%;
+        border-bottom-right-radius: 100%;
+        height: 30vh;
+    }
+    p{
+    text-align: center;
+    margin: 0;
+    padding-top: 3%;
+    font-weight: 100;
+    font-size: 1.5em;
+    color: #b3ca5a !important
+    }
+    .img-people{
+        height: 30vh;
+    width: 100%;
+    position: absolute;
+    top: 120px;
+    background-image: url(https://urg-videoconsulta-test-dot-urg-easydoc-205820.appspot.com/img/VC-tyc.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    z-index: 111111111111111111;
+    }
+    .content-btn{
+    text-align: center;
+    margin-top: 90%;
+    width: auto;
+    font-weight: 100
+    }
+    .btn{
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    background: -moz-linear-gradient(-6.75% 50% 0deg, rgba(34, 58, 133, 1) 0%, rgba( 0, 168, 209, 1 ) 100%);
+    background: -webkit-linear-gradient(0deg,rgba(34, 58, 133, 1) 0%, rgba( 0, 168, 209, 1 ) 100%);
+    background: -webkit-gradient(linear,-6.75% 50% , rgba( 0, 168, 209, 1 ),color-stop(0, rgba(34, 58, 133, 1) ),color-stop(1, rgba( 0, 168, 209, 1 ) ));
+    background: -o-linear-gradient(0deg, rgba(34, 58, 133, 1) 0%, rgba( 0, 168, 209, 1 ) 100%);
+    background: -ms-linear-gradient(0deg, rgba(34, 58, 133, 1) 0%, rgba( 0, 168, 209, 1 ) 100%);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#223A85, endColorstr= #00A8D1 ,GradientType=0)";
+    background: linear-gradient(90deg, rgba(34, 58, 133, 1) 0%, rgba( 0, 168, 209, 1 ) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#223A85, endColorstr= #00A8D1 , GradientType=1);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+    text-align: center;
+    margin: auto;
+    margin-top: 15px;
+    border-radius: 50px;
+    width: auto;
+    height: 55px;
+    }
+}

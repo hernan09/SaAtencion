@@ -63,7 +63,8 @@ import { ImageService } from './../providers/image.service';
 import { GroupedNotificationService } from './../providers/grouped.notificacion.service';
 import { AlertBuilder } from './../providers/builders/alert.builder';
 import { VideoConsultaService } from './../providers/video.consulta.service';
-
+import { BienvenidaVcPage } from '../pages/bienvenida-vc/bienvenida-vc';
+  
 @NgModule({
   declarations: [
     MyApp,
@@ -92,7 +93,9 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     SaResumenPage,
     SaQuestionSymptomPage,
     SaLocationPage,
-    SaAddressPage
+    SaAddressPage,
+    BienvenidaVcPage
+    
   ],
 
   entryComponents: [
@@ -122,7 +125,9 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     SaResumenPage,
     SaQuestionSymptomPage,
     SaLocationPage,
-    SaAddressPage
+    SaAddressPage,
+    BienvenidaVcPage
+    
   ],
 
   imports: [
