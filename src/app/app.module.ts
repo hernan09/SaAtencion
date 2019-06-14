@@ -64,6 +64,7 @@ import { GroupedNotificationService } from './../providers/grouped.notificacion.
 import { AlertBuilder } from './../providers/builders/alert.builder';
 import { VideoConsultaService } from './../providers/video.consulta.service';
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -92,7 +93,8 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     SaResumenPage,
     SaQuestionSymptomPage,
     SaLocationPage,
-    SaAddressPage
+    SaAddressPage,
+   
   ],
 
   entryComponents: [
@@ -122,7 +124,8 @@ import { VideoConsultaService } from './../providers/video.consulta.service';
     SaResumenPage,
     SaQuestionSymptomPage,
     SaLocationPage,
-    SaAddressPage
+    SaAddressPage,
+    
   ],
 
   imports: [

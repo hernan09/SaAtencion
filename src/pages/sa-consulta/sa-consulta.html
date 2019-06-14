@@ -39,17 +39,17 @@
                            <div *ngFor="let symptom of arrayFinalSymptom" (click)="setValueSymptom(symptom)">{{symptom}}</div>
                            <div class="close-prediction" (click)="close()">Cancelar</div>
                        </div>
-                       <label class="label-text" for="tel">Síntoma  </label>
+                       <label class="label-text" for="tel">Síntoma</label>
                    </div>
                 </div>
       
-                <div [hidden]="!(socio[1] == 'Julio Cesar')" class="user-cesar">
+                <div [hidden]="!(socio[0] == 'Julio Cesar')" class="user-cesar">
       
                     <ion-label >Descripción</ion-label>
                     <textarea name="name"></textarea>
       
                 </div>
-                <ion-grid class="box-warning" [hidden]="socio[1] == 'Julio Cesar'">
+                <ion-grid class="box-warning" [hidden]="socio[0] == 'Julio Cesar'">
       
                   <ion-row>
                     <ion-col col-4>
@@ -66,7 +66,7 @@
       
             <div class="" [formGroup]="profileForm" *ngIf="symptomSelected != 'Otro'">
               <!-- <div class="container-select" > -->
-              <div class="container-select" [hidden]="socio[1] == 'Infran Emiliano'||socio[1] == 'Andres Lauga'">
+              <div class="container-select" [hidden]="socio[0] == 'Infran Emiliano'||socio[0] == 'Andres Lauga'||socio[0] == 'NOMBRE DIEZ APELLIDO DIEZ'">
                 <ion-label>Sintoma</ion-label>
                 <ion-select [selectOptions]="selectOptions"
                    [ngClass]="{ 'is-invalid': f.symptom.errors && f.symptom.touched,'is-valid': f.symptom.touched && f.symptom.valid || f.symptom.valid}"
@@ -81,7 +81,7 @@
                 </ion-select>
               </div>
       
-              <div [hidden]="!(socio[1] == 'Incarbone Maria Sol')">
+              <div [hidden]="!(socio[0] == 'Incarbone Maria Sol')">
                 <div class="container-select">
                   <ion-label *ngIf="moreSymtom">otro Sintoma</ion-label>
                   <ion-select [selectOptions]="selectOptions"
@@ -98,17 +98,17 @@
                 <div class="btn-more-symtom " (click)="showMoreSymtom()" >  <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon> ¿Agregar un sintomas?</div>
               </div>
       
-              <div [hidden]="!(socio[1] == 'Julio Cesar')" class="user-cesar">
+              <div [hidden]="!(socio[0] == 'Julio Cesar')" class="user-cesar">
                   <ion-label >Descripción</ion-label>
                   <textarea name="name"></textarea>
               </div>
               <!-- <div class="user-cesar"> -->
-              <div [hidden]="!(socio[1] == 'Infran Emiliano'|| socio[1] == 'Andres Lauga'|| socio[1] == 'NOMBRE DIEZ APELLIDO DIEZ')" class="user-cesar">
+              <div [hidden]="!(socio[0] == 'Infran Emiliano'|| socio[0] == 'Andres Lauga'|| socio[0] == 'NOMBRE DIEZ APELLIDO DIEZ')" class="user-cesar">
       
                 <div class="form-control padding">
                     <ion-searchbar  placeholder="" [animated]="true" (ionInput)="getItems($event)"[(ngModel)]="PredictShowSymptom"[ngModelOptions]="{standalone: true}" (ionFocus)="topSearch(true)" (ionBlur)="initialSearch(false)"></ion-searchbar>
-                    <ion-list *ngIf="showPrediction" >
-                      <ion-item *ngFor="let item of items"(click)="setValueSymptom(item.SINTOMA)">
+                    <ion-list *ngIf="showPrediction">
+                      <ion-item *ngFor="let item of items|slice:0:5 let ind=index;"(click)="setValueSymptom(item.SINTOMA)">
                         {{ item.SINTOMA }}
                       </ion-item>
                     </ion-list>
@@ -122,7 +122,7 @@
                        <label class="label-text" for="tel">Síntoma</label>
                    </div> -->
                 </div>
-              </div>
+               </div>
               <!-- <textarea name="name" (keyup)="onkeyup(descriptionData,200)" [attr.maxLength]="textareaLength" formControlName="description" [(ngModel)]="descriptionData" placeholder="Ingrese una descripción del sintoma" class="description-symptom"></textarea> -->
               <!-- <div class="count">{{countDescription}} / 200</div> -->
               <!-- <div class="form-control padding">
@@ -143,18 +143,18 @@
                   </button>
                 
                -->
-              <div *ngIf="!showBtnNext">
-                <button type="submit" class="btn btn-light" [disabled]="!profileForm.valid" *ngIf="symptomSelected != 'Otro'">
+              <!-- <div *ngIf="!showBtnNext"> -->
+                <!-- <button type="submit" class="btn btn-light" [disabled]="!profileForm.valid" *ngIf="symptomSelected != 'Otro'"> -->
                 <!-- <button type="submit" class="btn btn-light" [disabled]="!profileForm.valid"> -->
-                  Continuar
+                  <!-- Continuar
                 </button>
-              </div>
+              </div> -->
             <!-- </div> -->
       
           </form>
       
-          <div *ngIf="!(socio[1] == 'Infran Emiliano')">
-            <div *ngIf="!(socio[1] == 'Julio Cesar')">
+          <div *ngIf="!(socio[0] == 'Infran Emiliano')">
+            <div *ngIf="!(socio[0] == 'Julio Cesar')">
               <a href="tel:{{telefono}}" (click)="nextPhoneNumber()" *ngIf="symptomSelected == 'Otro'">
                 <button ion-button full icon-start class="btn btn-green position-call">
                   <ion-icon name="call"></ion-icon>
@@ -165,11 +165,11 @@
           </div>
       
       
-          <button type="submit" class="btn btn-light" (click)="otherSymtomSelected()" [disabled]="!PredictShowSymptom" *ngIf="this.socio[1] == 'Infran Emiliano'||this.socio[1] == 'Andres Lauga'" >
+          <button type="submit" class="btn btn-light" (click)="otherSymtomSelected()" [disabled]="!PredictShowSymptom" *ngIf="this.socio[0] == 'Infran Emiliano'||this.socio[0] == 'Andres Lauga'|| socio[0] == 'NOMBRE DIEZ APELLIDO DIEZ'" >
             Continuar
           </button>
           <div *ngIf="symptomSelected == 'Otro'">
-            <button type="submit" class="btn btn-light" (click)="otherSymtomSelected()" [disabled]="!symptomValueSelect" *ngIf="this.socio[1] == 'Julio Cesar'" >
+            <button type="submit" class="btn btn-light" (click)="otherSymtomSelected()" [disabled]="!symptomValueSelect" *ngIf="this.socio[0] == 'Julio Cesar'" >
               Continuar
             </button>
           </div>
