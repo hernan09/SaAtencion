@@ -59,7 +59,7 @@ export class SolicitudAtencionPage {
       public dataService :DataService
 
      ){
-      // this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol",'Julio Cesar','Infran Emiliano','Hernan Dario','Andres Lauga' ];
+       this.data = ["Incarbone Eduardo Oscar","Incarbone Maria Sol",'Julio Cesar','Infran Emiliano','Hernan Dario','Andres Lauga' ];
 
       let dataPage =  this.utils.getFormSolicitudAtencion();
       console.log("datos de esta sección 1: ", dataPage);
@@ -155,7 +155,7 @@ export class SolicitudAtencionPage {
       // }
       console.log("pasar ala otra pagina",this.profileForm.value);
 
-      /*if(this.profileForm.value.partner == "Incarbone Eduardo Oscar") {
+      if(this.profileForm.value.partner == "Incarbone Eduardo Oscar") {
         this.name1 = 'Incarbone Eduardo Oscar';
         this.tycs1 = true;
         this.tycs2 = false;
@@ -209,7 +209,7 @@ export class SolicitudAtencionPage {
         this.tycs4 = false;
         this.tycs5 = false;
         this.tycs6 = true;
-      }*/
+      }
 
       let check = {
         users: [this.profileForm.value.partner],

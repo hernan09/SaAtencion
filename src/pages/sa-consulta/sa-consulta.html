@@ -103,7 +103,7 @@
                   <textarea name="name"></textarea>
               </div>
               <!-- <div class="user-cesar"> -->
-              <div [hidden]="!(socio[1] == 'Infran Emiliano'|| socio[1] == 'Andres Lauga')" class="user-cesar">
+              <div [hidden]="!(socio[1] == 'Infran Emiliano'|| socio[1] == 'Andres Lauga'|| socio[1] == '10000010')" class="user-cesar">
       
                 <div class="form-control padding">
                     <ion-searchbar  placeholder="" [animated]="true" (ionInput)="getItems($event)"[(ngModel)]="PredictShowSymptom"[ngModelOptions]="{standalone: true}" (ionFocus)="topSearch(true)" (ionBlur)="initialSearch(false)"></ion-searchbar>
