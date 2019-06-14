@@ -11,15 +11,15 @@
   <div class="login">
 
     <div class="form">
-
+       
       <div class="osde-label" *ngIf="newMember">AGREGAR SOCIO</div>
-
+        
       <div class="form-control">
           <input value="" (keyup)="validateDNINumber(dni,8)" onkeyup="this.setAttribute('value', this.value);" type="number" id="input1" (focus)="transitionLogin()" (blur)="transitionBlurLogin()" class="input-text input-user" [(ngModel)]="dni">
           <label for="input1" [ngClass]="isIOS ? 'label-text ios-transition' : 'label-text'" >{{ placeholder }}</label>
           <ion-icon name="ios-person-outline" isActive="false"></ion-icon>
       </div>
-
+       
     </div>
 
     <button class="btn btn-white"
