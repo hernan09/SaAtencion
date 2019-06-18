@@ -106,28 +106,33 @@
               <div [hidden]="!(socio[0] == 'Infran Emiliano'|| socio[0] == 'Andres Lauga'|| socio[0] == 'NOMBRE DIEZ APELLIDO DIEZ')" class="user-cesar">
       
                 <div class="form-control padding">
-                    <ion-searchbar  placeholder="" [animated]="true" (ionInput)="getItems($event)"[(ngModel)]="PredictShowSymptom"[ngModelOptions]="{standalone: true}" (ionFocus)="topSearch(true)" (ionBlur)="initialSearch(false)"></ion-searchbar>
-                    <ion-list *ngIf="showPrediction">
+                    <ion-searchbar  placeholder="" [animated]="true" (change)="onchange($event)" (ionInput)="getItems($event)"[(ngModel)]="PredictShowSymptom"[ngModelOptions]="{standalone: true}" (ionFocus)="topSearch(true)" (ionBlur)="initialSearch(false)"></ion-searchbar>
+                    <ion-list *ngIf="!boleanlista">
                       <ion-item *ngFor="let item of items|slice:0:5 let ind=index;"(click)="setValueSymptom(item.SINTOMA)">
                         {{ item.SINTOMA }}
                       </ion-item>
                     </ion-list>
-      
+                     
+                    <!-- <ion-list *ngIf="boleanlista">
+                      <ion-item *ngFor="let sintom of simtopPrueba">
+                        {{ sintom.SIN }}
+                      </ion-item>
+                    </ion-list> -->
                     <!-- <div class="box-data-container">
                        <input type="text" class="input-text input-user" [(ngModel)]="symptomValueSelect"(keyup)="search($event)" onkeyup="this.setAttribute('value', this.value);" [ngModelOptions]="{standalone: true}">
                        <div class="" [ngClass]= "{'data-select':showPrediction}" *ngIf="showPrediction">
-                           <div *ngFor="let symptom of arrayFinalSymptom" (click)="setValueSymptom(symptom)">{{symptom}}</div>
-                           <div class="close-prediction" (click)="close()">Cancelar</div>
-                       </div>
-                       <label class="label-text" for="tel">Síntoma</label>
+                           <div *ngFor="let symptom of arrayFinalSymptootherm" (click)="setValueSymptom(symptom)">{{symptom}}</div>
+                           <div class="close-prediction" (click)="closeother()">Cancelar</div>
+                       </div>other
+                       <label class="label-text" for="tel">Síntoma</labotherel>
                    </div> -->
                 </div>
                </div>
-              <!-- <textarea name="name" (keyup)="onkeyup(descriptionData,200)" [attr.maxLength]="textareaLength" formControlName="description" [(ngModel)]="descriptionData" placeholder="Ingrese una descripción del sintoma" class="description-symptom"></textarea> -->
-              <!-- <div class="count">{{countDescription}} / 200</div> -->
-              <!-- <div class="form-control padding">
-                  <div class="box-data-container">
-                     <input type="text" class="input-text input-user" [(ngModel)]="symptomValueSelect"(keyup)="search($event)" onkeyup="this.setAttribute('value', this.value);" [ngModelOptions]="{standalone: true}">
+              <!-- <textarea name="name" (keyup)="onkeyup(descriptionDaotherta,200)" [attr.maxLength]="textareaLength" formControlName="description" [(ngModel)]="descriptionData" placeholder="Ingrese una descripción del sintoma" class="description-symptom"></textarea> -->
+              <!-- <div class="count">{{countDescription}} / 200</div> other-->
+              <!-- <div class="form-control padding">other
+                  <div class="box-data-container">other
+                     <input type="text" class="input-text input-user" [other(ngModel)]="symptomValueSelect"(keyup)="search($event)" onkeyup="this.setAttribute('value', this.value);" [ngModelOptions]="{standalone: true}">
                      <div class="" [ngClass]= "{'data-select':showPrediction}" *ngIf="showPrediction">
                          <div *ngFor="let symptom of arrayFinalSymptom" (click)="setValueSymptom(symptom)">{{symptom}}</div>
                          <div class="close-prediction"(click)="close()">Cancelar</div>
@@ -165,7 +170,7 @@
           </div>
       
       
-          <button type="submit" class="btn btn-light" (click)="otherSymtomSelected()" [disabled]="!PredictShowSymptom" *ngIf="this.socio[0] == 'Infran Emiliano'||this.socio[0] == 'Andres Lauga'|| socio[0] == 'NOMBRE DIEZ APELLIDO DIEZ'" >
+          <button type="submit" class="btn btn-light" (click)="otherSymtomSelected()" [disabled]="!botontrue" *ngIf="this.socio[0] == 'Infran Emiliano'||this.socio[0] == 'Andres Lauga'|| socio[0] == 'NOMBRE DIEZ APELLIDO DIEZ'" >
             Continuar
           </button>
           <div *ngIf="symptomSelected == 'Otro'">

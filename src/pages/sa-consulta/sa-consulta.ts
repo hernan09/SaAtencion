@@ -60,11 +60,15 @@ export class SaConsultaPage  {
   PredictSymptom:string;
   PredictShowSymptom:string;
   result:string = '';
-  arrayFinalSymptom :string[] = new Array() ;
+  arrayFinalSymptom :string[] = new Array();
   showPrediction:boolean=false;
 
   moreSymtom:boolean = false;
   animationSearch:boolean = false;
+  botontrue:boolean
+  boleanlista:boolean
+  
+  simtopPrueba=[{"SIN":"BRADICARDIA"},{"SIN":"BRADICARDIA"},{"SIN":"BRADICARDIA"},{"SIN":"BRADICARDIA"},{"SIN":"BRADICARDIA"}]
 
   public telefono;
 
@@ -156,15 +160,25 @@ export class SaConsultaPage  {
   }
 
   otherSymtomSelected(){
-    console.log("sintoma del predictivo",this.PredictShowSymptom);
+   
     for(let i=0;i<=this.items.length-1;i++){
       if(this.PredictShowSymptom==this.items[i].SINTOMA){
         this.PredictSymptom=this.items[i].DIAGNOSTICO
+        this.gotoPage(this.PredictSymptom);
+      }else if(this.PredictShowSymptom!=this.items[i].SINTOMA){
+           console.log('otra lista')
+         
+         console.log('sintoma que no esta en la lista',this.PredictSymptom)
+         
       }
     }
 
-    this.gotoPage(this.PredictSymptom);
+   
     console.log(this.PredictSymptom)
+  }
+  onchange(event){
+    console.log(event.target.value)
+    this.botontrue=true
   }
 
   getName(){
